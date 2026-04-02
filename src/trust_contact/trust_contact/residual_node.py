@@ -214,9 +214,10 @@ class MomentumObserver(Node):
 
         # Jacobian at peg
         Jc = pin.computeFrameJacobian(self.model, self.data, self.q, self.frame_id, pin.ReferenceFrame.LOCAL_WORLD_ALIGNED)
+        Jc_v=Jc[:3, :]
 
-        F_ext = pinv(Jc.T) @ self.r_rev
-        F_ext[3:] = [0.0, 0.0, 0.0]
+        F_ext = pinv(Jc_v.T) @ self.r_rev
+        #F_ext[3:] = [0.0, 0.0, 0.0]
 
         # Publish
         msg = WrenchStamped()
@@ -227,9 +228,6 @@ class MomentumObserver(Node):
         msg.wrench.force.y = F_ext[1]
         msg.wrench.force.z = F_ext[2]
 
-        msg.wrench.torque.x = F_ext[3]
-        msg.wrench.torque.y = F_ext[4]
-        msg.wrench.torque.z = F_ext[5]
         self.publisher_.publish(msg)
         self.get_logger().info(f'Publishing: External Force = {F_ext}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         

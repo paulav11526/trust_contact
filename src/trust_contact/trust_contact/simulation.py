@@ -27,7 +27,7 @@ class ApplyContactForce:
 
         # simulation details
         self.force_body = self.d.body("peg").id
-        self.force_limit = 5  # maximum magnitude of each force component
+        self.force_limit = 15  # maximum magnitude of each force component
         self.application_time = 1000 # how many timesteps force is applied for
         self.force_starttime = 2000 # timesteps when force application begins
         self.logging_start = self.force_starttime # timestep when sensor data logging starts
@@ -43,14 +43,10 @@ class ApplyContactForce:
 
     # setting random force vector
     def force_generation(self):
-        fx = random.uniform(-self.force_limit,self.force_limit)
-        fy = random.uniform(-self.force_limit,self.force_limit)
-        fz = random.uniform(-self.force_limit,self.force_limit)
-        force_applied = [fx, fy, fz]
-        force_point = [self.df.iloc[self.random_row,0], self.df.iloc[self.random_row,1], self.df.iloc[self.random_row,2]] #random point of force application
-        return force_applied, force_point
- 
-    def normal2point(self, point):
+        # random point on peg
+        point = [self.df.iloc[self.random_row,0], self.df.iloc[self.random_row,1], self.df.iloc[self.random_row,2]] #random point of force application
+
+        # vector normal to point
         normal_vector = [self.df.iloc[self.random_row,3], self.df.iloc[self.random_row,4], self.df.iloc[self.random_row,5]]  #normal vector at point of force application, read from csv file
         # ensuring normal vector will always point outwards: point's x value and normal's x value must have the same sign etc. 
         if (point[0]<=0 and normal_vector[0]>=0) or (point[0]>=0 and normal_vector[0]<=0):
@@ -59,21 +55,25 @@ class ApplyContactForce:
             normal_vector[1] *= -1
         if (point[2]<=0 and normal_vector[2]>=0) or (point[2]>=0 and normal_vector[2]<=0):
             normal_vector[2] *= -1
-        return normal_vector
-
-    def angle_btwn_vectors(self, A, B):
-        dot_product = np.dot(A, B)
-        magnitude_A = np.linalg.norm(A)
-        magnitude_B = np.linalg.norm(B)
-        angle_radians = np.arccos(dot_product / (magnitude_A * magnitude_B))
-        angle_degrees = np.degrees(angle_radians)
-        return angle_degrees
-
-    def apply_force(self, force_point, force_vector, timestep, viewer):
-        self.d.qfrc_applied[:] = 0.0
         
+        # normalize
+        normal_local = normal_vector / np.linalg.norm(normal_vector)
+
+        # choose random magnitude
+        magnitude = random.uniform(0.0, self.force_limit)
+        self.node.get_logger().info(f'Magnitude: {magnitude}')
+
+        # inward pushing force
+        force_local = -magnitude * normal_local
+
+        return force_local, point
+
+
+    def apply_force(self, force_point, force_local, timestep, viewer):
+        self.d.qfrc_applied[:] = 0.0
+
         # scaling force vector for visualization so arrow geom is not giant
-        scaled_force_vector = [force_vector[0]/50, force_vector[1]/50, force_vector[2]/50]
+        scaled_force_vector = [force_local[0]/10, force_local[1]/10, force_local[2]/10]
         # finding starting point for force vector's arrow 
         local_arrow_start = [force_point[0]-scaled_force_vector[0], force_point[1]-scaled_force_vector[1], force_point[2]-scaled_force_vector[2]]
         
@@ -84,6 +84,8 @@ class ApplyContactForce:
         # convert point of force application to global coordinates
         globalpoint = xmat @ force_point + xpos
         arrow_start = xmat @ local_arrow_start + xpos
+        force_world = xmat @ force_local
+
         c_msg = Point()
         c_msg.x = float(force_point[0])
         c_msg.y = float(force_point[1])
@@ -93,8 +95,10 @@ class ApplyContactForce:
 
 
 
+
+
         if self.force_starttime <timestep< (self.force_starttime + self.application_time): # apply force at specified time interval
-            mujoco.mj_applyFT(self.m, self.d, force_vector, [0,0,0], globalpoint, self.force_body, self.d.qfrc_applied)
+            mujoco.mj_applyFT(self.m, self.d, force_world, [0,0,0], globalpoint, self.force_body, self.d.qfrc_applied)
             self.contact_detected = True
             i = viewer.user_scn.ngeom
             # creating arrow to visualize direction of force applied
@@ -108,8 +112,9 @@ class ApplyContactForce:
             viewer.user_scn.ngeom = i
             viewer.sync()
 
-            self.node.get_logger().info(f"Exerting a force of: {force_vector}")
-            self.node.get_logger().info(f"qfrc_applied: {self.d.qfrc_applied}")
+            self.node.get_logger().info(f"Exerting a force of: {force_world}")
+            self.node.get_logger().info(f"Force norm: {np.linalg.norm(force_world)}")
+            #self.node.get_logger().info(f"qfrc_applied: {self.d.qfrc_applied}")
             self.node.get_logger().info(f"Contact point at: {c_msg} in peg coordinates")
         else:
             self.contact_detected = False
@@ -117,7 +122,7 @@ class ApplyContactForce:
         msg = Bool()
         msg.data = self.contact_detected
         self.publisher1.publish(msg)
-        self.node.get_logger().info(f'Publishing: {self.contact_detected}')
+        #self.node.get_logger().info(f'Publishing: {self.contact_detected}')
         #self.get_logger().info(f"q mujoco: {self.d.qpos}")
 
 class RobotController:
@@ -178,16 +183,8 @@ def main(args=None):
 
     q_home = [8.94154e-21, -0.566287, 0.00014964, -0.850776, -9.77076e-05, 1.79119, -1.53133e-05]
 
-
+    # generate random force on random point
     force_vector, force_point = node.force_manager.force_generation()
-    normal_vector = node.force_manager.normal2point(force_point)
-    angle = node.force_manager.angle_btwn_vectors(force_vector, normal_vector)
-    # ensuring random force generated is a pushing force by checking angle between force vector and normal vector to the link's surface
-    if angle <= 90 or angle >= 270: 
-        while angle <= 90 or angle >= 270:
-            force_vector, force_point = node.force_manager.force_generation() # if force is not a pushing force, a new force is generated until requirement is fulfilled
-            normal_vector = node.force_manager.normal2point(force_point)
-            angle = node.force_manager.angle_btwn_vectors(force_vector, normal_vector)
 
     # Launch the simulation
     with mujoco.viewer.launch_passive(node.m, node.d) as viewer:
