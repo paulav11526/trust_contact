@@ -1,0 +1,9 @@
+source;share/contact_localization_ros/hook/pythonpath.ps1
+source;share/contact_localization_ros/hook/pythonpath.dsv
+source;share/contact_localization_ros/hook/pythonpath.sh
+source;share/contact_localization_ros/hook/ament_prefix_path.ps1
+source;share/contact_localization_ros/hook/ament_prefix_path.dsv
+source;share/contact_localization_ros/hook/ament_prefix_path.sh
+source;../../build/contact_localization_ros/share/contact_localization_ros/hook/pythonpath_develop.ps1
+source;../../build/contact_localization_ros/share/contact_localization_ros/hook/pythonpath_develop.dsv
+source;../../build/contact_localization_ros/share/contact_localization_ros/hook/pythonpath_develop.sh

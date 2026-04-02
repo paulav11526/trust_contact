@@ -1,0 +1,25 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from messages/msg/ForceEvent.msg
+// generated code does not contain a copyright notice
+
+#include "builtin_interfaces/msg/Time.idl"
+
+module messages {
+  module msg {
+    @verbatim (language="comment", text=
+      "ForceEvent.msg")
+    struct ForceEvent {
+      double force_magnitude_1;
+
+      builtin_interfaces::msg::Time timestamp_1_start;
+
+      builtin_interfaces::msg::Time timestamp_1_end;
+
+      double force_magnitude_2;
+
+      builtin_interfaces::msg::Time timestamp_2_start;
+
+      builtin_interfaces::msg::Time timestamp_2_end;
+    };
+  };
+};

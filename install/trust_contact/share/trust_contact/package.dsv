@@ -1,0 +1,9 @@
+source;share/trust_contact/hook/pythonpath.ps1
+source;share/trust_contact/hook/pythonpath.dsv
+source;share/trust_contact/hook/pythonpath.sh
+source;share/trust_contact/hook/ament_prefix_path.ps1
+source;share/trust_contact/hook/ament_prefix_path.dsv
+source;share/trust_contact/hook/ament_prefix_path.sh
+source;../../build/trust_contact/share/trust_contact/hook/pythonpath_develop.ps1
+source;../../build/trust_contact/share/trust_contact/hook/pythonpath_develop.dsv
+source;../../build/trust_contact/share/trust_contact/hook/pythonpath_develop.sh

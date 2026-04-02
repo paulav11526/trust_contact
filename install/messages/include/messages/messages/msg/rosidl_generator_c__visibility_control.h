@@ -1,0 +1,1 @@
+/home/paulav/contact_ws/build/messages/rosidl_generator_c/messages/msg/rosidl_generator_c__visibility_control.h

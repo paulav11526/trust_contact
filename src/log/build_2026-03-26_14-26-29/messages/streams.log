@@ -1,0 +1,202 @@
+[0.009s] Invoking command in '/home/paulav/contact_ws/src/build/messages': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/paulav/contact_ws/install/trust_contact:/home/paulav/contact_ws/install/contact_localization_ros:/opt/ros/humble /usr/bin/cmake /home/paulav/contact_ws/src/messages -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/paulav/contact_ws/src/install/messages
+[0.058s] -- The C compiler identification is GNU 11.4.0
+[0.099s] -- The CXX compiler identification is GNU 11.4.0
+[0.105s] -- Detecting C compiler ABI info
+[0.162s] -- Detecting C compiler ABI info - done
+[0.168s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.169s] -- Detecting C compile features
+[0.169s] -- Detecting C compile features - done
+[0.172s] -- Detecting CXX compiler ABI info
+[0.235s] -- Detecting CXX compiler ABI info - done
+[0.240s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.240s] -- Detecting CXX compile features
+[0.240s] -- Detecting CXX compile features - done
+[0.245s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.364s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.407s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.426s] -- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)
+[0.430s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.437s] -- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.462s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.481s] -- Found builtin_interfaces: 1.2.2 (/opt/ros/humble/share/builtin_interfaces/cmake)
+[0.655s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[0.797s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.013s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.031s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.6") 
+[1.033s] -- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)
+[1.054s] -- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.10.so (found suitable version "3.10.12", minimum required is "3.5") 
+[1.054s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[1.054s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10
+[1.054s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so
+[1.075s] -- Found PythonExtra: .so  
+[1.105s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[1.117s] -- Added test 'lint_cmake' to check CMake code style
+[1.117s] -- Added test 'xmllint' to check XML markup files
+[1.119s] -- Configuring done
+[1.131s] -- Generating done
+[1.135s] -- Build files have been written to: /home/paulav/contact_ws/src/build/messages
+[1.139s] Invoked command in '/home/paulav/contact_ws/src/build/messages' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/paulav/contact_ws/install/trust_contact:/home/paulav/contact_ws/install/contact_localization_ros:/opt/ros/humble /usr/bin/cmake /home/paulav/contact_ws/src/messages -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/paulav/contact_ws/src/install/messages
+[1.140s] Invoking command in '/home/paulav/contact_ws/src/build/messages': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/paulav/contact_ws/install/trust_contact:/home/paulav/contact_ws/install/contact_localization_ros:/opt/ros/humble /usr/bin/cmake --build /home/paulav/contact_ws/src/build/messages -- -j24 -l24
+[1.179s] [  3%] [34m[1mGenerating C code for ROS interfaces[0m
+[1.192s] [  6%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[1.198s] [  6%] Built target ament_cmake_python_symlink_messages
+[1.326s] [  6%] Built target messages__cpp
+[1.327s] [  9%] [32mBuilding C object CMakeFiles/messages__rosidl_generator_c.dir/rosidl_generator_c/messages/msg/detail/force_event__functions.c.o[0m
+[1.336s] running egg_info
+[1.336s] creating messages.egg-info
+[1.336s] writing messages.egg-info/PKG-INFO
+[1.336s] writing dependency_links to messages.egg-info/dependency_links.txt
+[1.337s] writing top-level names to messages.egg-info/top_level.txt
+[1.337s] writing manifest file 'messages.egg-info/SOURCES.txt'
+[1.337s] [ 19%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[1.337s] [ 19%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[1.337s] [ 19%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[1.338s] reading manifest file 'messages.egg-info/SOURCES.txt'
+[1.338s] writing manifest file 'messages.egg-info/SOURCES.txt'
+[1.355s] [ 19%] Built target ament_cmake_python_build_messages_egg
+[1.369s] [ 22%] [32m[1mLinking C shared library libmessages__rosidl_generator_c.so[0m
+[1.401s] [ 22%] Built target messages__rosidl_generator_c
+[1.413s] [ 25%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[1.413s] [ 32%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[1.413s] [ 32%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[1.484s] [ 35%] [32mBuilding CXX object CMakeFiles/messages__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/messages/msg/force_event__type_support.cpp.o[0m
+[1.493s] [ 38%] [32mBuilding CXX object CMakeFiles/messages__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/messages/msg/detail/force_event__type_support.cpp.o[0m
+[1.498s] [ 41%] [32mBuilding CXX object CMakeFiles/messages__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/messages/msg/detail/dds_fastrtps/force_event__type_support.cpp.o[0m
+[1.565s] [ 45%] [32mBuilding CXX object CMakeFiles/messages__rosidl_typesupport_c.dir/rosidl_typesupport_c/messages/msg/force_event__type_support.cpp.o[0m
+[1.582s] [ 48%] [32mBuilding C object CMakeFiles/messages__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/messages/msg/detail/force_event__type_support.c.o[0m
+[1.582s] [ 51%] [32mBuilding CXX object CMakeFiles/messages__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/messages/msg/detail/force_event__type_support_c.cpp.o[0m
+[1.590s] [ 54%] [32m[1mLinking CXX shared library libmessages__rosidl_typesupport_c.so[0m
+[1.616s] [ 58%] [32m[1mLinking C shared library libmessages__rosidl_typesupport_introspection_c.so[0m
+[1.625s] [ 58%] Built target messages__rosidl_typesupport_c
+[1.636s] [ 61%] [32m[1mLinking CXX shared library libmessages__rosidl_typesupport_cpp.so[0m
+[1.650s] [ 61%] Built target messages__rosidl_typesupport_introspection_c
+[1.673s] [ 61%] Built target messages__rosidl_typesupport_cpp
+[1.693s] [ 64%] [32m[1mLinking CXX shared library libmessages__rosidl_typesupport_introspection_cpp.so[0m
+[1.704s] [ 67%] [32m[1mLinking CXX shared library libmessages__rosidl_typesupport_fastrtps_cpp.so[0m
+[1.733s] [ 67%] Built target messages__rosidl_typesupport_introspection_cpp
+[1.752s] [ 70%] [32m[1mLinking CXX shared library libmessages__rosidl_typesupport_fastrtps_c.so[0m
+[1.752s] [ 70%] Built target messages__rosidl_typesupport_fastrtps_cpp
+[1.812s] [ 70%] Built target messages__rosidl_typesupport_fastrtps_c
+[1.844s] [ 70%] Built target messages
+[1.880s] [ 74%] [34m[1mGenerating Python code for ROS interfaces[0m
+[2.076s] [ 74%] Built target messages__py
+[2.108s] [ 77%] [32mBuilding C object CMakeFiles/messages__rosidl_generator_py.dir/rosidl_generator_py/messages/msg/_force_event_s.c.o[0m
+[2.177s] [ 80%] [32m[1mLinking C shared library rosidl_generator_py/messages/libmessages__rosidl_generator_py.so[0m
+[2.222s] [ 80%] Built target messages__rosidl_generator_py
+[2.255s] [ 83%] [32mBuilding C object CMakeFiles/messages__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/messages/_messages_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[2.255s] [ 90%] [32mBuilding C object CMakeFiles/messages__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/messages/_messages_s.ep.rosidl_typesupport_c.c.o[0m
+[2.255s] [ 90%] [32mBuilding C object CMakeFiles/messages__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/messages/_messages_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[2.313s] [100%] [32m[1mLinking C shared library rosidl_generator_py/messages/messages_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so[0m
+[2.313s] [100%] [32m[1mLinking C shared library rosidl_generator_py/messages/messages_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so[0m
+[2.313s] [100%] [32m[1mLinking C shared library rosidl_generator_py/messages/messages_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so[0m
+[2.344s] [100%] Built target messages__rosidl_typesupport_introspection_c__pyext
+[2.347s] [100%] Built target messages__rosidl_typesupport_c__pyext
+[2.349s] [100%] Built target messages__rosidl_typesupport_fastrtps_c__pyext
+[2.364s] Invoked command in '/home/paulav/contact_ws/src/build/messages' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/paulav/contact_ws/install/trust_contact:/home/paulav/contact_ws/install/contact_localization_ros:/opt/ros/humble /usr/bin/cmake --build /home/paulav/contact_ws/src/build/messages -- -j24 -l24
+[2.380s] Invoking command in '/home/paulav/contact_ws/src/build/messages': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/paulav/contact_ws/install/trust_contact:/home/paulav/contact_ws/install/contact_localization_ros:/opt/ros/humble /usr/bin/cmake --install /home/paulav/contact_ws/src/build/messages
+[2.390s] -- Install configuration: ""
+[2.391s] -- Execute custom install script
+[2.392s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/ament_index/resource_index/rosidl_interfaces/messages
+[2.405s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/include/messages/messages/msg/detail/force_event__functions.h
+[2.416s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/include/messages/messages/msg/detail/force_event__struct.h
+[2.427s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/include/messages/messages/msg/detail/force_event__type_support.h
+[2.439s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/include/messages/messages/msg/force_event.h
+[2.448s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/include/messages/messages/msg/rosidl_generator_c__visibility_control.h
+[2.456s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/messages/environment/library_path.sh
+[2.467s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/messages/environment/library_path.dsv
+[2.479s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/include/messages/messages/msg/detail/force_event__rosidl_typesupport_fastrtps_c.h
+[2.489s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/include/messages/messages/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[2.501s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/include/messages/messages/msg/detail/force_event__rosidl_typesupport_introspection_c.h
+[2.511s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/include/messages/messages/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[2.522s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/include/messages/messages/msg/detail/force_event__builder.hpp
+[2.533s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/include/messages/messages/msg/detail/force_event__struct.hpp
+[2.545s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/include/messages/messages/msg/detail/force_event__traits.hpp
+[2.556s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/include/messages/messages/msg/detail/force_event__type_support.hpp
+[2.567s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/include/messages/messages/msg/force_event.hpp
+[2.579s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/include/messages/messages/msg/rosidl_generator_cpp__visibility_control.hpp
+[2.590s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/include/messages/messages/msg/detail/force_event__rosidl_typesupport_fastrtps_cpp.hpp
+[2.601s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/include/messages/messages/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[2.612s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/include/messages/messages/msg/detail/force_event__rosidl_typesupport_introspection_cpp.hpp
+[2.623s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/messages/environment/pythonpath.sh
+[2.632s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/messages/environment/pythonpath.dsv
+[2.643s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/local/lib/python3.10/dist-packages/messages-0.0.0-py3.10.egg-info/PKG-INFO
+[2.654s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/local/lib/python3.10/dist-packages/messages-0.0.0-py3.10.egg-info/SOURCES.txt
+[2.665s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/local/lib/python3.10/dist-packages/messages-0.0.0-py3.10.egg-info/dependency_links.txt
+[2.676s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/local/lib/python3.10/dist-packages/messages-0.0.0-py3.10.egg-info/top_level.txt
+[2.686s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/local/lib/python3.10/dist-packages/messages/__init__.py
+[2.696s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/local/lib/python3.10/dist-packages/messages/_messages_s.ep.rosidl_typesupport_c.c
+[2.707s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/local/lib/python3.10/dist-packages/messages/_messages_s.ep.rosidl_typesupport_fastrtps_c.c
+[2.718s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/local/lib/python3.10/dist-packages/messages/_messages_s.ep.rosidl_typesupport_introspection_c.c
+[2.728s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/local/lib/python3.10/dist-packages/messages/libmessages__rosidl_generator_py.so
+[2.740s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/local/lib/python3.10/dist-packages/messages/messages_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[2.751s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/local/lib/python3.10/dist-packages/messages/messages_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[2.762s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/local/lib/python3.10/dist-packages/messages/messages_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[2.770s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/local/lib/python3.10/dist-packages/messages/msg/__init__.py
+[2.780s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/local/lib/python3.10/dist-packages/messages/msg/_force_event.py
+[2.791s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/local/lib/python3.10/dist-packages/messages/msg/_force_event_s.c
+[2.801s] -- Up-to-date symlink: /home/paulav/contact_ws/src/install/messages/local/lib/python3.10/dist-packages/messages/messages_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[2.801s] -- Up-to-date symlink: /home/paulav/contact_ws/src/install/messages/local/lib/python3.10/dist-packages/messages/messages_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[2.801s] -- Up-to-date symlink: /home/paulav/contact_ws/src/install/messages/local/lib/python3.10/dist-packages/messages/messages_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[2.801s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/messages/msg/ForceEvent.idl
+[2.812s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/messages/msg/ForceEvent.msg
+[2.823s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/ament_index/resource_index/package_run_dependencies/messages
+[2.835s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/ament_index/resource_index/parent_prefix_path/messages
+[2.845s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/messages/environment/ament_prefix_path.sh
+[2.854s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/messages/environment/ament_prefix_path.dsv
+[2.865s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/messages/environment/path.sh
+[2.878s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/messages/environment/path.dsv
+[2.884s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/messages/local_setup.bash
+[2.892s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/messages/local_setup.sh
+[2.898s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/messages/local_setup.zsh
+[2.909s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/messages/local_setup.dsv
+[2.919s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/messages/package.dsv
+[2.931s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/ament_index/resource_index/packages/messages
+[2.941s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/rosidl_cmake-extras.cmake
+[2.951s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/ament_cmake_export_dependencies-extras.cmake
+[2.962s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/ament_cmake_export_include_directories-extras.cmake
+[2.972s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/ament_cmake_export_libraries-extras.cmake
+[2.985s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/ament_cmake_export_targets-extras.cmake
+[2.993s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[3.002s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[3.010s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/messagesConfig.cmake
+[3.017s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/messagesConfig-version.cmake
+[3.022s] -- Symlinking: /home/paulav/contact_ws/src/install/messages/share/messages/package.xml
+[3.028s] -- Installing: /home/paulav/contact_ws/src/install/messages/lib/libmessages__rosidl_generator_c.so
+[3.028s] -- Set runtime path of "/home/paulav/contact_ws/src/install/messages/lib/libmessages__rosidl_generator_c.so" to ""
+[3.029s] -- Installing: /home/paulav/contact_ws/src/install/messages/lib/libmessages__rosidl_typesupport_fastrtps_c.so
+[3.029s] -- Set runtime path of "/home/paulav/contact_ws/src/install/messages/lib/libmessages__rosidl_typesupport_fastrtps_c.so" to ""
+[3.029s] -- Installing: /home/paulav/contact_ws/src/install/messages/lib/libmessages__rosidl_typesupport_introspection_c.so
+[3.029s] -- Set runtime path of "/home/paulav/contact_ws/src/install/messages/lib/libmessages__rosidl_typesupport_introspection_c.so" to ""
+[3.029s] -- Installing: /home/paulav/contact_ws/src/install/messages/lib/libmessages__rosidl_typesupport_c.so
+[3.029s] -- Set runtime path of "/home/paulav/contact_ws/src/install/messages/lib/libmessages__rosidl_typesupport_c.so" to ""
+[3.029s] -- Installing: /home/paulav/contact_ws/src/install/messages/lib/libmessages__rosidl_typesupport_fastrtps_cpp.so
+[3.029s] -- Set runtime path of "/home/paulav/contact_ws/src/install/messages/lib/libmessages__rosidl_typesupport_fastrtps_cpp.so" to ""
+[3.029s] -- Installing: /home/paulav/contact_ws/src/install/messages/lib/libmessages__rosidl_typesupport_introspection_cpp.so
+[3.029s] -- Set runtime path of "/home/paulav/contact_ws/src/install/messages/lib/libmessages__rosidl_typesupport_introspection_cpp.so" to ""
+[3.029s] -- Installing: /home/paulav/contact_ws/src/install/messages/lib/libmessages__rosidl_typesupport_cpp.so
+[3.030s] -- Set runtime path of "/home/paulav/contact_ws/src/install/messages/lib/libmessages__rosidl_typesupport_cpp.so" to ""
+[3.059s] Listing '/home/paulav/contact_ws/src/install/messages/local/lib/python3.10/dist-packages/messages'...
+[3.060s] Compiling '/home/paulav/contact_ws/src/install/messages/local/lib/python3.10/dist-packages/messages/__init__.py'...
+[3.060s] Listing '/home/paulav/contact_ws/src/install/messages/local/lib/python3.10/dist-packages/messages/msg'...
+[3.060s] Compiling '/home/paulav/contact_ws/src/install/messages/local/lib/python3.10/dist-packages/messages/msg/__init__.py'...
+[3.060s] Compiling '/home/paulav/contact_ws/src/install/messages/local/lib/python3.10/dist-packages/messages/msg/_force_event.py'...
+[3.062s] -- Installing: /home/paulav/contact_ws/src/install/messages/lib/libmessages__rosidl_generator_py.so
+[3.062s] -- Set runtime path of "/home/paulav/contact_ws/src/install/messages/lib/libmessages__rosidl_generator_py.so" to ""
+[3.062s] -- Installing: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/export_messages__rosidl_generator_cExport.cmake
+[3.062s] -- Installing: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/export_messages__rosidl_generator_cExport-noconfig.cmake
+[3.062s] -- Installing: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/export_messages__rosidl_typesupport_fastrtps_cExport.cmake
+[3.062s] -- Installing: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/export_messages__rosidl_typesupport_fastrtps_cExport-noconfig.cmake
+[3.062s] -- Installing: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/messages__rosidl_typesupport_introspection_cExport.cmake
+[3.062s] -- Installing: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/messages__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[3.062s] -- Installing: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/messages__rosidl_typesupport_cExport.cmake
+[3.062s] -- Installing: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/messages__rosidl_typesupport_cExport-noconfig.cmake
+[3.063s] -- Installing: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/export_messages__rosidl_generator_cppExport.cmake
+[3.063s] -- Installing: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/export_messages__rosidl_typesupport_fastrtps_cppExport.cmake
+[3.063s] -- Installing: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/export_messages__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake
+[3.063s] -- Installing: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/messages__rosidl_typesupport_introspection_cppExport.cmake
+[3.063s] -- Installing: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/messages__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[3.063s] -- Installing: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/messages__rosidl_typesupport_cppExport.cmake
+[3.063s] -- Installing: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/messages__rosidl_typesupport_cppExport-noconfig.cmake
+[3.063s] -- Installing: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/export_messages__rosidl_generator_pyExport.cmake
+[3.063s] -- Installing: /home/paulav/contact_ws/src/install/messages/share/messages/cmake/export_messages__rosidl_generator_pyExport-noconfig.cmake
+[3.064s] Invoked command in '/home/paulav/contact_ws/src/build/messages' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/paulav/contact_ws/install/trust_contact:/home/paulav/contact_ws/install/contact_localization_ros:/opt/ros/humble /usr/bin/cmake --install /home/paulav/contact_ws/src/build/messages

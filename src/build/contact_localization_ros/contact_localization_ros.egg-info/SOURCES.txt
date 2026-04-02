@@ -1,0 +1,12 @@
+package.xml
+setup.cfg
+setup.py
+contact_localization_ros/__init__.py
+contact_localization_ros.egg-info/PKG-INFO
+contact_localization_ros.egg-info/SOURCES.txt
+contact_localization_ros.egg-info/dependency_links.txt
+contact_localization_ros.egg-info/entry_points.txt
+contact_localization_ros.egg-info/requires.txt
+contact_localization_ros.egg-info/top_level.txt
+contact_localization_ros.egg-info/zip-safe
+resource/contact_localization_ros

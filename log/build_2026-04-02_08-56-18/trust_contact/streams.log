@@ -1,0 +1,20 @@
+[0.340s] Invoking command in '/home/paulav/contact_ws/build/trust_contact': AMENT_PREFIX_PATH=/home/paulav/contact_ws/install/messages:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/paulav/contact_ws/install/messages:/usr/local LD_LIBRARY_PATH=/home/paulav/contact_ws/install/messages/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/paulav/contact_ws/build/trust_contact/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages:/home/paulav/contact_ws/install/messages/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/paulav/contact_ws/build/trust_contact/build --no-deps symlink_data
+[0.471s] running develop
+[0.556s] running egg_info
+[0.556s] writing trust_contact.egg-info/PKG-INFO
+[0.556s] writing dependency_links to trust_contact.egg-info/dependency_links.txt
+[0.556s] writing entry points to trust_contact.egg-info/entry_points.txt
+[0.556s] writing requirements to trust_contact.egg-info/requires.txt
+[0.556s] writing top-level names to trust_contact.egg-info/top_level.txt
+[0.557s] reading manifest file 'trust_contact.egg-info/SOURCES.txt'
+[0.558s] writing manifest file 'trust_contact.egg-info/SOURCES.txt'
+[0.558s] running build_ext
+[0.559s] Creating /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust-contact.egg-link (link to .)
+[0.559s] Installing contact_classifier_node script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+[0.559s] Installing fsm_node script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+[0.559s] Installing residual_node script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+[0.559s] Installing simulation script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+[0.559s] 
+[0.559s] Installed /home/paulav/contact_ws/build/trust_contact
+[0.559s] running symlink_data
+[0.575s] Invoked command in '/home/paulav/contact_ws/build/trust_contact' returned '0': AMENT_PREFIX_PATH=/home/paulav/contact_ws/install/messages:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/paulav/contact_ws/install/messages:/usr/local LD_LIBRARY_PATH=/home/paulav/contact_ws/install/messages/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/paulav/contact_ws/build/trust_contact/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages:/home/paulav/contact_ws/install/messages/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/paulav/contact_ws/build/trust_contact/build --no-deps symlink_data

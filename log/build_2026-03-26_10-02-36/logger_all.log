@@ -1,0 +1,470 @@
+[0.051s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--symlink-install']
+[0.051s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=True, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=24, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x712a893a08e0>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x712a89373ee0>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x712a89373ee0>>, mixin_verb=('build',))
+[0.133s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.133s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.133s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.133s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.133s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.133s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.134s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/paulav/contact_ws'
+[0.134s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.134s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.134s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.134s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.134s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.134s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.134s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.134s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.134s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.143s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.143s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.143s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.143s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.143s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.143s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.143s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.143s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(src/contact_localization_ros) by extensions ['ignore', 'ignore_ament_install']
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(src/contact_localization_ros) by extension 'ignore'
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(src/contact_localization_ros) by extension 'ignore_ament_install'
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(src/contact_localization_ros) by extensions ['colcon_pkg']
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(src/contact_localization_ros) by extension 'colcon_pkg'
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(src/contact_localization_ros) by extensions ['colcon_meta']
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(src/contact_localization_ros) by extension 'colcon_meta'
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(src/contact_localization_ros) by extensions ['ros']
+[0.144s] Level 1:colcon.colcon_core.package_identification:_identify(src/contact_localization_ros) by extension 'ros'
+[0.145s] DEBUG:colcon.colcon_core.package_identification:Package 'src/contact_localization_ros' with type 'ros.ament_python' and name 'contact_localization_ros'
+[0.145s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location) by extensions ['ignore', 'ignore_ament_install']
+[0.145s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location) by extension 'ignore'
+[0.145s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location) by extension 'ignore_ament_install'
+[0.145s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location) by extensions ['colcon_pkg']
+[0.145s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location) by extension 'colcon_pkg'
+[0.145s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location) by extensions ['colcon_meta']
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location) by extension 'colcon_meta'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location) by extensions ['ros']
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location) by extension 'ros'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location) by extensions ['cmake', 'python']
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location) by extension 'cmake'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location) by extension 'python'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location) by extensions ['python_setup_py']
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location) by extension 'python_setup_py'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion) by extensions ['ignore', 'ignore_ament_install']
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion) by extension 'ignore'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion) by extension 'ignore_ament_install'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion) by extensions ['colcon_pkg']
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion) by extension 'colcon_pkg'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion) by extensions ['colcon_meta']
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion) by extension 'colcon_meta'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion) by extensions ['ros']
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion) by extension 'ros'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion) by extensions ['cmake', 'python']
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion) by extension 'cmake'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion) by extension 'python'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion) by extensions ['python_setup_py']
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion) by extension 'python_setup_py'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion/peg_trainingset) by extensions ['ignore', 'ignore_ament_install']
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion/peg_trainingset) by extension 'ignore'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion/peg_trainingset) by extension 'ignore_ament_install'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion/peg_trainingset) by extensions ['colcon_pkg']
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion/peg_trainingset) by extension 'colcon_pkg'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion/peg_trainingset) by extensions ['colcon_meta']
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion/peg_trainingset) by extension 'colcon_meta'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion/peg_trainingset) by extensions ['ros']
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion/peg_trainingset) by extension 'ros'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion/peg_trainingset) by extensions ['cmake', 'python']
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion/peg_trainingset) by extension 'cmake'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion/peg_trainingset) by extension 'python'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion/peg_trainingset) by extensions ['python_setup_py']
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/diffusion/peg_trainingset) by extension 'python_setup_py'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application) by extensions ['ignore', 'ignore_ament_install']
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application) by extension 'ignore'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application) by extension 'ignore_ament_install'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application) by extensions ['colcon_pkg']
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application) by extension 'colcon_pkg'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application) by extensions ['colcon_meta']
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application) by extension 'colcon_meta'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application) by extensions ['ros']
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application) by extension 'ros'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application) by extensions ['cmake', 'python']
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application) by extension 'cmake'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application) by extension 'python'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application) by extensions ['python_setup_py']
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application) by extension 'python_setup_py'
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application/pointcloud) by extensions ['ignore', 'ignore_ament_install']
+[0.146s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application/pointcloud) by extension 'ignore'
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application/pointcloud) by extension 'ignore_ament_install'
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application/pointcloud) by extensions ['colcon_pkg']
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application/pointcloud) by extension 'colcon_pkg'
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application/pointcloud) by extensions ['colcon_meta']
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application/pointcloud) by extension 'colcon_meta'
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application/pointcloud) by extensions ['ros']
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application/pointcloud) by extension 'ros'
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application/pointcloud) by extensions ['cmake', 'python']
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application/pointcloud) by extension 'cmake'
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application/pointcloud) by extension 'python'
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application/pointcloud) by extensions ['python_setup_py']
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/force_location/force_application/pointcloud) by extension 'python_setup_py'
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/messages) by extensions ['ignore', 'ignore_ament_install']
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/messages) by extension 'ignore'
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/messages) by extension 'ignore_ament_install'
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/messages) by extensions ['colcon_pkg']
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/messages) by extension 'colcon_pkg'
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/messages) by extensions ['colcon_meta']
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/messages) by extension 'colcon_meta'
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/messages) by extensions ['ros']
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/messages) by extension 'ros'
+[0.147s] DEBUG:colcon.colcon_core.package_identification:Package 'src/messages' with type 'ros.ament_cmake' and name 'messages'
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact) by extensions ['ignore', 'ignore_ament_install']
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact) by extension 'ignore'
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact) by extension 'ignore_ament_install'
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact) by extensions ['colcon_pkg']
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact) by extension 'colcon_pkg'
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact) by extensions ['colcon_meta']
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact) by extension 'colcon_meta'
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact) by extensions ['ros']
+[0.147s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact) by extension 'ros'
+[0.148s] DEBUG:colcon.colcon_core.package_identification:Package 'src/trust_contact' with type 'ros.ament_python' and name 'trust_contact'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change) by extensions ['ignore', 'ignore_ament_install']
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change) by extension 'ignore'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change) by extension 'ignore_ament_install'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change) by extensions ['colcon_pkg']
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change) by extension 'colcon_pkg'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change) by extensions ['colcon_meta']
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change) by extension 'colcon_meta'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change) by extensions ['ros']
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change) by extension 'ros'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change) by extensions ['cmake', 'python']
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change) by extension 'cmake'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change) by extension 'python'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change) by extensions ['python_setup_py']
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change) by extension 'python_setup_py'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/build) by extensions ['ignore', 'ignore_ament_install']
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/build) by extension 'ignore'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/build) ignored
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/install) by extensions ['ignore', 'ignore_ament_install']
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/install) by extension 'ignore'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/install) ignored
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/log) by extensions ['ignore', 'ignore_ament_install']
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/log) by extension 'ignore'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/log) ignored
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models) by extensions ['ignore', 'ignore_ament_install']
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models) by extension 'ignore'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models) by extension 'ignore_ament_install'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models) by extensions ['colcon_pkg']
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models) by extension 'colcon_pkg'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models) by extensions ['colcon_meta']
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models) by extension 'colcon_meta'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models) by extensions ['ros']
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models) by extension 'ros'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models) by extensions ['cmake', 'python']
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models) by extension 'cmake'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models) by extension 'python'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models) by extensions ['python_setup_py']
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models) by extension 'python_setup_py'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models/assets) by extensions ['ignore', 'ignore_ament_install']
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models/assets) by extension 'ignore'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models/assets) by extension 'ignore_ament_install'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models/assets) by extensions ['colcon_pkg']
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models/assets) by extension 'colcon_pkg'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models/assets) by extensions ['colcon_meta']
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models/assets) by extension 'colcon_meta'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models/assets) by extensions ['ros']
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models/assets) by extension 'ros'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models/assets) by extensions ['cmake', 'python']
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models/assets) by extension 'cmake'
+[0.149s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models/assets) by extension 'python'
+[0.149s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models/assets) by extensions ['python_setup_py']
+[0.149s] Level 1:colcon.colcon_core.package_identification:_identify(src/trust_contact_change/models/assets) by extension 'python_setup_py'
+[0.149s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.149s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.149s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.149s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.149s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.158s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.158s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.159s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 3 installed packages in /home/paulav/contact_ws/install
+[0.160s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 378 installed packages in /opt/ros/humble
+[0.161s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'contact_localization_ros' build argument 'cmake_args' from command line to 'None'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'contact_localization_ros' build argument 'cmake_target' from command line to 'None'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'contact_localization_ros' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'contact_localization_ros' build argument 'cmake_clean_cache' from command line to 'False'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'contact_localization_ros' build argument 'cmake_clean_first' from command line to 'False'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'contact_localization_ros' build argument 'cmake_force_configure' from command line to 'False'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'contact_localization_ros' build argument 'ament_cmake_args' from command line to 'None'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'contact_localization_ros' build argument 'catkin_cmake_args' from command line to 'None'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'contact_localization_ros' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.181s] DEBUG:colcon.colcon_core.verb:Building package 'contact_localization_ros' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/paulav/contact_ws/build/contact_localization_ros', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/paulav/contact_ws/install/contact_localization_ros', 'merge_install': False, 'path': '/home/paulav/contact_ws/src/contact_localization_ros', 'symlink_install': True, 'test_result_base': None}
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'messages' build argument 'cmake_args' from command line to 'None'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'messages' build argument 'cmake_target' from command line to 'None'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'messages' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'messages' build argument 'cmake_clean_cache' from command line to 'False'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'messages' build argument 'cmake_clean_first' from command line to 'False'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'messages' build argument 'cmake_force_configure' from command line to 'False'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'messages' build argument 'ament_cmake_args' from command line to 'None'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'messages' build argument 'catkin_cmake_args' from command line to 'None'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'messages' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.181s] DEBUG:colcon.colcon_core.verb:Building package 'messages' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/paulav/contact_ws/build/messages', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/paulav/contact_ws/install/messages', 'merge_install': False, 'path': '/home/paulav/contact_ws/src/messages', 'symlink_install': True, 'test_result_base': None}
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'trust_contact' build argument 'cmake_args' from command line to 'None'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'trust_contact' build argument 'cmake_target' from command line to 'None'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'trust_contact' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'trust_contact' build argument 'cmake_clean_cache' from command line to 'False'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'trust_contact' build argument 'cmake_clean_first' from command line to 'False'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'trust_contact' build argument 'cmake_force_configure' from command line to 'False'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'trust_contact' build argument 'ament_cmake_args' from command line to 'None'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'trust_contact' build argument 'catkin_cmake_args' from command line to 'None'
+[0.181s] Level 5:colcon.colcon_core.verb:set package 'trust_contact' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.181s] DEBUG:colcon.colcon_core.verb:Building package 'trust_contact' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/paulav/contact_ws/build/trust_contact', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/paulav/contact_ws/install/trust_contact', 'merge_install': False, 'path': '/home/paulav/contact_ws/src/trust_contact', 'symlink_install': True, 'test_result_base': None}
+[0.181s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.182s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.182s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/paulav/contact_ws/src/messages' with build type 'ament_cmake'
+[0.182s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/paulav/contact_ws/src/messages'
+[0.183s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.184s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.184s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.185s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/paulav/contact_ws/src/contact_localization_ros' with build type 'ament_python'
+[0.185s] Level 1:colcon.colcon_core.shell:create_environment_hook('contact_localization_ros', 'ament_prefix_path')
+[0.186s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/paulav/contact_ws/install/contact_localization_ros/share/contact_localization_ros/hook/ament_prefix_path.ps1'
+[0.186s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/paulav/contact_ws/install/contact_localization_ros/share/contact_localization_ros/hook/ament_prefix_path.dsv'
+[0.186s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/paulav/contact_ws/install/contact_localization_ros/share/contact_localization_ros/hook/ament_prefix_path.sh'
+[0.186s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.186s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.191s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/paulav/contact_ws/build/messages': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/paulav/contact_ws/install/contact_localization_ros:/home/paulav/contact_ws/install/trust_contact:/opt/ros/humble /usr/bin/cmake /home/paulav/contact_ws/src/messages -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/paulav/contact_ws/install/messages
+[0.328s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/paulav/contact_ws/src/contact_localization_ros'
+[0.328s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.328s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.521s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/contact_localization_ros/share/ament_index/resource_index/packages/contact_localization_ros
+[0.521s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/contact_localization_ros/share/contact_localization_ros/package.xml
+[0.522s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/paulav/contact_ws/build/contact_localization_ros': PYTHONPATH=/home/paulav/contact_ws/build/contact_localization_ros/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/paulav/contact_ws/install/contact_localization_ros/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/paulav/contact_ws/build/contact_localization_ros/build --no-deps symlink_data --force
+[0.759s] Level 1:colcon.colcon_core.shell:create_environment_hook('contact_localization_ros', 'pythonpath_develop')
+[0.759s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/paulav/contact_ws/build/contact_localization_ros/share/contact_localization_ros/hook/pythonpath_develop.ps1'
+[0.760s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/paulav/contact_ws/build/contact_localization_ros' returned '0': PYTHONPATH=/home/paulav/contact_ws/build/contact_localization_ros/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/paulav/contact_ws/install/contact_localization_ros/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/paulav/contact_ws/build/contact_localization_ros/build --no-deps symlink_data --force
+[0.760s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/paulav/contact_ws/build/contact_localization_ros/share/contact_localization_ros/hook/pythonpath_develop.dsv'
+[0.760s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/paulav/contact_ws/build/contact_localization_ros/share/contact_localization_ros/hook/pythonpath_develop.sh'
+[0.763s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/contact_localization_ros' for CMake module files
+[0.763s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/contact_localization_ros' for CMake config files
+[0.763s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/contact_localization_ros/lib'
+[0.764s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/contact_localization_ros/bin'
+[0.764s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/contact_localization_ros/lib/pkgconfig/contact_localization_ros.pc'
+[0.764s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/contact_localization_ros/lib/python3.10/site-packages'
+[0.764s] Level 1:colcon.colcon_core.shell:create_environment_hook('contact_localization_ros', 'pythonpath')
+[0.764s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/paulav/contact_ws/install/contact_localization_ros/share/contact_localization_ros/hook/pythonpath.ps1'
+[0.764s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/paulav/contact_ws/install/contact_localization_ros/share/contact_localization_ros/hook/pythonpath.dsv'
+[0.765s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/paulav/contact_ws/install/contact_localization_ros/share/contact_localization_ros/hook/pythonpath.sh'
+[0.765s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/contact_localization_ros/bin'
+[0.765s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(contact_localization_ros)
+[0.766s] INFO:colcon.colcon_core.shell:Creating package script '/home/paulav/contact_ws/install/contact_localization_ros/share/contact_localization_ros/package.ps1'
+[0.766s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/paulav/contact_ws/install/contact_localization_ros/share/contact_localization_ros/package.dsv'
+[0.767s] INFO:colcon.colcon_core.shell:Creating package script '/home/paulav/contact_ws/install/contact_localization_ros/share/contact_localization_ros/package.sh'
+[0.767s] INFO:colcon.colcon_core.shell:Creating package script '/home/paulav/contact_ws/install/contact_localization_ros/share/contact_localization_ros/package.bash'
+[0.768s] INFO:colcon.colcon_core.shell:Creating package script '/home/paulav/contact_ws/install/contact_localization_ros/share/contact_localization_ros/package.zsh'
+[0.768s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/paulav/contact_ws/install/contact_localization_ros/share/colcon-core/packages/contact_localization_ros)
+[0.858s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/paulav/contact_ws/build/messages' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/paulav/contact_ws/install/contact_localization_ros:/home/paulav/contact_ws/install/trust_contact:/opt/ros/humble /usr/bin/cmake /home/paulav/contact_ws/src/messages -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/paulav/contact_ws/install/messages
+[0.859s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/paulav/contact_ws/build/messages': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/paulav/contact_ws/install/contact_localization_ros:/home/paulav/contact_ws/install/trust_contact:/opt/ros/humble /usr/bin/cmake --build /home/paulav/contact_ws/build/messages -- -j24 -l24
+[1.094s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/paulav/contact_ws/build/messages' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/paulav/contact_ws/install/contact_localization_ros:/home/paulav/contact_ws/install/trust_contact:/opt/ros/humble /usr/bin/cmake --build /home/paulav/contact_ws/build/messages -- -j24 -l24
+[1.106s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/paulav/contact_ws/build/messages': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/paulav/contact_ws/install/contact_localization_ros:/home/paulav/contact_ws/install/trust_contact:/opt/ros/humble /usr/bin/cmake --install /home/paulav/contact_ws/build/messages
+[1.165s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(messages)
+[1.166s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/paulav/contact_ws/build/messages' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/paulav/contact_ws/install/contact_localization_ros:/home/paulav/contact_ws/install/trust_contact:/opt/ros/humble /usr/bin/cmake --install /home/paulav/contact_ws/build/messages
+[1.166s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/messages' for CMake module files
+[1.167s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/messages' for CMake config files
+[1.167s] Level 1:colcon.colcon_core.shell:create_environment_hook('messages', 'cmake_prefix_path')
+[1.167s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/paulav/contact_ws/install/messages/share/messages/hook/cmake_prefix_path.ps1'
+[1.167s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/paulav/contact_ws/install/messages/share/messages/hook/cmake_prefix_path.dsv'
+[1.168s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/paulav/contact_ws/install/messages/share/messages/hook/cmake_prefix_path.sh'
+[1.168s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/messages/lib'
+[1.168s] Level 1:colcon.colcon_core.shell:create_environment_hook('messages', 'ld_library_path_lib')
+[1.168s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/paulav/contact_ws/install/messages/share/messages/hook/ld_library_path_lib.ps1'
+[1.169s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/paulav/contact_ws/install/messages/share/messages/hook/ld_library_path_lib.dsv'
+[1.169s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/paulav/contact_ws/install/messages/share/messages/hook/ld_library_path_lib.sh'
+[1.169s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/messages/bin'
+[1.169s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/messages/lib/pkgconfig/messages.pc'
+[1.170s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/messages/lib/python3.10/site-packages'
+[1.170s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/messages/bin'
+[1.170s] INFO:colcon.colcon_core.shell:Creating package script '/home/paulav/contact_ws/install/messages/share/messages/package.ps1'
+[1.171s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/paulav/contact_ws/install/messages/share/messages/package.dsv'
+[1.171s] INFO:colcon.colcon_core.shell:Creating package script '/home/paulav/contact_ws/install/messages/share/messages/package.sh'
+[1.171s] INFO:colcon.colcon_core.shell:Creating package script '/home/paulav/contact_ws/install/messages/share/messages/package.bash'
+[1.172s] INFO:colcon.colcon_core.shell:Creating package script '/home/paulav/contact_ws/install/messages/share/messages/package.zsh'
+[1.172s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/paulav/contact_ws/install/messages/share/colcon-core/packages/messages)
+[1.172s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(messages)
+[1.172s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/messages' for CMake module files
+[1.173s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/messages' for CMake config files
+[1.173s] Level 1:colcon.colcon_core.shell:create_environment_hook('messages', 'cmake_prefix_path')
+[1.173s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/paulav/contact_ws/install/messages/share/messages/hook/cmake_prefix_path.ps1'
+[1.173s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/paulav/contact_ws/install/messages/share/messages/hook/cmake_prefix_path.dsv'
+[1.173s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/paulav/contact_ws/install/messages/share/messages/hook/cmake_prefix_path.sh'
+[1.174s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/messages/lib'
+[1.174s] Level 1:colcon.colcon_core.shell:create_environment_hook('messages', 'ld_library_path_lib')
+[1.174s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/paulav/contact_ws/install/messages/share/messages/hook/ld_library_path_lib.ps1'
+[1.174s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/paulav/contact_ws/install/messages/share/messages/hook/ld_library_path_lib.dsv'
+[1.174s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/paulav/contact_ws/install/messages/share/messages/hook/ld_library_path_lib.sh'
+[1.174s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/messages/bin'
+[1.174s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/messages/lib/pkgconfig/messages.pc'
+[1.174s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/messages/lib/python3.10/site-packages'
+[1.175s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/messages/bin'
+[1.175s] INFO:colcon.colcon_core.shell:Creating package script '/home/paulav/contact_ws/install/messages/share/messages/package.ps1'
+[1.175s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/paulav/contact_ws/install/messages/share/messages/package.dsv'
+[1.175s] INFO:colcon.colcon_core.shell:Creating package script '/home/paulav/contact_ws/install/messages/share/messages/package.sh'
+[1.175s] INFO:colcon.colcon_core.shell:Creating package script '/home/paulav/contact_ws/install/messages/share/messages/package.bash'
+[1.176s] INFO:colcon.colcon_core.shell:Creating package script '/home/paulav/contact_ws/install/messages/share/messages/package.zsh'
+[1.176s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/paulav/contact_ws/install/messages/share/colcon-core/packages/messages)
+[1.176s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/paulav/contact_ws/src/trust_contact' with build type 'ament_python'
+[1.176s] Level 1:colcon.colcon_core.shell:create_environment_hook('trust_contact', 'ament_prefix_path')
+[1.176s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/paulav/contact_ws/install/trust_contact/share/trust_contact/hook/ament_prefix_path.ps1'
+[1.176s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/paulav/contact_ws/install/trust_contact/share/trust_contact/hook/ament_prefix_path.dsv'
+[1.176s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/paulav/contact_ws/install/trust_contact/share/trust_contact/hook/ament_prefix_path.sh'
+[1.177s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.177s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.327s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/paulav/contact_ws/src/trust_contact'
+[1.327s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.327s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/ament_index/resource_index/packages/trust_contact
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/package.xml
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/peg.xml
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/panda_nohand.xml
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/scene.xml
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/panda_withpeg.xml
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/panda.urdf
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/pointcloud/link2_points.asc
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/pointcloud/link5_points.asc
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/pointcloud/peg_points.asc
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/pointcloud/link7_points.asc
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/pointcloud/link4_points.asc
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/pointcloud/link1_points.asc
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/pointcloud/link6_points.asc
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/pointcloud/link3_points.asc
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/oldpeg.stl
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link5_0.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link0_10.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link7_3.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/finger_0.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link4_2.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link5_2.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link5_1.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/finger_1.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link4_0.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link6_9.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link0_1.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link6.stl
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link3_3.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/hand_3.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/hand_4.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link2.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link4_1.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link7.stl
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link0_11.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link7_6.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link6_13.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link0_9.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/hand_2.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link2.stl
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link3_0.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/oldpeg.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link0_8.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link0_7.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link4_3.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link6_4.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link6_3.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/peg.stl
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/hand.stl
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link7_5.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link6_1.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link6_15.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link0_3.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link3.stl
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link0_4.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link4.stl
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link1.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link6_12.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link3_1.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link0.stl
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link7_2.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link6_10.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link0_0.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link6_16.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link5_collision_2.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link6_5.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link5_collision_0.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link6_7.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link3_2.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link0_2.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link6_6.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link6_11.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link7_0.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link6_14.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link5_collision_1.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link7_1.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/hand_0.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link7_4.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link6_0.obj
+[1.527s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link0_5.obj
+[1.528s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link1.stl
+[1.528s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link7_7.obj
+[1.528s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/peg.obj
+[1.528s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/hand_1.obj
+[1.528s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link6_8.obj
+[1.528s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets/link6_2.obj
+[1.528s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/lib/trust_contact/residual_node
+[1.528s] DEBUG:colcon.colcon_core.task.python.build:While undoing a previous installation files outside the Python library path are being ignored: /home/paulav/contact_ws/install/trust_contact/lib/trust_contact/simulation
+[1.530s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/paulav/contact_ws/build/trust_contact': CMAKE_PREFIX_PATH=/home/paulav/contact_ws/install/messages:/usr/local PYTHONPATH=/home/paulav/contact_ws/build/trust_contact/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/paulav/contact_ws/build/trust_contact/build --no-deps symlink_data --force
+[1.779s] Level 1:colcon.colcon_core.shell:create_environment_hook('trust_contact', 'pythonpath_develop')
+[1.780s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/paulav/contact_ws/build/trust_contact/share/trust_contact/hook/pythonpath_develop.ps1'
+[1.780s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/paulav/contact_ws/build/trust_contact' returned '0': CMAKE_PREFIX_PATH=/home/paulav/contact_ws/install/messages:/usr/local PYTHONPATH=/home/paulav/contact_ws/build/trust_contact/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/paulav/contact_ws/build/trust_contact/build --no-deps symlink_data --force
+[1.780s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/paulav/contact_ws/build/trust_contact/share/trust_contact/hook/pythonpath_develop.dsv'
+[1.781s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/paulav/contact_ws/build/trust_contact/share/trust_contact/hook/pythonpath_develop.sh'
+[1.781s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/trust_contact' for CMake module files
+[1.781s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/trust_contact' for CMake config files
+[1.782s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/trust_contact/lib'
+[1.782s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/trust_contact/bin'
+[1.782s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/trust_contact/lib/pkgconfig/trust_contact.pc'
+[1.782s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages'
+[1.782s] Level 1:colcon.colcon_core.shell:create_environment_hook('trust_contact', 'pythonpath')
+[1.782s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/paulav/contact_ws/install/trust_contact/share/trust_contact/hook/pythonpath.ps1'
+[1.782s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/paulav/contact_ws/install/trust_contact/share/trust_contact/hook/pythonpath.dsv'
+[1.783s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/paulav/contact_ws/install/trust_contact/share/trust_contact/hook/pythonpath.sh'
+[1.783s] Level 1:colcon.colcon_core.environment:checking '/home/paulav/contact_ws/install/trust_contact/bin'
+[1.783s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(trust_contact)
+[1.783s] INFO:colcon.colcon_core.shell:Creating package script '/home/paulav/contact_ws/install/trust_contact/share/trust_contact/package.ps1'
+[1.783s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/paulav/contact_ws/install/trust_contact/share/trust_contact/package.dsv'
+[1.783s] INFO:colcon.colcon_core.shell:Creating package script '/home/paulav/contact_ws/install/trust_contact/share/trust_contact/package.sh'
+[1.784s] INFO:colcon.colcon_core.shell:Creating package script '/home/paulav/contact_ws/install/trust_contact/share/trust_contact/package.bash'
+[1.784s] INFO:colcon.colcon_core.shell:Creating package script '/home/paulav/contact_ws/install/trust_contact/share/trust_contact/package.zsh'
+[1.784s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/paulav/contact_ws/install/trust_contact/share/colcon-core/packages/trust_contact)
+[1.784s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[1.784s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[1.784s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[1.784s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[1.789s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[1.789s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[1.789s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[1.796s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[1.797s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/paulav/contact_ws/install/local_setup.ps1'
+[1.797s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/paulav/contact_ws/install/_local_setup_util_ps1.py'
+[1.798s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/paulav/contact_ws/install/setup.ps1'
+[1.798s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/paulav/contact_ws/install/local_setup.sh'
+[1.798s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/paulav/contact_ws/install/_local_setup_util_sh.py'
+[1.798s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/paulav/contact_ws/install/setup.sh'
+[1.799s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/paulav/contact_ws/install/local_setup.bash'
+[1.799s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/paulav/contact_ws/install/setup.bash'
+[1.799s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/paulav/contact_ws/install/local_setup.zsh'
+[1.800s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/paulav/contact_ws/install/setup.zsh'

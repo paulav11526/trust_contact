@@ -1,0 +1,22 @@
+[0.466s] Invoking command in '/home/paulav/contact_ws/src/trust_contact': PYTHONPATH=/home/paulav/contact_ws/build/trust_contact/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/trust_contact build --build-base /home/paulav/contact_ws/build/trust_contact/build install --record /home/paulav/contact_ws/build/trust_contact/install.log --single-version-externally-managed install_data
+[0.586s] running egg_info
+[0.587s] writing ../../build/trust_contact/trust_contact.egg-info/PKG-INFO
+[0.587s] writing dependency_links to ../../build/trust_contact/trust_contact.egg-info/dependency_links.txt
+[0.587s] writing entry points to ../../build/trust_contact/trust_contact.egg-info/entry_points.txt
+[0.587s] writing requirements to ../../build/trust_contact/trust_contact.egg-info/requires.txt
+[0.587s] writing top-level names to ../../build/trust_contact/trust_contact.egg-info/top_level.txt
+[0.588s] reading manifest file '../../build/trust_contact/trust_contact.egg-info/SOURCES.txt'
+[0.588s] writing manifest file '../../build/trust_contact/trust_contact.egg-info/SOURCES.txt'
+[0.588s] running build
+[0.588s] running build_py
+[0.589s] running install
+[0.589s] running install_lib
+[0.589s] running install_data
+[0.590s] running install_egg_info
+[0.591s] removing '/home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact-0.0.0-py3.10.egg-info' (and everything under it)
+[0.591s] Copying ../../build/trust_contact/trust_contact.egg-info to /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact-0.0.0-py3.10.egg-info
+[0.591s] running install_scripts
+[0.601s] Installing contact_force script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+[0.601s] Installing residual_node script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+[0.602s] writing list of installed files to '/home/paulav/contact_ws/build/trust_contact/install.log'
+[0.617s] Invoked command in '/home/paulav/contact_ws/src/trust_contact' returned '0': PYTHONPATH=/home/paulav/contact_ws/build/trust_contact/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/trust_contact build --build-base /home/paulav/contact_ws/build/trust_contact/build install --record /home/paulav/contact_ws/build/trust_contact/install.log --single-version-externally-managed install_data

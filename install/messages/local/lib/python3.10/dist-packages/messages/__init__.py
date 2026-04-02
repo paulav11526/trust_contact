@@ -1,0 +1,1 @@
+/home/paulav/contact_ws/build/messages/rosidl_generator_py/messages/__init__.py

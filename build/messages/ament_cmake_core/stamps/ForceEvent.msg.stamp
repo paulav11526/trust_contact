@@ -1,0 +1,7 @@
+# ForceEvent.msg
+float64 force_magnitude_1
+builtin_interfaces/Time timestamp_1_start
+builtin_interfaces/Time timestamp_1_end
+float64 force_magnitude_2
+builtin_interfaces/Time timestamp_2_start
+builtin_interfaces/Time timestamp_2_end

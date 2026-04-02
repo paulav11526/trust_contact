@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "messages__py",
+		"source" : "/home/paulav/contact_ws/build/messages/messages__py"
+	}
+}

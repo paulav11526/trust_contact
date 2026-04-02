@@ -1,0 +1,102 @@
+running develop
+running egg_info
+writing trust_contact.egg-info/PKG-INFO
+writing dependency_links to trust_contact.egg-info/dependency_links.txt
+writing entry points to trust_contact.egg-info/entry_points.txt
+writing requirements to trust_contact.egg-info/requires.txt
+writing top-level names to trust_contact.egg-info/top_level.txt
+reading manifest file 'trust_contact.egg-info/SOURCES.txt'
+writing manifest file 'trust_contact.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust-contact.egg-link (link to .)
+Installing residual_node script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+Installing simulation script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+
+Installed /home/paulav/contact_ws/build/trust_contact
+running symlink_data
+symbolically linking /home/paulav/contact_ws/build/trust_contact/resource/trust_contact -> /home/paulav/contact_ws/install/trust_contact/share/ament_index/resource_index/packages
+symbolically linking /home/paulav/contact_ws/build/trust_contact/package.xml -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/peg.xml -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/panda_nohand.xml -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/scene.xml -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/panda_withpeg.xml -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/panda.urdf -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/pointcloud/link2_points.asc -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/pointcloud
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/pointcloud/link5_points.asc -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/pointcloud
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/pointcloud/peg_points.asc -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/pointcloud
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/pointcloud/link7_points.asc -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/pointcloud
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/pointcloud/link4_points.asc -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/pointcloud
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/pointcloud/link1_points.asc -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/pointcloud
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/pointcloud/link6_points.asc -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/pointcloud
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/pointcloud/link3_points.asc -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/pointcloud
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/oldpeg.stl -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link5_0.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link0_10.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link7_3.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/finger_0.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link4_2.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link5_2.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link5_1.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/finger_1.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link4_0.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link6_9.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link0_1.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link6.stl -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link3_3.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/hand_3.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/hand_4.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link2.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link4_1.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link7.stl -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link0_11.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link7_6.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link6_13.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link0_9.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/hand_2.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link2.stl -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link3_0.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/oldpeg.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link0_8.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link0_7.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link4_3.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link6_4.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link6_3.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/peg.stl -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/hand.stl -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link7_5.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link6_1.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link6_15.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link0_3.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link3.stl -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link0_4.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link4.stl -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link1.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link6_12.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link3_1.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link0.stl -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link7_2.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link6_10.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link0_0.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link6_16.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link5_collision_2.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link6_5.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link5_collision_0.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link6_7.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link3_2.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link0_2.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link6_6.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link6_11.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link7_0.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link6_14.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link5_collision_1.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link7_1.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/hand_0.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link7_4.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link6_0.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link0_5.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link1.stl -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link7_7.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/peg.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/hand_1.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link6_8.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+symbolically linking /home/paulav/contact_ws/build/trust_contact/trust_contact/models/assets/link6_2.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets

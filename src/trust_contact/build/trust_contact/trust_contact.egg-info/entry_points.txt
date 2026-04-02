@@ -1,0 +1,5 @@
+[console_scripts]
+fsm_node = trust_contact.fsm_node:main
+residual_node = trust_contact.residual_node:main
+simulation = trust_contact.simulation:main
+

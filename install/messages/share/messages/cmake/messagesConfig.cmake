@@ -1,0 +1,1 @@
+/home/paulav/contact_ws/build/messages/ament_cmake_core/messagesConfig.cmake

@@ -1,0 +1,20 @@
+[0.456s] Invoking command in '/home/paulav/contact_ws/src/contact_localization_ros': PYTHONPATH=/home/paulav/contact_ws/build/contact_localization_ros/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/paulav/contact_ws/install/contact_localization_ros/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/contact_localization_ros build --build-base /home/paulav/contact_ws/build/contact_localization_ros/build install --record /home/paulav/contact_ws/build/contact_localization_ros/install.log --single-version-externally-managed install_data
+[0.575s] running egg_info
+[0.576s] writing ../../build/contact_localization_ros/contact_localization_ros.egg-info/PKG-INFO
+[0.576s] writing dependency_links to ../../build/contact_localization_ros/contact_localization_ros.egg-info/dependency_links.txt
+[0.576s] writing entry points to ../../build/contact_localization_ros/contact_localization_ros.egg-info/entry_points.txt
+[0.576s] writing requirements to ../../build/contact_localization_ros/contact_localization_ros.egg-info/requires.txt
+[0.576s] writing top-level names to ../../build/contact_localization_ros/contact_localization_ros.egg-info/top_level.txt
+[0.577s] reading manifest file '../../build/contact_localization_ros/contact_localization_ros.egg-info/SOURCES.txt'
+[0.577s] writing manifest file '../../build/contact_localization_ros/contact_localization_ros.egg-info/SOURCES.txt'
+[0.577s] running build
+[0.577s] running build_py
+[0.577s] running install
+[0.577s] running install_lib
+[0.578s] running install_data
+[0.578s] running install_egg_info
+[0.579s] removing '/home/paulav/contact_ws/install/contact_localization_ros/lib/python3.10/site-packages/contact_localization_ros-0.0.0-py3.10.egg-info' (and everything under it)
+[0.579s] Copying ../../build/contact_localization_ros/contact_localization_ros.egg-info to /home/paulav/contact_ws/install/contact_localization_ros/lib/python3.10/site-packages/contact_localization_ros-0.0.0-py3.10.egg-info
+[0.579s] running install_scripts
+[0.590s] writing list of installed files to '/home/paulav/contact_ws/build/contact_localization_ros/install.log'
+[0.601s] Invoked command in '/home/paulav/contact_ws/src/contact_localization_ros' returned '0': PYTHONPATH=/home/paulav/contact_ws/build/contact_localization_ros/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/paulav/contact_ws/install/contact_localization_ros/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/contact_localization_ros build --build-base /home/paulav/contact_ws/build/contact_localization_ros/build install --record /home/paulav/contact_ws/build/contact_localization_ros/install.log --single-version-externally-managed install_data

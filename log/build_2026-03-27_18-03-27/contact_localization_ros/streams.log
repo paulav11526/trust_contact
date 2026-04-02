@@ -1,0 +1,16 @@
+[0.421s] Invoking command in '/home/paulav/contact_ws/build/contact_localization_ros': PYTHONPATH=/home/paulav/contact_ws/build/contact_localization_ros/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/paulav/contact_ws/install/contact_localization_ros/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/paulav/contact_ws/build/contact_localization_ros/build --no-deps symlink_data
+[0.553s] running develop
+[0.641s] running egg_info
+[0.641s] writing contact_localization_ros.egg-info/PKG-INFO
+[0.641s] writing dependency_links to contact_localization_ros.egg-info/dependency_links.txt
+[0.641s] writing entry points to contact_localization_ros.egg-info/entry_points.txt
+[0.641s] writing requirements to contact_localization_ros.egg-info/requires.txt
+[0.642s] writing top-level names to contact_localization_ros.egg-info/top_level.txt
+[0.642s] reading manifest file 'contact_localization_ros.egg-info/SOURCES.txt'
+[0.643s] writing manifest file 'contact_localization_ros.egg-info/SOURCES.txt'
+[0.643s] running build_ext
+[0.644s] Creating /home/paulav/contact_ws/install/contact_localization_ros/lib/python3.10/site-packages/contact-localization-ros.egg-link (link to .)
+[0.644s] 
+[0.644s] Installed /home/paulav/contact_ws/build/contact_localization_ros
+[0.644s] running symlink_data
+[0.657s] Invoked command in '/home/paulav/contact_ws/build/contact_localization_ros' returned '0': PYTHONPATH=/home/paulav/contact_ws/build/contact_localization_ros/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/paulav/contact_ws/install/contact_localization_ros/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/paulav/contact_ws/build/contact_localization_ros/build --no-deps symlink_data

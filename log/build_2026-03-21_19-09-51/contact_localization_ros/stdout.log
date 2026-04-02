@@ -1,0 +1,31 @@
+running egg_info
+creating ../../build/contact_localization_ros/contact_localization_ros.egg-info
+writing ../../build/contact_localization_ros/contact_localization_ros.egg-info/PKG-INFO
+writing dependency_links to ../../build/contact_localization_ros/contact_localization_ros.egg-info/dependency_links.txt
+writing entry points to ../../build/contact_localization_ros/contact_localization_ros.egg-info/entry_points.txt
+writing requirements to ../../build/contact_localization_ros/contact_localization_ros.egg-info/requires.txt
+writing top-level names to ../../build/contact_localization_ros/contact_localization_ros.egg-info/top_level.txt
+writing manifest file '../../build/contact_localization_ros/contact_localization_ros.egg-info/SOURCES.txt'
+reading manifest file '../../build/contact_localization_ros/contact_localization_ros.egg-info/SOURCES.txt'
+writing manifest file '../../build/contact_localization_ros/contact_localization_ros.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/paulav/contact_ws/build/contact_localization_ros/build
+creating /home/paulav/contact_ws/build/contact_localization_ros/build/lib
+creating /home/paulav/contact_ws/build/contact_localization_ros/build/lib/contact_localization_ros
+copying contact_localization_ros/__init__.py -> /home/paulav/contact_ws/build/contact_localization_ros/build/lib/contact_localization_ros
+running install
+running install_lib
+creating /home/paulav/contact_ws/install/contact_localization_ros/lib/python3.10/site-packages/contact_localization_ros
+copying /home/paulav/contact_ws/build/contact_localization_ros/build/lib/contact_localization_ros/__init__.py -> /home/paulav/contact_ws/install/contact_localization_ros/lib/python3.10/site-packages/contact_localization_ros
+byte-compiling /home/paulav/contact_ws/install/contact_localization_ros/lib/python3.10/site-packages/contact_localization_ros/__init__.py to __init__.cpython-310.pyc
+running install_data
+creating /home/paulav/contact_ws/install/contact_localization_ros/share/ament_index
+creating /home/paulav/contact_ws/install/contact_localization_ros/share/ament_index/resource_index
+creating /home/paulav/contact_ws/install/contact_localization_ros/share/ament_index/resource_index/packages
+copying resource/contact_localization_ros -> /home/paulav/contact_ws/install/contact_localization_ros/share/ament_index/resource_index/packages
+copying package.xml -> /home/paulav/contact_ws/install/contact_localization_ros/share/contact_localization_ros
+running install_egg_info
+Copying ../../build/contact_localization_ros/contact_localization_ros.egg-info to /home/paulav/contact_ws/install/contact_localization_ros/lib/python3.10/site-packages/contact_localization_ros-0.0.0-py3.10.egg-info
+running install_scripts
+writing list of installed files to '/home/paulav/contact_ws/build/contact_localization_ros/install.log'

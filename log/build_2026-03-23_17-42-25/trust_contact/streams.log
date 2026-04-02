@@ -1,0 +1,18 @@
+[0.464s] Invoking command in '/home/paulav/contact_ws/build/trust_contact': PYTHONPATH=/home/paulav/contact_ws/build/trust_contact/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/paulav/contact_ws/build/trust_contact/build --no-deps symlink_data
+[0.599s] running develop
+[0.687s] running egg_info
+[0.687s] writing trust_contact.egg-info/PKG-INFO
+[0.687s] writing dependency_links to trust_contact.egg-info/dependency_links.txt
+[0.687s] writing entry points to trust_contact.egg-info/entry_points.txt
+[0.687s] writing requirements to trust_contact.egg-info/requires.txt
+[0.687s] writing top-level names to trust_contact.egg-info/top_level.txt
+[0.688s] reading manifest file 'trust_contact.egg-info/SOURCES.txt'
+[0.689s] writing manifest file 'trust_contact.egg-info/SOURCES.txt'
+[0.689s] running build_ext
+[0.690s] Creating /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust-contact.egg-link (link to .)
+[0.690s] Installing contact_force script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+[0.690s] Installing residual_node script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+[0.690s] 
+[0.690s] Installed /home/paulav/contact_ws/build/trust_contact
+[0.690s] running symlink_data
+[0.704s] Invoked command in '/home/paulav/contact_ws/build/trust_contact' returned '0': PYTHONPATH=/home/paulav/contact_ws/build/trust_contact/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/paulav/contact_ws/build/trust_contact/build --no-deps symlink_data
