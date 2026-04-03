@@ -14,13 +14,6 @@ def generate_launch_description():
             name='mujoco_simulator',
             output='screen'
         ),
-        #FSM node
-        Node(
-            package=package_name,
-            executable='fsm_node',
-            name='fsm_logic',
-            output='screen'
-        ),
         # Momentum observer
         Node(
             package=package_name,

@@ -1,0 +1,39 @@
+[0.363s] Invoking command in '/home/paulav/contact_ws/src/trust_contact': CMAKE_PREFIX_PATH=/home/paulav/contact_ws/install/messages:/usr/local PYTHONPATH=/home/paulav/contact_ws/build/trust_contact/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/trust_contact build --build-base /home/paulav/contact_ws/build/trust_contact/build install --record /home/paulav/contact_ws/build/trust_contact/install.log --single-version-externally-managed install_data
+[0.482s] running egg_info
+[0.482s] writing ../../build/trust_contact/trust_contact.egg-info/PKG-INFO
+[0.482s] writing dependency_links to ../../build/trust_contact/trust_contact.egg-info/dependency_links.txt
+[0.482s] writing entry points to ../../build/trust_contact/trust_contact.egg-info/entry_points.txt
+[0.482s] writing requirements to ../../build/trust_contact/trust_contact.egg-info/requires.txt
+[0.482s] writing top-level names to ../../build/trust_contact/trust_contact.egg-info/top_level.txt
+[0.483s] reading manifest file '../../build/trust_contact/trust_contact.egg-info/SOURCES.txt'
+[0.484s] writing manifest file '../../build/trust_contact/trust_contact.egg-info/SOURCES.txt'
+[0.484s] running build
+[0.484s] running build_py
+[0.484s] copying trust_contact/simulation.py -> /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact
+[0.485s] copying trust_contact/generating_data.py -> /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact
+[0.485s] copying trust_contact/residual_node.py -> /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact
+[0.485s] running install
+[0.485s] running install_lib
+[0.485s] copying /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact/simulation.py -> /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact
+[0.485s] copying /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact/generating_data.py -> /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact
+[0.485s] copying /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact/residual_node.py -> /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact
+[0.485s] byte-compiling /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact/simulation.py to simulation.cpython-310.pyc
+[0.487s] byte-compiling /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact/generating_data.py to generating_data.cpython-310.pyc
+[0.487s] byte-compiling /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact/residual_node.py to residual_node.cpython-310.pyc
+[0.487s]   File "/home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact/generating_data.py", line 54
+[0.487s]     model.fit(X, speed_true)import random
+[0.487s]                             ^^^^^^
+[0.487s] SyntaxError: invalid syntax
+[0.487s] 
+[0.488s] running install_data
+[0.488s] copying launch/trust_contact_launch.py -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/launch
+[0.489s] running install_egg_info
+[0.490s] removing '/home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact-0.0.0-py3.10.egg-info' (and everything under it)
+[0.490s] Copying ../../build/trust_contact/trust_contact.egg-info to /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact-0.0.0-py3.10.egg-info
+[0.490s] running install_scripts
+[0.500s] Installing contact_classifier_node script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+[0.500s] Installing fsm_node script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+[0.500s] Installing residual_node script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+[0.500s] Installing simulation script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+[0.500s] writing list of installed files to '/home/paulav/contact_ws/build/trust_contact/install.log'
+[0.511s] Invoked command in '/home/paulav/contact_ws/src/trust_contact' returned '0': CMAKE_PREFIX_PATH=/home/paulav/contact_ws/install/messages:/usr/local PYTHONPATH=/home/paulav/contact_ws/build/trust_contact/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/trust_contact build --build-base /home/paulav/contact_ws/build/trust_contact/build install --record /home/paulav/contact_ws/build/trust_contact/install.log --single-version-externally-managed install_data

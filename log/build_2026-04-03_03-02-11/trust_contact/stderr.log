@@ -1,0 +1,5 @@
+  File "/home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact/generating_data.py", line 54
+    model.fit(X, speed_true)import random
+                            ^^^^^^
+SyntaxError: invalid syntax
+
