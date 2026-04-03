@@ -24,49 +24,91 @@ class ContactClassifier(Node):
         self.get_logger().info('Classifier node started')
 
     def train(self):
-        # Create Sample Training Data
         np.random.seed(42)
+
         X = []
         y = []
 
-        for _ in range(1000):
-            # Generate two contacts
-            contact1 = [
-                np.random.uniform(0, 15),   # force
-                np.random.uniform(0, 2),      # start
-                np.random.uniform(2, 5)      # end
-            ]
-            
-            contact2 = [
-                np.random.uniform(0, 15),
-                np.random.uniform(0, 5),
-                np.random.uniform(5, 10)
-            ]
-            
-            matrix = np.array([contact1, contact2])
+        n_samples = 3000
+
+        for _ in range(n_samples):
+            # choose intent class
+            intent = np.random.choice(["single tap", "double tap", "long tap"])
+
+            # --- First contact always exists ---
+            force1 = np.random.uniform(1.0, 15.0)
+            t1_start = np.random.uniform(0.0, 5.0)
+
+            if intent == "single tap":
+                duration1 = np.random.uniform(0.04, 0.35)
+                t1_end = t1_start + duration1
+
+                # no second contact
+                force2 = 0.0
+                t2_start = 0.0
+                t2_end = 0.0
+
+            elif intent == "long tap":
+                duration1 = np.random.uniform(0.8, 3.0)
+                t1_end = t1_start + duration1
+
+                # no second contact
+                force2 = 0.0
+                t2_start = 0.0
+                t2_end = 0.0
+
+            else:  # double tap
+                duration1 = np.random.uniform(0.04, 0.30)
+                t1_end = t1_start + duration1
+
+                gap = np.random.uniform(0.05, 0.45)
+
+                force2 = np.random.uniform(1.0, 15.0)
+                t2_start = t1_end + gap
+                duration2 = np.random.uniform(0.04, 0.30)
+                t2_end = t2_start + duration2
+
+            # Add small measurement noise/jitter
+            force1 = max(0.0, force1 + np.random.normal(0, 0.3))
+            force2 = max(0.0, force2 + np.random.normal(0, 0.3))
+
+            t1_start = max(0.0, t1_start + np.random.normal(0, 0.005))
+            t1_end = max(t1_start, t1_end + np.random.normal(0, 0.005))
+
+            if force2 > 0.0:
+                t2_start = max(t1_end, t2_start + np.random.normal(0, 0.005))
+                t2_end = max(t2_start, t2_end + np.random.normal(0, 0.005))
+
+            matrix = np.array([
+                [force1, t1_start, t1_end],
+                [force2, t2_start, t2_end]
+            ], dtype=float)
+
             features = self.extract_features(matrix)
-            
-            # Label rules (example logic)
-            if features[4] < 0.5:
-                label = "double tap"
-            elif features[4] > 0.5:
-                if features[2] > 2:
-                    label = "long tap"
-                else:
-                    label = "continue"
-            
+
             X.append(features)
-            y.append(self.encode_label(label))
+            y.append(self.encode_label(intent))
 
-            X = pd.DataFrame(X, columns=[
-                "force1", "force2", "duration1", "duration2", "gap", "force_diff"
-            ])
+        X = pd.DataFrame(X, columns=[
+            "force1",
+            "force2",
+            "duration1",
+            "duration2",
+            "gap",
+            "force_diff",
+            "has_second_contact"
+        ])
 
-            # Train Model
-            model = RandomForestClassifier(n_estimators=100, random_state=42)
-            model.fit(X, y)
+        model = RandomForestClassifier(
+            n_estimators=200,
+            random_state=42,
+            max_depth=8,
+            min_samples_split=5,
+            min_samples_leaf=2
+        )
+        model.fit(X, y)
 
-            return model
+        return model
 
     def ros_time_to_float(self, ros_time):
         return ros_time.sec + (ros_time.nanosec / 1e9)
@@ -88,19 +130,25 @@ class ContactClassifier(Node):
 
     # Feature Extraction Function
     def extract_features(self, matrix):
-        # matrix shape: (2, 3)
         f1, t1_start, t1_end = matrix[0]
         f2, t2_start, t2_end = matrix[1]
-        
-        duration1 = t1_end - t1_start
-        duration2 = t2_end - t2_start
-        gap = t2_start - t1_end  # time between contacts
-        force_diff = abs(f1 - f2)
-        self.get_logger().info(f'Duration: {duration1}')
-        self.get_logger().info(f'start: {t1_start}')
-        self.get_logger().info(f'end: {t1_end}')
-        
-        return [f1, f2, duration1, duration2, gap, force_diff]
+
+        duration1 = max(0.0, t1_end - t1_start)
+
+        has_second_contact = not (
+            f2 == 0.0 and t2_start == 0.0 and t2_end == 0.0
+        )
+
+        if has_second_contact:
+            duration2 = max(0.0, t2_end - t2_start)
+            gap = max(0.0, t2_start - t1_end)
+            force_diff = abs(f1 - f2)
+        else:
+            duration2 = 0.0
+            gap = 0.0
+            force_diff = 0.0
+
+        return [f1,f2,duration1,duration2,gap,force_diff,float(has_second_contact)]
 
     # Encoding Function
     def encode_label(self,label):
@@ -108,14 +156,14 @@ class ContactClassifier(Node):
                 return [1, 0, 0]
             elif label == "double tap":
                 return [0, 1, 0]
-            else:  # "tap"
+            else:  # "single tap"
                 return [0, 0, 1]
 
     # Prediction Function
     def predict_movement(self, matrix):
         features = self.extract_features(matrix)
         features_df = pd.DataFrame([features], columns=[
-                "force1", "force2", "duration1", "duration2", "gap", "force_diff"
+                "force1", "force2", "duration1", "duration2", "gap", "force_diff", "has_second_contact",
             ])
 
         pred = self.model.predict(features_df)[0]

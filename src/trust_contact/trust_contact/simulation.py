@@ -19,6 +19,7 @@ from std_msgs.msg import Bool
 from geometry_msgs.msg import Point
 from std_msgs.msg import Float64MultiArray
 from std_msgs.msg import Float64
+from std_msgs.msg import Float32MultiArray
 
 class ApplyContactForce:
     def __init__(self, model, data, df, random_row, contact_pub, point_pub, node):
@@ -29,7 +30,7 @@ class ApplyContactForce:
         # simulation details
         self.force_body = self.d.body("peg").id
         self.force_limit = 15  # maximum magnitude of each force component
-        self.application_time = 50 # how many timesteps force is applied for
+        self.application_time = 300 # how many timesteps force is applied for
         self.force_starttime = 2000 # timesteps when force application begins
         self.logging_start = self.force_starttime # timestep when sensor data logging starts
         self.logging_end = self.logging_start + 1000 # timestep when sensor data logging ends
@@ -130,10 +131,13 @@ class ApplyContactForce:
         #self.get_logger().info(f"q mujoco: {self.d.qpos}")
         return globalpoint, force_world
 
-    def contact_type(self):
+    def contact_parameters(self):
         C1 = random.random() # trust parameter
         C2 = random.choice([0,1]) # palm or finger
         X = [[C1, C2]]
+        return X
+
+    
 
 class RobotController:
     def __init__(self, model, data):
@@ -208,14 +212,14 @@ class MujocoSimulatorNode(Node):
 def main(args=None):
     rclpy.init(args=args)
     node = MujocoSimulatorNode()
-    force= [-2.3310970026575504, -2, 3]
-    point= [np.float64(0.025166), np.float64(-0.000428), np.float64(0.094485)]
     msg = JointState()
-
-    
 
     # generate random force on random point
     force_vector, force_point = node.force_manager.force_generation()
+
+    # generate randoom trust parameter and contact type
+    X = node.force_manager.contact_parameters()
+    node.get_logger().info(f'Contact: {X}')
 
     # Launch the simulation
     with mujoco.viewer.launch_passive(node.m, node.d) as viewer:

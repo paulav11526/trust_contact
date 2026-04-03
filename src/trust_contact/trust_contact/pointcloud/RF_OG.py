@@ -45,14 +45,19 @@ for _ in range(1000):
     
     matrix = np.array([contact1, contact2])
     features = extract_features(matrix)
- 
-    if features[4] < 0.5:
-        label = "double tap"
-    elif features[4] > 0.5:
+    if features[1] < 0.01:
         if features[2] > 2:
             label = "long tap"
         else:
-            label = "continue"
+                label = "continue"
+    else:
+        if features[4] < 0.5:
+            label = "double tap"
+        elif features[4] > 0.5:
+            if features[2] > 2:
+                label = "long tap"
+            else:
+                label = "continue"
     
     X.append(features)
     y.append(encode_label(label))
@@ -77,8 +82,8 @@ def predict_movement(matrix):
  
 # Example Prediction
 test_matrix = np.array([
-    [2, 3, 6],   # long contact
-    [6, 4.1, 5]
+    [8.422379, 3.999999999, 4.095999999],   # long contact
+    [0,0,0]
 ])
 
 print(predict_movement(test_matrix))
