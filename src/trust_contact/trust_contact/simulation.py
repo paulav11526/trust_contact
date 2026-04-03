@@ -18,6 +18,8 @@ from geometry_msgs.msg import WrenchStamped
 from std_msgs.msg import Bool
 from geometry_msgs.msg import Point
 from std_msgs.msg import Float64MultiArray
+from std_msgs.msg import Float64
+from std_msgs.msg import Float32MultiArray
 
 class ApplyContactForce:
     def __init__(self, model, data, df, random_row, contact_pub, point_pub, node):
@@ -27,8 +29,8 @@ class ApplyContactForce:
 
         # simulation details
         self.force_body = self.d.body("peg").id
-        self.force_limit = 5  # maximum magnitude of each force component
-        self.application_time = 1000 # how many timesteps force is applied for
+        self.force_limit = 15  # maximum magnitude of each force component
+        self.application_time = 100 # how many timesteps force is applied for
         self.force_starttime = 2000 # timesteps when force application begins
         self.logging_start = self.force_starttime # timestep when sensor data logging starts
         self.logging_end = self.logging_start + 1000 # timestep when sensor data logging ends
@@ -43,14 +45,10 @@ class ApplyContactForce:
 
     # setting random force vector
     def force_generation(self):
-        fx = random.uniform(-self.force_limit,self.force_limit)
-        fy = random.uniform(-self.force_limit,self.force_limit)
-        fz = random.uniform(-self.force_limit,self.force_limit)
-        force_applied = [fx, fy, fz]
-        force_point = [self.df.iloc[self.random_row,0], self.df.iloc[self.random_row,1], self.df.iloc[self.random_row,2]] #random point of force application
-        return force_applied, force_point
- 
-    def normal2point(self, point):
+        # random point on peg
+        point = [self.df.iloc[self.random_row,0], self.df.iloc[self.random_row,1], self.df.iloc[self.random_row,2]] #random point of force application
+
+        # vector normal to point
         normal_vector = [self.df.iloc[self.random_row,3], self.df.iloc[self.random_row,4], self.df.iloc[self.random_row,5]]  #normal vector at point of force application, read from csv file
         # ensuring normal vector will always point outwards: point's x value and normal's x value must have the same sign etc. 
         if (point[0]<=0 and normal_vector[0]>=0) or (point[0]>=0 and normal_vector[0]<=0):
@@ -59,21 +57,27 @@ class ApplyContactForce:
             normal_vector[1] *= -1
         if (point[2]<=0 and normal_vector[2]>=0) or (point[2]>=0 and normal_vector[2]<=0):
             normal_vector[2] *= -1
-        return normal_vector
-
-    def angle_btwn_vectors(self, A, B):
-        dot_product = np.dot(A, B)
-        magnitude_A = np.linalg.norm(A)
-        magnitude_B = np.linalg.norm(B)
-        angle_radians = np.arccos(dot_product / (magnitude_A * magnitude_B))
-        angle_degrees = np.degrees(angle_radians)
-        return angle_degrees
-
-    def apply_force(self, force_point, force_vector, timestep, viewer):
-        self.d.qfrc_applied[:] = 0.0
         
+        # normalize
+        normal_local = normal_vector / np.linalg.norm(normal_vector)
+
+        # choose random magnitude
+        magnitude = random.uniform(0.0, self.force_limit)
+        self.node.get_logger().info(f'Magnitude: {magnitude}')
+
+        # inward pushing force
+        force_local = -magnitude * normal_local
+
+        # EDIT LATER
+
+        return force_local, point
+
+
+    def apply_force(self, force_point, force_local, timestep, viewer):
+        self.d.qfrc_applied[:] = 0.0
+
         # scaling force vector for visualization so arrow geom is not giant
-        scaled_force_vector = [force_vector[0]/50, force_vector[1]/50, force_vector[2]/50]
+        scaled_force_vector = [force_local[0]/10, force_local[1]/10, force_local[2]/10]
         # finding starting point for force vector's arrow 
         local_arrow_start = [force_point[0]-scaled_force_vector[0], force_point[1]-scaled_force_vector[1], force_point[2]-scaled_force_vector[2]]
         
@@ -84,6 +88,8 @@ class ApplyContactForce:
         # convert point of force application to global coordinates
         globalpoint = xmat @ force_point + xpos
         arrow_start = xmat @ local_arrow_start + xpos
+        force_world = xmat @ force_local
+
         c_msg = Point()
         c_msg.x = float(force_point[0])
         c_msg.y = float(force_point[1])
@@ -93,8 +99,10 @@ class ApplyContactForce:
 
 
 
+
+
         if self.force_starttime <timestep< (self.force_starttime + self.application_time): # apply force at specified time interval
-            mujoco.mj_applyFT(self.m, self.d, force_vector, [0,0,0], globalpoint, self.force_body, self.d.qfrc_applied)
+            mujoco.mj_applyFT(self.m, self.d, force_world, [0,0,0], globalpoint, self.force_body, self.d.qfrc_applied)
             self.contact_detected = True
             i = viewer.user_scn.ngeom
             # creating arrow to visualize direction of force applied
@@ -108,7 +116,9 @@ class ApplyContactForce:
             viewer.user_scn.ngeom = i
             viewer.sync()
 
-            self.node.get_logger().info(f"Exerting a force of: {force_vector}")
+            self.node.get_logger().info(f"Forcal local: {force_local}")
+            self.node.get_logger().info(f"Force world: {force_world}")
+            self.node.get_logger().info(f"Force world norm: {np.linalg.norm(force_world)}")
             self.node.get_logger().info(f"qfrc_applied: {self.d.qfrc_applied}")
             self.node.get_logger().info(f"Contact point at: {c_msg} in peg coordinates")
         else:
@@ -117,16 +127,28 @@ class ApplyContactForce:
         msg = Bool()
         msg.data = self.contact_detected
         self.publisher1.publish(msg)
-        self.node.get_logger().info(f'Publishing: {self.contact_detected}')
+        #self.node.get_logger().info(f'Publishing: {self.contact_detected}')
         #self.get_logger().info(f"q mujoco: {self.d.qpos}")
+        return globalpoint, force_world
+
+    def contact_parameters(self):
+        C1 = random.random() # trust parameter
+        C2 = random.choice([0,1]) # palm or finger
+        X = [[C1, C2]]
+        return X
+
+    def force_event_type(self):
+        event = np.random.choice([0,1]) #1 = double tap
+        return event
+
 
 class RobotController:
-    def __init__(self, model, data):
+    def __init__(self, model, data, qhome):
         self.model = model
         self.data = data
-        self.q_des = None
-        self.q_target = np.zeros(model.nu)
-        #self.q_target = np.array([-5.57811e-22, 0.00096614, -2.6869e-07, -0.0695319, -2.45295e-05, 1.6, -1.53293e-05])
+        
+        self.q_des = qhome
+        self.q_target = qhome
 
     def update(self):
         #Initialize desired pose
@@ -147,6 +169,14 @@ class MujocoSimulatorNode(Node):
         pointcloud_path = os.path.join(package_share_dir, 'pointcloud', 'peg_points.asc')
         self.m = mujoco.MjModel.from_xml_path(model_path)
         self.d = mujoco.MjData(self.m)
+
+        # set robot to home position
+        q_home = [8.94154e-21, -0.566287, 0.00014964, -0.850776, -9.77076e-05, 1.79119, -1.53133e-05]
+        self.d.qpos[:7] = q_home
+        self.d.qvel[:] = [1.07488e-18, -2.65678e-14 ,-5.71869e-18, 2.687e-14 ,-5.14054e-18 ,-5.34417e-14 ,-1.40062e-18]
+        self.d.ctrl[:7] = [8.94154e-21, -0.566287 ,0.00014964, -0.850776 ,-9.77076e-05 ,1.79119 ,-1.53133e-05]
+        mujoco.mj_forward(self.m, self.d)
+
         # reading coordinates of body points from file and selecting random row of data
         self.df = pd.read_csv(pointcloud_path, usecols = ["X", "Y", "Z", "Nx", "Ny", "Nz"])
         self.random_row = random.randint(len(self.df.index))
@@ -155,39 +185,49 @@ class MujocoSimulatorNode(Node):
         self.publisher1 = self.create_publisher(Bool, 'contact_detection', 10)
         self.publisher2 = self.create_publisher(Point, 'contact_point', 10)
         self.publisher3 = self.create_publisher(JointState, 'joint_states', 10)
-        self.publisher4 = self.create_publisher(Float64MultiArray, '/observer/qfrc_constraint', 10)
+        self.publisher4 = self.create_publisher(Float64MultiArray, '/observer/qfrc_applied', 10)
+        self.force_pub = self.create_publisher(Float64MultiArray, '/observer/force_world', 10)
+        self.jacobian_pub = self.create_publisher(Float64MultiArray, '/debug/contact_jacobian', 10)
+        self.sim_time_pub = self.create_publisher(Float64, '/sim_time', 10)
         self.create_subscription(JointState, 'q_target', self.target_callback, 10)
 
         #Instantiate helper classes
         self.force_manager = ApplyContactForce(self.m, self.d, self.df, self.random_row, self.publisher1, self.publisher2, self)
-        self.controller = RobotController(self.m, self.d)
+        self.controller = RobotController(self.m, self.d, q_home)
 
     def target_callback(self, msg:JointState):
         self.controller.q_target = np.array(msg.position)
         self.controller.update()
 
 
-    
+    def publish_jacobian(self, J):
+        msg = Float64MultiArray()
+        msg.data = np.asarray(J, dtype=np.float64).reshape(-1).tolist()
+        self.jacobian_pub.publish(msg)
+
+    def calculate_jacobian(self, globalpoint):
+        jacp = np.zeros((3, self.m.nv))
+        jacr = np.zeros((3, self.m.nv))
+
+        # globalpoint = world point where force is applied
+        mujoco.mj_jac(self.m, self.d, jacp, jacr, globalpoint, self.force_manager.force_body)
+
+        Jc_v = jacp[:, :7].copy()
+        self.publish_jacobian(Jc_v)
+            
 
 def main(args=None):
     rclpy.init(args=args)
     node = MujocoSimulatorNode()
-    force= [-2.3310970026575504, -2, 3]
-    point= [np.float64(0.025166), np.float64(-0.000428), np.float64(0.094485)]
     msg = JointState()
 
-    q_home = [8.94154e-21, -0.566287, 0.00014964, -0.850776, -9.77076e-05, 1.79119, -1.53133e-05]
-
-
+    # generate random force on random point
     force_vector, force_point = node.force_manager.force_generation()
-    normal_vector = node.force_manager.normal2point(force_point)
-    angle = node.force_manager.angle_btwn_vectors(force_vector, normal_vector)
-    # ensuring random force generated is a pushing force by checking angle between force vector and normal vector to the link's surface
-    if angle <= 90 or angle >= 270: 
-        while angle <= 90 or angle >= 270:
-            force_vector, force_point = node.force_manager.force_generation() # if force is not a pushing force, a new force is generated until requirement is fulfilled
-            normal_vector = node.force_manager.normal2point(force_point)
-            angle = node.force_manager.angle_btwn_vectors(force_vector, normal_vector)
+    event = node.force_manager.force_event_type()
+
+    # generate randoom trust parameter and contact type
+    X = node.force_manager.contact_parameters()
+    node.get_logger().info(f'Contact: {X}')
 
     # Launch the simulation
     with mujoco.viewer.launch_passive(node.m, node.d) as viewer:
@@ -205,17 +245,22 @@ def main(args=None):
         while viewer.is_running():
             
             rclpy.spin_once(node, timeout_sec=0.001)
+            # publish sim time
+            msg_t = Float64()
+            msg_t.data = float(node.d.time)
+            node.sim_time_pub.publish(msg_t)
 
             timestep+=1
             dt = node.m.opt.timestep
             viewer.user_scn.ngeom = 0
 
             # set robot to home position
-            node.d.ctrl[:7] = q_home
+            #node.d.ctrl[:7] = q_home
 
             # Apply force
-            node.force_manager.apply_force(force_point, force_vector, timestep, viewer)
-            
+            globalpoint, force_world = node.force_manager.apply_force(force_point, force_vector, timestep, viewer)
+            node.calculate_jacobian(globalpoint)
+
             if node.force_manager.logging_start < timestep <= node.force_manager.logging_end: # only recording sensor data at certain timesteps
                 sensor_readings.loc[timestep] = [node.d.sensordata[fx], node.d.sensordata[fy], node.d.sensordata[fz], node.d.sensordata[tz]] # logging sensor readings in data frame
 
@@ -253,9 +298,16 @@ def main(args=None):
 
             node.publisher3.publish(msg)
 
+            # publish qfrc applied
             msg1= Float64MultiArray()
             msg1.data = np.asarray(node.d.qfrc_applied[:7], dtype=np.float64).flatten().tolist()
             node.publisher4.publish(msg1)
+
+            # publish force world
+            for_msg = Float64MultiArray()
+            for_msg.data = np.asarray(force_world, dtype=np.float64).flatten().tolist()
+            node.force_pub.publish(for_msg)
+            
 
             # Update viewer
             viewer.sync()
