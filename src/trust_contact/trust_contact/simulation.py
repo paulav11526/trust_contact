@@ -30,7 +30,7 @@ class ApplyContactForce:
         # simulation details
         self.force_body = self.d.body("peg").id
         self.force_limit = 15  # maximum magnitude of each force component
-        self.application_time = 300 # how many timesteps force is applied for
+        self.application_time = 100 # how many timesteps force is applied for
         self.force_starttime = 2000 # timesteps when force application begins
         self.logging_start = self.force_starttime # timestep when sensor data logging starts
         self.logging_end = self.logging_start + 1000 # timestep when sensor data logging ends
@@ -137,19 +137,18 @@ class ApplyContactForce:
         X = [[C1, C2]]
         return X
 
-    
+    def force_event_type(self):
+        event = np.random.choice([0,1]) #1 = double tap
+        return event
+
 
 class RobotController:
-    def __init__(self, model, data):
+    def __init__(self, model, data, qhome):
         self.model = model
         self.data = data
-        q_home = [8.94154e-21, -0.566287, 0.00014964, -0.850776, -9.77076e-05, 1.79119, -1.53133e-05]
-        self.q_des = q_home.copy()
-        #self.q_target = np.zeros(model.nu)
-        self.q_target = q_home.copy()
-
-        # go to home position upon starting
-        self.data.ctrl[:] = self.q_des
+        
+        self.q_des = qhome
+        self.q_target = qhome
 
     def update(self):
         #Initialize desired pose
@@ -170,6 +169,14 @@ class MujocoSimulatorNode(Node):
         pointcloud_path = os.path.join(package_share_dir, 'pointcloud', 'peg_points.asc')
         self.m = mujoco.MjModel.from_xml_path(model_path)
         self.d = mujoco.MjData(self.m)
+
+        # set robot to home position
+        q_home = [8.94154e-21, -0.566287, 0.00014964, -0.850776, -9.77076e-05, 1.79119, -1.53133e-05]
+        self.d.qpos[:7] = q_home
+        self.d.qvel[:] = [1.07488e-18, -2.65678e-14 ,-5.71869e-18, 2.687e-14 ,-5.14054e-18 ,-5.34417e-14 ,-1.40062e-18]
+        self.d.ctrl[:7] = [8.94154e-21, -0.566287 ,0.00014964, -0.850776 ,-9.77076e-05 ,1.79119 ,-1.53133e-05]
+        mujoco.mj_forward(self.m, self.d)
+
         # reading coordinates of body points from file and selecting random row of data
         self.df = pd.read_csv(pointcloud_path, usecols = ["X", "Y", "Z", "Nx", "Ny", "Nz"])
         self.random_row = random.randint(len(self.df.index))
@@ -186,7 +193,7 @@ class MujocoSimulatorNode(Node):
 
         #Instantiate helper classes
         self.force_manager = ApplyContactForce(self.m, self.d, self.df, self.random_row, self.publisher1, self.publisher2, self)
-        self.controller = RobotController(self.m, self.d)
+        self.controller = RobotController(self.m, self.d, q_home)
 
     def target_callback(self, msg:JointState):
         self.controller.q_target = np.array(msg.position)
@@ -216,6 +223,7 @@ def main(args=None):
 
     # generate random force on random point
     force_vector, force_point = node.force_manager.force_generation()
+    event = node.force_manager.force_event_type()
 
     # generate randoom trust parameter and contact type
     X = node.force_manager.contact_parameters()
