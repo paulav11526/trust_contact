@@ -29,30 +29,31 @@ class ContactClassifier(Node):
         X = []
         y = []
 
-        for _ in range(300):
+        for _ in range(1000):
             # Generate two contacts
             contact1 = [
-                np.random.uniform(0.05, 10),   # force
-                np.random.uniform(0, 5),      # start
-                np.random.uniform(5, 10)      # end
+                np.random.uniform(0, 15),   # force
+                np.random.uniform(0, 2),      # start
+                np.random.uniform(2, 5)      # end
             ]
             
             contact2 = [
-                np.random.uniform(0.05, 10),
-                np.random.uniform(10, 15),
-                np.random.uniform(15, 20)
+                np.random.uniform(0, 15),
+                np.random.uniform(0, 5),
+                np.random.uniform(5, 10)
             ]
             
             matrix = np.array([contact1, contact2])
             features = self.extract_features(matrix)
             
             # Label rules (example logic)
-            if features[2] > 3 and features[4] > 2:
-                label = "long tap"
-            elif features[4] < 0.5:
+            if features[4] < 0.5:
                 label = "double tap"
-            else:
-                label = "continue"
+            elif features[4] > 0.5:
+                if features[2] > 2:
+                    label = "long tap"
+                else:
+                    label = "continue"
             
             X.append(features)
             y.append(self.encode_label(label))
@@ -81,7 +82,7 @@ class ContactClassifier(Node):
             [msg.force_magnitude_1, t1_s, t1_e],
             [msg.force_magnitude_2, t2_s, t2_e]
         ])
-
+        self.get_logger().info(f"input data: {matrix}")
         self.prediction = self.predict_movement(matrix)
         self.publish_event()
 
@@ -95,6 +96,9 @@ class ContactClassifier(Node):
         duration2 = t2_end - t2_start
         gap = t2_start - t1_end  # time between contacts
         force_diff = abs(f1 - f2)
+        self.get_logger().info(f'Duration: {duration1}')
+        self.get_logger().info(f'start: {t1_start}')
+        self.get_logger().info(f'end: {t1_end}')
         
         return [f1, f2, duration1, duration2, gap, force_diff]
 
@@ -140,12 +144,3 @@ def main(args=None):
 if __name__ == "__main__":
     main()
 
-"""
-# Example Prediction
-test_matrix = np.array([
-    [1, 1.0, 5.0],   # long contact
-    [3, 8.0, 9.0]
-])
-
-prediction = predict_movement(test_matrix)
-print("Prediction:", prediction)"""

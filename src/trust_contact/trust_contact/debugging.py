@@ -1,6 +1,7 @@
 import mujoco
 import pinocchio as pin
 import numpy as np
+from numpy.linalg import pinv
 
 # 1. Load Models
 m_mj = mujoco.MjModel.from_xml_path("/home/paulav/contact_ws/src/trust_contact/trust_contact/models/scene.xml")
@@ -163,3 +164,29 @@ print("qfrc_actuator:", d_mj.qfrc_actuator[:7])
 print("neq:", m_mj.neq)
 for i in range(m_mj.neq):
     print(i, m_mj.eq_type[i], m_mj.eq_obj1id[i], m_mj.eq_obj2id[i])
+
+### testing point
+point_peg = [-0.021978, -0.016132, 0.054675]
+force_world = [0.09497044, -10.33624113 ,  2.04209867]
+force_magnitude = 10.536463692853902
+
+ee_frame_name = "peg"  
+peg_id = m_pin.getFrameId(ee_frame_name)
+parent_joint_id = m_pin.frames[peg_id].parentJoint
+contact_frame = pin.Frame("contact_frame", parent_joint_id, peg_id, pin.SE3(np.eye(3), point_peg), pin.FrameType.OP_FRAME)
+frame_id = m_pin.addFrame(contact_frame)
+q = [8.94154e-21, -0.566287, 0.00014964, -0.850776, -9.77076e-05, 1.79119, -1.53133e-05]
+# update contact point frame if point changes
+m_pin.frames[frame_id].placement = pin.SE3(np.eye(3), point_peg)
+
+pin.forwardKinematics(m_pin, d_pin.data, q)
+pin.updateFramePlacements(m_pin, d_pin)
+
+# Jacobian at peg
+Jc = pin.computeFrameJacobian(m_pin, d_pin, q, frame_id, pin.ReferenceFrame.LOCAL_WORLD_ALIGNED)
+Jc_v=Jc[:3, :]
+
+F_ext = pinv(Jc_v.T) @ d_mj.qfrc_applied
+
+print(f'Jc: {Jc}')
+print(f'Fext = {F_ext}')

@@ -12,9 +12,9 @@ launch/trust_contact_launch.py
 resource/trust_contact
 trust_contact/__init__.py
 trust_contact/contact_classifier_node.py
+trust_contact/debugging.py
 trust_contact/fsm_node.py
 trust_contact/generating_data.py
-trust_contact/import mujoco.py
 trust_contact/random_force.py
 trust_contact/residual_node.py
 trust_contact/sensor_logging.py

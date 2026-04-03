@@ -18,6 +18,7 @@ from geometry_msgs.msg import WrenchStamped
 from std_msgs.msg import Bool
 from geometry_msgs.msg import Point
 from std_msgs.msg import Float64MultiArray
+from std_msgs.msg import Float64
 
 class ApplyContactForce:
     def __init__(self, model, data, df, random_row, contact_pub, point_pub, node):
@@ -28,7 +29,7 @@ class ApplyContactForce:
         # simulation details
         self.force_body = self.d.body("peg").id
         self.force_limit = 15  # maximum magnitude of each force component
-        self.application_time = 1000 # how many timesteps force is applied for
+        self.application_time = 50 # how many timesteps force is applied for
         self.force_starttime = 2000 # timesteps when force application begins
         self.logging_start = self.force_starttime # timestep when sensor data logging starts
         self.logging_end = self.logging_start + 1000 # timestep when sensor data logging ends
@@ -65,6 +66,8 @@ class ApplyContactForce:
 
         # inward pushing force
         force_local = -magnitude * normal_local
+
+        # EDIT LATER
 
         return force_local, point
 
@@ -112,9 +115,10 @@ class ApplyContactForce:
             viewer.user_scn.ngeom = i
             viewer.sync()
 
-            self.node.get_logger().info(f"Exerting a force of: {force_world}")
-            self.node.get_logger().info(f"Force norm: {np.linalg.norm(force_world)}")
-            #self.node.get_logger().info(f"qfrc_applied: {self.d.qfrc_applied}")
+            self.node.get_logger().info(f"Forcal local: {force_local}")
+            self.node.get_logger().info(f"Force world: {force_world}")
+            self.node.get_logger().info(f"Force world norm: {np.linalg.norm(force_world)}")
+            self.node.get_logger().info(f"qfrc_applied: {self.d.qfrc_applied}")
             self.node.get_logger().info(f"Contact point at: {c_msg} in peg coordinates")
         else:
             self.contact_detected = False
@@ -124,14 +128,24 @@ class ApplyContactForce:
         self.publisher1.publish(msg)
         #self.node.get_logger().info(f'Publishing: {self.contact_detected}')
         #self.get_logger().info(f"q mujoco: {self.d.qpos}")
+        return globalpoint, force_world
+
+    def contact_type(self):
+        C1 = random.random() # trust parameter
+        C2 = random.choice([0,1]) # palm or finger
+        X = [[C1, C2]]
 
 class RobotController:
     def __init__(self, model, data):
         self.model = model
         self.data = data
-        self.q_des = None
-        self.q_target = np.zeros(model.nu)
-        #self.q_target = np.array([-5.57811e-22, 0.00096614, -2.6869e-07, -0.0695319, -2.45295e-05, 1.6, -1.53293e-05])
+        q_home = [8.94154e-21, -0.566287, 0.00014964, -0.850776, -9.77076e-05, 1.79119, -1.53133e-05]
+        self.q_des = q_home.copy()
+        #self.q_target = np.zeros(model.nu)
+        self.q_target = q_home.copy()
+
+        # go to home position upon starting
+        self.data.ctrl[:] = self.q_des
 
     def update(self):
         #Initialize desired pose
@@ -160,7 +174,10 @@ class MujocoSimulatorNode(Node):
         self.publisher1 = self.create_publisher(Bool, 'contact_detection', 10)
         self.publisher2 = self.create_publisher(Point, 'contact_point', 10)
         self.publisher3 = self.create_publisher(JointState, 'joint_states', 10)
-        self.publisher4 = self.create_publisher(Float64MultiArray, '/observer/qfrc_constraint', 10)
+        self.publisher4 = self.create_publisher(Float64MultiArray, '/observer/qfrc_applied', 10)
+        self.force_pub = self.create_publisher(Float64MultiArray, '/observer/force_world', 10)
+        self.jacobian_pub = self.create_publisher(Float64MultiArray, '/debug/contact_jacobian', 10)
+        self.sim_time_pub = self.create_publisher(Float64, '/sim_time', 10)
         self.create_subscription(JointState, 'q_target', self.target_callback, 10)
 
         #Instantiate helper classes
@@ -172,7 +189,21 @@ class MujocoSimulatorNode(Node):
         self.controller.update()
 
 
-    
+    def publish_jacobian(self, J):
+        msg = Float64MultiArray()
+        msg.data = np.asarray(J, dtype=np.float64).reshape(-1).tolist()
+        self.jacobian_pub.publish(msg)
+
+    def calculate_jacobian(self, globalpoint):
+        jacp = np.zeros((3, self.m.nv))
+        jacr = np.zeros((3, self.m.nv))
+
+        # globalpoint = world point where force is applied
+        mujoco.mj_jac(self.m, self.d, jacp, jacr, globalpoint, self.force_manager.force_body)
+
+        Jc_v = jacp[:, :7].copy()
+        self.publish_jacobian(Jc_v)
+            
 
 def main(args=None):
     rclpy.init(args=args)
@@ -181,7 +212,7 @@ def main(args=None):
     point= [np.float64(0.025166), np.float64(-0.000428), np.float64(0.094485)]
     msg = JointState()
 
-    q_home = [8.94154e-21, -0.566287, 0.00014964, -0.850776, -9.77076e-05, 1.79119, -1.53133e-05]
+    
 
     # generate random force on random point
     force_vector, force_point = node.force_manager.force_generation()
@@ -202,17 +233,22 @@ def main(args=None):
         while viewer.is_running():
             
             rclpy.spin_once(node, timeout_sec=0.001)
+            # publish sim time
+            msg_t = Float64()
+            msg_t.data = float(node.d.time)
+            node.sim_time_pub.publish(msg_t)
 
             timestep+=1
             dt = node.m.opt.timestep
             viewer.user_scn.ngeom = 0
 
             # set robot to home position
-            node.d.ctrl[:7] = q_home
+            #node.d.ctrl[:7] = q_home
 
             # Apply force
-            node.force_manager.apply_force(force_point, force_vector, timestep, viewer)
-            
+            globalpoint, force_world = node.force_manager.apply_force(force_point, force_vector, timestep, viewer)
+            node.calculate_jacobian(globalpoint)
+
             if node.force_manager.logging_start < timestep <= node.force_manager.logging_end: # only recording sensor data at certain timesteps
                 sensor_readings.loc[timestep] = [node.d.sensordata[fx], node.d.sensordata[fy], node.d.sensordata[fz], node.d.sensordata[tz]] # logging sensor readings in data frame
 
@@ -250,9 +286,16 @@ def main(args=None):
 
             node.publisher3.publish(msg)
 
+            # publish qfrc applied
             msg1= Float64MultiArray()
             msg1.data = np.asarray(node.d.qfrc_applied[:7], dtype=np.float64).flatten().tolist()
             node.publisher4.publish(msg1)
+
+            # publish force world
+            for_msg = Float64MultiArray()
+            for_msg.data = np.asarray(force_world, dtype=np.float64).flatten().tolist()
+            node.force_pub.publish(for_msg)
+            
 
             # Update viewer
             viewer.sync()

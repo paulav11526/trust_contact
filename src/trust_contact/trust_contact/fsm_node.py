@@ -30,7 +30,7 @@ class FSMNode(Node):
 
     def __init__(self):
         super().__init__('fsm_node')
-        self.create_subscription(String, 'contact_events', self.event_callback, 10) # subscribing to topic that outputs long events
+        self.create_subscription(String, 'contact_events', self.event_callback, 10) # subscribing to topic that outputs events
         self.create_subscription(JointState, 'joint_states', self.joint_state_callback ,10 ) 
         self.publisher = self.create_publisher(JointState, 'q_target', 10)
 
@@ -39,7 +39,7 @@ class FSMNode(Node):
         self.BIN_B_q = [0.579967, -0.278543, -0.150242, -1.78547, -0.000275622, 2.1679, -0.0800071]
         self.STOP_q = None
 
-        self.current_q = np.zeros(7)
+        self.current_q =np.array( [8.94154e-21, -0.566287, 0.00014964, -0.850776, -9.77076e-05, 1.79119, -1.53133e-05])
         # Initial state
         self.state = State.STOPPED
 
@@ -62,14 +62,14 @@ class FSMNode(Node):
         self.current_q = np.array(msg.position[:7])
     
     def event_callback(self, msg: String):
-        if msg == 'Long_Tap':
+        if msg.data == 'Long_Tap':
             self.event = Event.LONG_TAP
-        elif msg == "Double_Tap":
+        elif msg.data == "Double_Tap":
             self.event = Event.DOUBLE_TAP
         else:
             self.event = Event.SINGLE_TAP
-        
-        self.get_logger().info('Event received: {self.event}')
+        self.get_logger().info(f'msg: {msg.data}')
+        self.get_logger().info(f'Event received: {self.event}')
 
     # -------------------------
     # FSM Loop
