@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "rosidl_generator_py/messages/messages_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so"
+			"path" : "rosidl_generator_py/messages/messages_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so"
 		}
 	],
 	"backtrace" : 5,
@@ -74,12 +74,6 @@
 				"parent" : 4
 			},
 			{
-				"command" : 4,
-				"file" : 0,
-				"line" : 260,
-				"parent" : 4
-			},
-			{
 				"command" : 5,
 				"file" : 0,
 				"line" : 268,
@@ -89,7 +83,7 @@
 				"command" : 4,
 				"file" : 4,
 				"line" : 145,
-				"parent" : 8
+				"parent" : 7
 			},
 			{
 				"command" : 5,
@@ -101,7 +95,7 @@
 				"command" : 4,
 				"file" : 4,
 				"line" : 151,
-				"parent" : 10
+				"parent" : 9
 			},
 			{
 				"command" : 5,
@@ -113,18 +107,12 @@
 				"command" : 4,
 				"file" : 4,
 				"line" : 145,
-				"parent" : 12
+				"parent" : 11
 			},
 			{
 				"command" : 6,
 				"file" : 0,
 				"line" : 229,
-				"parent" : 4
-			},
-			{
-				"command" : 6,
-				"file" : 0,
-				"line" : 273,
 				"parent" : 4
 			},
 			{
@@ -137,7 +125,7 @@
 				"command" : 7,
 				"file" : 0,
 				"line" : 146,
-				"parent" : 16
+				"parent" : 14
 			},
 			{
 				"command" : 1,
@@ -147,33 +135,33 @@
 			},
 			{
 				"file" : 7,
-				"parent" : 18
+				"parent" : 16
 			},
 			{
 				"command" : 10,
 				"file" : 7,
 				"line" : 21,
-				"parent" : 19
+				"parent" : 17
 			},
 			{
 				"file" : 6,
-				"parent" : 20
+				"parent" : 18
 			},
 			{
 				"command" : 1,
 				"file" : 6,
 				"line" : 41,
-				"parent" : 21
+				"parent" : 19
 			},
 			{
 				"file" : 5,
-				"parent" : 22
+				"parent" : 20
 			},
 			{
 				"command" : 9,
 				"file" : 5,
 				"line" : 25,
-				"parent" : 23
+				"parent" : 21
 			},
 			{
 				"command" : 11,
@@ -185,19 +173,19 @@
 				"command" : 11,
 				"file" : 4,
 				"line" : 141,
-				"parent" : 12
+				"parent" : 11
 			},
 			{
 				"command" : 11,
 				"file" : 4,
 				"line" : 141,
-				"parent" : 8
+				"parent" : 7
 			},
 			{
 				"command" : 11,
 				"file" : 4,
 				"line" : 147,
-				"parent" : 10
+				"parent" : 9
 			}
 		]
 	},
@@ -210,18 +198,18 @@
 					"fragment" : "-fPIC"
 				},
 				{
-					"backtrace" : 17,
+					"backtrace" : 15,
 					"fragment" : "-Wall"
 				},
 				{
-					"backtrace" : 17,
+					"backtrace" : 15,
 					"fragment" : "-Wextra"
 				}
 			],
 			"defines" : 
 			[
 				{
-					"backtrace" : 9,
+					"backtrace" : 8,
 					"define" : "FASTCDR_DYN_LINK"
 				},
 				{
@@ -229,53 +217,49 @@
 					"define" : "RCUTILS_ENABLE_FAULT_INJECTION"
 				},
 				{
-					"backtrace" : 24,
+					"backtrace" : 22,
 					"define" : "ROS_PACKAGE_NAME=\"messages\""
 				},
 				{
-					"define" : "messages__rosidl_typesupport_introspection_c__pyext_EXPORTS"
+					"define" : "messages__rosidl_typesupport_c__pyext_EXPORTS"
 				}
 			],
 			"includes" : 
 			[
 				{
-					"backtrace" : 25,
+					"backtrace" : 23,
 					"path" : "/home/paulav/contact_ws/build/messages/rosidl_generator_c"
 				},
 				{
-					"backtrace" : 25,
+					"backtrace" : 23,
 					"path" : "/home/paulav/contact_ws/build/messages/rosidl_generator_py"
 				},
 				{
-					"backtrace" : 25,
+					"backtrace" : 23,
 					"path" : "/usr/include/python3.10"
 				},
 				{
-					"backtrace" : 6,
-					"path" : "/home/paulav/contact_ws/build/messages/rosidl_typesupport_introspection_c"
-				},
-				{
-					"backtrace" : 26,
+					"backtrace" : 24,
 					"isSystem" : true,
 					"path" : "/opt/ros/humble/include/rosidl_runtime_c"
 				},
 				{
-					"backtrace" : 26,
+					"backtrace" : 24,
 					"isSystem" : true,
 					"path" : "/opt/ros/humble/include/rosidl_typesupport_c"
 				},
 				{
-					"backtrace" : 26,
+					"backtrace" : 24,
 					"isSystem" : true,
 					"path" : "/opt/ros/humble/include/rosidl_typesupport_interface"
 				},
 				{
-					"backtrace" : 27,
+					"backtrace" : 25,
 					"isSystem" : true,
 					"path" : "/opt/ros/humble/include/builtin_interfaces"
 				},
 				{
-					"backtrace" : 28,
+					"backtrace" : 26,
 					"isSystem" : true,
 					"path" : "/opt/ros/humble/include/rmw"
 				},
@@ -285,32 +269,32 @@
 					"path" : "/opt/ros/humble/include/rcutils"
 				},
 				{
-					"backtrace" : 6,
-					"isSystem" : true,
-					"path" : "/opt/ros/humble/include/rosidl_typesupport_introspection_c"
-				},
-				{
-					"backtrace" : 9,
+					"backtrace" : 8,
 					"isSystem" : true,
 					"path" : "/opt/ros/humble/include/fastcdr"
 				},
 				{
-					"backtrace" : 9,
+					"backtrace" : 8,
 					"isSystem" : true,
 					"path" : "/opt/ros/humble/include/rosidl_runtime_cpp"
 				},
 				{
-					"backtrace" : 9,
+					"backtrace" : 8,
 					"isSystem" : true,
 					"path" : "/opt/ros/humble/include/rosidl_typesupport_fastrtps_cpp"
 				},
 				{
-					"backtrace" : 9,
+					"backtrace" : 8,
 					"isSystem" : true,
 					"path" : "/opt/ros/humble/include/rosidl_typesupport_fastrtps_c"
 				},
 				{
-					"backtrace" : 9,
+					"backtrace" : 8,
+					"isSystem" : true,
+					"path" : "/opt/ros/humble/include/rosidl_typesupport_introspection_c"
+				},
+				{
+					"backtrace" : 8,
 					"isSystem" : true,
 					"path" : "/opt/ros/humble/include/rosidl_typesupport_introspection_cpp"
 				}
@@ -325,27 +309,23 @@
 	"dependencies" : 
 	[
 		{
-			"backtrace" : 14,
+			"backtrace" : 13,
 			"id" : "messages__py::@9a9b5dd0a7af22410310"
 		},
 		{
-			"backtrace" : 6,
-			"id" : "messages__rosidl_generator_c::@6890427a1f51a3e7e1df"
-		},
-		{
-			"backtrace" : 15,
-			"id" : "messages__rosidl_typesupport_introspection_c::@6890427a1f51a3e7e1df"
-		},
-		{
-			"backtrace" : 14,
+			"backtrace" : 13,
 			"id" : "messages__rosidl_typesupport_c::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 6,
 			"id" : "messages__rosidl_generator_py::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 6,
+			"id" : "messages__rosidl_generator_c::@6890427a1f51a3e7e1df"
 		}
 	],
-	"id" : "messages__rosidl_typesupport_introspection_c__pyext::@6890427a1f51a3e7e1df",
+	"id" : "messages__rosidl_typesupport_c__pyext::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -370,46 +350,41 @@
 			},
 			{
 				"backtrace" : 6,
-				"fragment" : "libmessages__rosidl_typesupport_introspection_c.so",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 7,
 				"fragment" : "libmessages__rosidl_typesupport_c.so",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 9,
+				"backtrace" : 8,
 				"fragment" : "/opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_fastrtps_c.so",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 9,
+				"backtrace" : 8,
 				"fragment" : "/opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 9,
+				"backtrace" : 8,
 				"fragment" : "/opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_fastrtps_cpp.so",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 9,
+				"backtrace" : 8,
 				"fragment" : "/opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 9,
+				"backtrace" : 8,
 				"fragment" : "/opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_cpp.so",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 9,
+				"backtrace" : 8,
 				"fragment" : "/opt/ros/humble/lib/libbuiltin_interfaces__rosidl_generator_py.so",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 11,
+				"backtrace" : 10,
 				"fragment" : "/opt/ros/humble/lib/librmw.so",
 				"role" : "libraries"
 			},
@@ -419,7 +394,7 @@
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 9,
+				"backtrace" : 8,
 				"fragment" : "/opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_c.so",
 				"role" : "libraries"
 			},
@@ -428,12 +403,12 @@
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 9,
-				"fragment" : "/opt/ros/humble/lib/libbuiltin_interfaces__rosidl_generator_c.so",
+				"fragment" : "/opt/ros/humble/lib/librosidl_typesupport_fastrtps_c.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/humble/lib/librosidl_typesupport_fastrtps_c.so",
+				"backtrace" : 8,
+				"fragment" : "/opt/ros/humble/lib/libbuiltin_interfaces__rosidl_generator_c.so",
 				"role" : "libraries"
 			},
 			{
@@ -457,17 +432,17 @@
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 13,
+				"backtrace" : 12,
 				"fragment" : "/opt/ros/humble/lib/librosidl_typesupport_c.so",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 13,
+				"backtrace" : 12,
 				"fragment" : "/opt/ros/humble/lib/librosidl_runtime_c.so",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 11,
+				"backtrace" : 10,
 				"fragment" : "/opt/ros/humble/lib/librcutils.so",
 				"role" : "libraries"
 			},
@@ -486,8 +461,8 @@
 		],
 		"language" : "C"
 	},
-	"name" : "messages__rosidl_typesupport_introspection_c__pyext",
-	"nameOnDisk" : "messages_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so",
+	"name" : "messages__rosidl_typesupport_c__pyext",
+	"nameOnDisk" : "messages_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so",
 	"paths" : 
 	{
 		"build" : ".",
@@ -509,7 +484,7 @@
 			"backtrace" : 5,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "/home/paulav/contact_ws/build/messages/rosidl_generator_py/messages/_messages_s.ep.rosidl_typesupport_introspection_c.c",
+			"path" : "/home/paulav/contact_ws/build/messages/rosidl_generator_py/messages/_messages_s.ep.rosidl_typesupport_c.c",
 			"sourceGroupIndex" : 0
 		}
 	],

@@ -22,7 +22,7 @@ from std_msgs.msg import Float64
 from std_msgs.msg import Float32MultiArray
 
 class ApplyContactForce:
-    def __init__(self, model, data, df, random_row, contact_pub, point_pub, node):
+    def __init__(self, model, data, df, random_row, contact_pub, point_pub, param_pub ,node):
         self.m = model
         self.d = data
         self.node = node
@@ -48,6 +48,10 @@ class ApplyContactForce:
 
         self.publisher1 = contact_pub
         self.publisher2 = point_pub
+        self.param_pub = param_pub
+
+        # trust parameter
+        self.C1 = None
 
     # setting random force vector
     def force_generation(self):
@@ -74,7 +78,10 @@ class ApplyContactForce:
         # inward pushing force
         force_local = -magnitude * normal_local
 
-        return force_local, point
+        # Get contact_type for tap
+        C2 = self.contact_type()
+
+        return force_local, point, C2
 
 
     def apply_force(self, timestep, viewer, event):
@@ -107,7 +114,7 @@ class ApplyContactForce:
             self.current_force_index = active_index
             
             # generate local point + local normal force 
-            force_local, force_point = self.force_generation()
+            force_local, force_point, C2 = self.force_generation()
             self.active_force_point_local = np.array(force_point, dtype=float)
             self.active_force_local = np.array(force_local, dtype=float)
 
@@ -117,6 +124,11 @@ class ApplyContactForce:
             c_msg.z = float(self.active_force_point_local[2])
             self.publisher2.publish(c_msg)
             self.node.get_logger().info(f"Contact point at: {c_msg} in peg coordinates")
+
+            # publish trust parameters
+            trust_param_msg = Float32MultiArray()
+            trust_param_msg.data = np.asarray( np.array([self.C1, C2]), dtype=float).flatten().tolist()
+            self.param_pub.publish(trust_param_msg)
 
         # get global position and rotation of desired body
         xpos = self.d.xpos[self.force_body]
@@ -154,17 +166,18 @@ class ApplyContactForce:
         self.node.get_logger().info(f"Current Event: {current_event}")
         
 
-        
+        # publish bool for contact detection
         contact_msg.data = self.contact_detected
         self.publisher1.publish(contact_msg)
 
         return self.active_globalpoint.copy(), self.active_force_world.copy()
 
     def contact_parameters(self):
-        C1 = random.random() # trust parameter
+        self.C1 = random.random() # trust parameter
+
+    def contact_type(self):
         C2 = random.choice([0,1]) # palm or finger
-        X = [[C1, C2]]
-        return X
+        return C2
 
     def force_event_type(self):
         events = []
@@ -214,7 +227,7 @@ class ApplyContactForce:
                 end = start + tap_duration
 
                 self.force_windows.append((start, end, 0))
-                current_time + end + np.random.randint(1000, 2000)
+                current_time = end + np.random.randint(1000, 2000)
 
         self.node.get_logger().info(f'force window: {self.force_windows}')
 
@@ -266,10 +279,11 @@ class MujocoSimulatorNode(Node):
         self.force_pub = self.create_publisher(Float64MultiArray, '/observer/force_world', 10)
         self.jacobian_pub = self.create_publisher(Float64MultiArray, '/debug/contact_jacobian', 10)
         self.sim_time_pub = self.create_publisher(Float64, '/sim_time', 10)
+        self.cont_param_pub = self.create_publisher(Float32MultiArray, 'contact_parameters', 10)
         self.create_subscription(JointState, 'q_target', self.target_callback, 10)
 
         #Instantiate helper classes
-        self.force_manager = ApplyContactForce(self.m, self.d, self.df, self.random_row, self.publisher1, self.publisher2, self)
+        self.force_manager = ApplyContactForce(self.m, self.d, self.df, self.random_row, self.publisher1, self.publisher2, self.cont_param_pub , self)
         self.controller = RobotController(self.m, self.d, self.q_home)
 
     def target_callback(self, msg:JointState):
@@ -304,10 +318,8 @@ def main(args=None):
     contact_event = node.force_manager.force_event_type()
     node.force_manager.force_application_time(contact_event)
 
-
-    # generate randoom trust parameter and contact type
-    X = node.force_manager.contact_parameters()
-    node.get_logger().info(f'Contact: {X}')
+    # generate randoom trust parameter for duration of simulation
+    node.force_manager.contact_parameters()
 
     # Launch the simulation
     with mujoco.viewer.launch_passive(node.m, node.d) as viewer:

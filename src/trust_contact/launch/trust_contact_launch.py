@@ -28,6 +28,14 @@ def generate_launch_description():
             executable='contact_classifier_node',
             name='RF_classifier',
             output='screen'
+        ),
+
+        # Speed predictor
+        Node(
+            package=package_name,
+            executable='speed_predictor_node',
+            name='speed_predictor',
+            output='screen'
         )
 
         

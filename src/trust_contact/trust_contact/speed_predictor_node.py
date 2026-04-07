@@ -1,68 +1,15 @@
-import numpy as np
 import random
-import matplotlib.pyplot as plt 
-from sklearn.linear_model import LinearRegression
-
-
-def contact_type_data(contact_type):
-    speed = 0
-    if contact_type >= 1:
-        if random.random() > 0.75:
-            speed = 0.8
-        else: speed = 0.5
-
-    else:
-        if random.random() > 0.75:
-            speed = 0.2
-        else: speed = 0.5        
-    return speed
-            
- 
-def trust_parameter_data(trust_p):
-    speed = np.square(trust_p)
-    return speed
-
-
-##  generating dataset
-
-C1 = np.zeros([1000, 2]) # trust parameter
-C2 = np.zeros([1000, 2]) # contact type
-maxS = 2 #m/s Franka
-alpha = 0.5
-beta = 0.25
-
-# generating independent random variables
-for trust in range(len(C1)):
-    C1[trust, 0] = random.random()
-    C1[trust, 1] = trust_parameter_data(C1[trust, 0])
-
-for i in range(len(C2)):  
-    C2[i,0] = random.choice([0,1])
-    C2[i,1] = contact_type_data(C2[i,0])
-
-# joining data with: SPEED = (alpha*C1 + beta*C2)maxSPEED
-
-speed_true = np.zeros([1000])
-for i in range(len(speed_true)):
-    speed_true[i] = (alpha * C1[i, 1] + beta * C2[i,1]) * maxS
-
-# stacking C1 and C2
-X = np.column_stack((C1[:,0], C2[:,0]))
-
-## Linear Regression -------------------------------------------------------------------------
-model = LinearRegression()
-model.fit(X, speed_true)import random
 import numpy as np
 from sklearn.linear_model import LinearRegression
 
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import Float64, Float64MultiArray
+from std_msgs.msg import Float64, Float32MultiArray
 
 
 class SpeedPredictor(Node):
     def __init__(self):
-        super().__init__('speed_predictor')
+        super().__init__('speed_predictor_node')
 
         self.max_speed = 2.0
         self.alpha = 0.5
@@ -71,18 +18,8 @@ class SpeedPredictor(Node):
 
         self.model = self.train_model()
 
-        self.subscription = self.create_subscription(
-            Float64MultiArray,
-            'intent_inputs',   # expects [C1, C2]
-            self.input_callback,
-            10
-        )
-
-        self.publisher = self.create_publisher(
-            Float64,
-            'predicted_speed',
-            10
-        )
+        self.subscription = self.create_subscription(Float32MultiArray, 'contact_parameters', self.input_callback, 10) # get C1 and C2
+        self.publisher = self.create_publisher(Float64, 'predicted_speed', 10) # publish new speed
 
         self.get_logger().info('Speed predictor node started.')
 
@@ -144,11 +81,9 @@ class SpeedPredictor(Node):
         )
         return model
 
-    def input_callback(self, msg: Float64MultiArray) -> None:
+    def input_callback(self, msg: Float32MultiArray) -> None:
         if len(msg.data) < 2:
-            self.get_logger().warning(
-                'Expected Float64MultiArray with [C1, C2]'
-            )
+            self.get_logger().warning('Expected Float32MultiArray with [C1, C2]')
             return
 
         c1 = float(msg.data[0])
@@ -156,9 +91,6 @@ class SpeedPredictor(Node):
 
         # Optional sanity clamp
         c1 = max(0.0, min(1.0, c1))
-
-        # C2 is expected to be 0 or 1, but we’ll tolerate nearby values
-        c2 = 1.0 if c2 >= 0.5 else 0.0
 
         X_new = np.array([[c1, c2]], dtype=float)
         predicted_speed = float(self.model.predict(X_new)[0])
@@ -186,16 +118,5 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 
-print(model.coef_)
-print(model.intercept_) 
 
 
-## ----------------------------------------------------------
-C1_new = random.random()
-C2_new = random.choice([0,1])
-X_new = [[C1_new, C2_new]]
-predicted_speed = model.predict(X_new)
-
-print(predicted_speed)
-
-## ----------------------------------------------
