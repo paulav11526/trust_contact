@@ -286,12 +286,9 @@ class MomentumObserver(Node):
         #publish
         tau_check = self.Jc_v.T @ F_ext
         self.get_logger().info(f'Publishing: External Force = {F_ext}')
-        self.get_logger().info(f'tau_check = {tau_check}')
-        self.get_logger().info(f'tau_check_mjforce = {mj_tau}')
-        self.get_logger().info(f'r_used = {r}')
-
-
-        self.get_logger().info(f'External Force = {F_ext}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+        #self.get_logger().info(f'tau_check = {tau_check}')
+        #self.get_logger().info(f'tau_check_mjforce = {mj_tau}')
+        #self.get_logger().info(f'r_used = {r}')
         
         return np.linalg.norm(F_ext)
 
@@ -306,7 +303,7 @@ class MomentumObserver(Node):
         msg.timestamp_2_end = Time(seconds=self.results[5]).to_msg()
 
         self.publisher1.publish(msg)
-        self.get_logger().info('Published force data')
+        self.get_logger().info(f'Published force data: {msg}')
    
     # helper function to get snapshot of states 
     def get_force_snapshot(self):

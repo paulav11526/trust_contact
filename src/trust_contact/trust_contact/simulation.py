@@ -81,6 +81,7 @@ class ApplyContactForce:
 
     def apply_force(self, timestep, viewer, event):
         self.d.qfrc_applied[:] = 0.0
+        contact_msg = Bool()
 
         active_index = self.get_active_force_index(timestep)
         if active_index is None:   # if we're not in a force window
@@ -94,9 +95,13 @@ class ApplyContactForce:
             # clear custom geoms
             viewer.user_scn.ngeom = 0
             viewer.sync()
-            return None, None
 
-        self.contact_detected = True
+            #publish contact detection
+            contact_msg.data = self.contact_detected
+            self.publisher1.publish(contact_msg)
+            return None, None
+        else:
+            self.contact_detected = True
 
         # entering a new force window -> generate new force/point once
         if self.current_force_index != active_index:
@@ -108,9 +113,9 @@ class ApplyContactForce:
             self.active_force_local = np.array(force_local, dtype=float)
 
             c_msg = Point()
-            c_msg.x = float(force_point[0])
-            c_msg.y = float(force_point[1])
-            c_msg.z = float(force_point[2])
+            c_msg.x = float(self.active_force_point_local[0])
+            c_msg.y = float(self.active_force_point_local[1])
+            c_msg.z = float(self.active_force_point_local[2])
             self.publisher2.publish(c_msg)
             self.node.get_logger().info(f"Contact point at: {c_msg} in peg coordinates")
 
@@ -150,10 +155,10 @@ class ApplyContactForce:
         self.node.get_logger().info(f"Event type: {event}")
         
 
-        msg = Bool()
-        msg.data = self.contact_detected
-        self.publisher1.publish(msg)
-        #self.node.get_logger().info(f'Publishing: {self.contact_detected}')
+        
+        contact_msg.data = self.contact_detected
+        self.publisher1.publish(contact_msg)
+        self.node.get_logger().info(f'Publishing: {self.contact_detected}')
         #self.get_logger().info(f"q mujoco: {self.d.qpos}")
         return self.active_globalpoint.copy(), self.active_force_world.copy()
 
