@@ -8,6 +8,7 @@ import os
 from numpy import random 
 import matplotlib.pyplot as plt
 import pandas as pd
+import threading
 
 # ros dependencies
 import rclpy
@@ -233,22 +234,76 @@ class ApplyContactForce:
 
 
 class RobotController:
-    def __init__(self, model, data, qhome):
+    def __init__(self, model, data, qhome, node):
         self.model = model
         self.data = data
-        
-        self.q_des = qhome
+        self.node = node
+        self.n_arm_joints = 7
+
         self.q_target = qhome
+        self.speed_scale = 1.0
+        self.motion_active = False
 
-    def update(self):
-        #Initialize desired pose
-        if self.q_des is None:
-            self.q_des = self.data.qpos.copy()
+        # controller tuning
+        self.Kp = np.array([2.0, 2.0, 2.0, 2.0, 1.5, 1.5, 1.5])   # position -> velocity gain
+        self.max_joint_vel = np.array([2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0])  # rad/s
+        self.pos_tol = 0.05   # rad
 
-        self.q_des = self.q_target.copy()
-        # apply control
-        self.data.ctrl[:] = self.q_des
+        self.pending_q_target = None
+        self.pending_speed = None
+
+    def compute_velocity_command(self):
+        if self.q_target is None:
+            return np.zeros(self.n_arm_joints)
         
+        q = self.data.qpos[:self.n_arm_joints].copy()
+        q_error = self.q_target - q
+
+        # stop if close enough
+        if self.motion_active and np.linalg.norm(q_error) < self.pos_tol:
+            self.motion_active = False
+            self.node.get_logger().info("Target reached")
+            return np.zeros(self.n_arm_joints)
+        
+        # proportional position error -> desired velocity
+        qdot_cmd = self.Kp * q_error
+        
+        # speed scaling
+        vel_limit = self.speed_scale * self.max_joint_vel
+        qdot_cmd = np.clip(qdot_cmd, -vel_limit, vel_limit)
+
+        # minimum command to avoid creeping forever
+        min_vel = 0.05  # tune this
+        for i in range(self.n_arm_joints):
+            if abs(q_error[i]) > self.pos_tol and abs(qdot_cmd[i]) < min_vel:
+                qdot_cmd[i] = np.sign(qdot_cmd[i]) * min_vel
+
+        return qdot_cmd
+    
+    def apply_control(self):
+        with self.node.state_lock:
+            qdot_cmd = self.compute_velocity_command()
+
+            # arm velocity actuators
+            self.data.ctrl[:self.n_arm_joints] = qdot_cmd
+
+            # gravity/bias compensation
+            self.data.qfrc_applied[:] = self.data.qfrc_bias
+
+    def try_activate_command(self):
+        if self.pending_q_target is None or self.pending_speed is None:
+            return
+
+        self.q_target = self.pending_q_target.copy()
+        self.speed_scale = self.pending_speed
+        self.motion_active = True
+
+        self.pending_q_target = None
+        self.pending_speed_scale = None
+
+        self.node.get_logger().info(
+            f"Activated new target with speed_scale={self.speed_scale:.2f}")        
+
 class MujocoSimulatorNode(Node):
     def __init__(self):
         super().__init__('mujoco_simulator_node')
@@ -262,10 +317,11 @@ class MujocoSimulatorNode(Node):
 
         # set robot to home position
         self.q_home = [8.94154e-21, -0.566287, 0.00014964, -0.850776, -9.77076e-05, 1.79119, -1.53133e-05]
+        mujoco.mj_resetDataKeyframe(self.m, self.d, 0)
         #self.d.qpos[:7] = q_home
        # self.d.qvel[:] = [1.07488e-18, -2.65678e-14 ,-5.71869e-18, 2.687e-14 ,-5.14054e-18 ,-5.34417e-14 ,-1.40062e-18]
         #self.d.ctrl[:7] = [8.94154e-21, -0.566287 ,0.00014964, -0.850776 ,-9.77076e-05 ,1.79119 ,-1.53133e-05]
-        #mujoco.mj_forward(self.m, self.d)
+        mujoco.mj_forward(self.m, self.d)
 
         # reading coordinates of body points from file and selecting random row of data
         self.df = pd.read_csv(pointcloud_path, usecols = ["X", "Y", "Z", "Nx", "Ny", "Nz"])
@@ -281,15 +337,28 @@ class MujocoSimulatorNode(Node):
         self.sim_time_pub = self.create_publisher(Float64, '/sim_time', 10)
         self.cont_param_pub = self.create_publisher(Float32MultiArray, 'contact_parameters', 10)
         self.create_subscription(JointState, 'q_target', self.target_callback, 10)
+        self.create_subscription(Float64, 'predicted_speed', self.speed_callback, 10)
+        
+        # lock
+        self.state_lock = threading.Lock()
 
         #Instantiate helper classes
         self.force_manager = ApplyContactForce(self.m, self.d, self.df, self.random_row, self.publisher1, self.publisher2, self.cont_param_pub , self)
-        self.controller = RobotController(self.m, self.d, self.q_home)
+        self.controller = RobotController(self.m, self.d, self.q_home, self)
 
+
+
+    # subscribes to target position
     def target_callback(self, msg:JointState):
-        self.controller.q_target = np.array(msg.position)
-        self.controller.update()
-
+        with self.state_lock:
+            self.controller.pending_q_target = np.array(msg.position)
+            self.controller.try_activate_command()
+    
+    # subscribes to target speed
+    def speed_callback(self, msg:Float64 ):
+        with self.state_lock:
+            self.controller.pending_speed = msg.data
+            self.controller.try_activate_command()
 
     def publish_jacobian(self, J):
         msg = Float64MultiArray()
@@ -312,7 +381,7 @@ def main(args=None):
     node = MujocoSimulatorNode()
     msg = JointState()
 
-    node.controller.data.ctrl[:] = node.q_home
+    #node.controller.data.ctrl[:] = node.q_home
 
     # determine what type of contact event this is
     contact_event = node.force_manager.force_event_type()
@@ -341,6 +410,8 @@ def main(args=None):
             msg_t = Float64()
             msg_t.data = float(node.d.time)
             node.sim_time_pub.publish(msg_t)
+
+            node.controller.apply_control()
 
             timestep+=1
             dt = node.m.opt.timestep

@@ -211,6 +211,18 @@
     </body>
   </worldbody>
 
+<!-- Velocity actuators: ctrl sets target joint velocity (rad/s).
+      Force = kv * (ctrl - qvel). Joints 1-4 get higher kv (bigger links). -->
+<actuator>
+  <velocity name="vel_j1" joint="joint1" kv="100" ctrlrange="-2.0 2.0" forcerange="-87 87" />
+  <velocity name="vel_j2" joint="joint2" kv="100" ctrlrange="-2.0 2.0" forcerange="-87 87" />
+  <velocity name="vel_j3" joint="joint3" kv="100" ctrlrange="-2.0 2.0" forcerange="-87 87" />
+  <velocity name="vel_j4" joint="joint4" kv="100" ctrlrange="-2.0 2.0" forcerange="-87 87" />
+  <velocity name="vel_j5" joint="joint5" kv="50"  ctrlrange="-2.0 2.0" forcerange="-12 12" />
+  <velocity name="vel_j6" joint="joint6" kv="50"  ctrlrange="-2.0 2.0" forcerange="-12 12" />
+  <velocity name="vel_j7" joint="joint7" kv="50"  ctrlrange="-2.0 2.0" forcerange="-12 12" />
+</actuator> 
+<!-- 
 <actuator>
   <general class="panda" name="actuator1" joint="joint1" gainprm="4500" biasprm="0 -4500 -450"/>
   <general class="panda" name="actuator2" joint="joint2" gainprm="4500" biasprm="0 -4500 -450"
@@ -224,7 +236,8 @@
     forcerange="-12 12" ctrlrange="-0.0175 3.7525"/>
   <general class="panda" name="actuator7" joint="joint7" gainprm="2000" biasprm="0 -2000 -200"
     forcerange="-12 12"/>
-</actuator>
+</actuator> 
+-->
 
   <sensor>
     <force name="joint1_force_sensor" site="sensor1_site"/>

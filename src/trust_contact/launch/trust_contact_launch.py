@@ -36,6 +36,14 @@ def generate_launch_description():
             executable='speed_predictor_node',
             name='speed_predictor',
             output='screen'
+        ),
+
+        # FSM
+        Node(
+            package=package_name,
+            executable='fsm_node',
+            name='FSM',
+            output='screen'
         )
 
         
