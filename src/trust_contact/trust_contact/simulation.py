@@ -30,8 +30,8 @@ class ApplyContactForce:
         # simulation details
         self.force_body = self.d.body("peg").id
         self.force_limit = 15  # maximum magnitude of each force component
-        self.application_time = 500 # how many timesteps force is applied for
-        self.force_starttime = [3000, 4000, 5000] # timesteps when force application begins
+        self.force_starttime = [500] # timesteps when force application begins
+        self.force_windows = []
         self.current_force_index = None
         self.active_force_world = None
         self.active_force_local = None
@@ -73,8 +73,6 @@ class ApplyContactForce:
 
         # inward pushing force
         force_local = -magnitude * normal_local
-
-        # EDIT LATER
 
         return force_local, point
 
@@ -169,27 +167,54 @@ class ApplyContactForce:
         return X
 
     def force_event_type(self):
-        event = np.random.choice([0, 1, 2]) #0 - long tap , 1 = double tap, 2 - single tap
-        return event
+        events = []
+        
+        num_events = np.random.choice([1, 2, 3]) # number of events in entire simulation
+        for _ in range(num_events):
+            event = np.random.choice([0, 1, 2]) #0 - long tap , 1 = double tap, 2 - single tap
+            events.append(event)  
+        return events
 
     def get_active_force_index(self, timestep):
-        for i, start in enumerate(self.force_starttime):
-            if start < timestep < (start + self.application_time):
+        for i, (start,end) in enumerate(self.force_windows):
+            if start <= timestep < end:
                 return i
         return None
 
-    def force_application_time(self, event):
-        start_time = np.random.randint(2000, 4000)
-        if event == 1: # double tap
-            self.application_time = 100
-            gap = np.random.randint(50, 100)
-            self.force_starttime = [start_time, start_time + self.application_time + gap]
-        elif event == 2:
-            self.application_time = 300
-            self.force_starttime = [start_time]
-        else:
-            self.application_time = 700 # long tap
-            self.force_starttime = [start_time]
+    def force_application_time(self, events):
+        self.force_windows = []
+        current_time = np.random.randint(2000, 2500)
+
+        for event in events:
+            if event == 1: # double tap
+                tap_duration = 100
+                gap = np.random.randint(50, 100)
+
+                start1 = current_time
+                end1 = start1 + tap_duration
+
+                start2 = end1 + gap
+                end2 = start2 + tap_duration
+
+                self.force_windows.append((start1, end1))
+                self.force_windows.append((start2, end2))
+                current_time = end2 + np.random.randint(1000, 2000)
+            elif event == 2: # single tap
+                tap_duration = 300
+
+                start = current_time
+                end = start + tap_duration
+
+                self.force_windows.append((start, end))
+                current_time = end + np.random.randint(1000, 2000)
+            else:
+                tap_duration = 700 # long tap  
+
+                start = current_time
+                end = start + tap_duration
+
+                self.force_windows.append((start, end))
+                current_time + end + np.random.randint(1000, 2000)
 
 
 class RobotController:
