@@ -100,6 +100,7 @@ class ApplyContactForce:
             return None, None
         else:
             self.contact_detected = True
+            current_event = self.force_windows[active_index]
 
         # entering a new force window -> generate new force/point once
         if self.current_force_index != active_index:
@@ -147,17 +148,16 @@ class ApplyContactForce:
         viewer.sync()
 
         #self.node.get_logger().info(f"Forcal local: {force_local}")
-        self.node.get_logger().info(f"Force world: {self.active_force_world}")
-        self.node.get_logger().info(f"Force world norm: {np.linalg.norm(self.active_force_world)}")
+        self.node.get_logger().info(f"Force world: {self.active_force_world} | Norm:  {np.linalg.norm(self.active_force_world)}")
         self.node.get_logger().info(f"qfrc_applied: {self.d.qfrc_applied}")
         self.node.get_logger().info(f"Event type: {event}")
+        self.node.get_logger().info(f"Current Event: {current_event}")
         
 
         
         contact_msg.data = self.contact_detected
         self.publisher1.publish(contact_msg)
-        self.node.get_logger().info(f'Publishing: {self.contact_detected}')
-        #self.get_logger().info(f"q mujoco: {self.d.qpos}")
+
         return self.active_globalpoint.copy(), self.active_force_world.copy()
 
     def contact_parameters(self):
@@ -176,7 +176,7 @@ class ApplyContactForce:
         return events
 
     def get_active_force_index(self, timestep):
-        for i, (start,end) in enumerate(self.force_windows):
+        for i, (start,end, _) in enumerate(self.force_windows):
             if start <= timestep < end:
                 return i
         return None
@@ -196,16 +196,16 @@ class ApplyContactForce:
                 start2 = end1 + gap
                 end2 = start2 + tap_duration
 
-                self.force_windows.append((start1, end1))
-                self.force_windows.append((start2, end2))
+                self.force_windows.append((start1, end1, 1))
+                self.force_windows.append((start2, end2, 1))
                 current_time = end2 + np.random.randint(1000, 2000)
             elif event == 2: # single tap
-                tap_duration = 300
+                tap_duration = 200
 
                 start = current_time
                 end = start + tap_duration
 
-                self.force_windows.append((start, end))
+                self.force_windows.append((start, end, 2))
                 current_time = end + np.random.randint(1000, 2000)
             else:
                 tap_duration = 700 # long tap  
@@ -213,8 +213,10 @@ class ApplyContactForce:
                 start = current_time
                 end = start + tap_duration
 
-                self.force_windows.append((start, end))
+                self.force_windows.append((start, end, 0))
                 current_time + end + np.random.randint(1000, 2000)
+
+        self.node.get_logger().info(f'force window: {self.force_windows}')
 
 
 class RobotController:
