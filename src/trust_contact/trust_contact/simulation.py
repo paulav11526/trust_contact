@@ -147,7 +147,7 @@ class ApplyContactForce:
         self.node.get_logger().info(f"Force world: {self.active_force_world}")
         self.node.get_logger().info(f"Force world norm: {np.linalg.norm(self.active_force_world)}")
         self.node.get_logger().info(f"qfrc_applied: {self.d.qfrc_applied}")
-        self.node.get_logger().info(f"Even type: {event}")
+        self.node.get_logger().info(f"Event type: {event}")
         
 
         msg = Bool()
@@ -164,7 +164,7 @@ class ApplyContactForce:
         return X
 
     def force_event_type(self):
-        event = np.random.choice([0,1]) #1 = double tap
+        event = np.random.choice([0, 1, 2]) #0 - long tap , 1 = double tap, 2 - single tap
         return event
 
     def get_active_force_index(self, timestep):
@@ -179,8 +179,11 @@ class ApplyContactForce:
             self.application_time = 100
             gap = np.random.randint(50, 100)
             self.force_starttime = [start_time, start_time + self.application_time + gap]
+        elif event == 2:
+            self.application_time = 300
+            self.force_starttime = [start_time]
         else:
-            self.application_time = 500 # long tap
+            self.application_time = 700 # long tap
             self.force_starttime = [start_time]
 
 
@@ -262,6 +265,8 @@ def main(args=None):
     rclpy.init(args=args)
     node = MujocoSimulatorNode()
     msg = JointState()
+
+    node.controller.data.ctrl[:] = node.q_home
 
     # determine what type of contact event this is
     contact_event = node.force_manager.force_event_type()
