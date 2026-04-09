@@ -14,6 +14,7 @@ trust_contact/__init__.py
 trust_contact/contact_classifier_node.py
 trust_contact/debug_jacobian.py
 trust_contact/debugging.py
+trust_contact/evaluation_logger.py
 trust_contact/fsm_node.py
 trust_contact/residual_node.py
 trust_contact/sensor_logging.py

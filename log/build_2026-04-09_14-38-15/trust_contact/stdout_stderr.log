@@ -1,0 +1,20 @@
+running develop
+running egg_info
+writing trust_contact.egg-info/PKG-INFO
+writing dependency_links to trust_contact.egg-info/dependency_links.txt
+writing entry points to trust_contact.egg-info/entry_points.txt
+writing requirements to trust_contact.egg-info/requires.txt
+writing top-level names to trust_contact.egg-info/top_level.txt
+reading manifest file 'trust_contact.egg-info/SOURCES.txt'
+writing manifest file 'trust_contact.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust-contact.egg-link (link to .)
+Installing contact_classifier_node script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+Installing evaluation_logger script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+Installing fsm_node script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+Installing residual_node script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+Installing simulation script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+Installing speed_predictor_node script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+
+Installed /home/paulav/contact_ws/build/trust_contact
+running symlink_data

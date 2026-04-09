@@ -40,7 +40,8 @@ setup(
             'residual_node = trust_contact.residual_node:main',
             'fsm_node = trust_contact.fsm_node:main',
             'contact_classifier_node = trust_contact.contact_classifier_node:main',
-            'speed_predictor_node = trust_contact.speed_predictor_node:main'
+            'speed_predictor_node = trust_contact.speed_predictor_node:main',
+            'evaluation_logger = trust_contact.evaluation_logger:main'
 
         ],
     },

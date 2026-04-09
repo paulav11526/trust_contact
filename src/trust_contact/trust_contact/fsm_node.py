@@ -33,6 +33,7 @@ class FSMNode(Node):
         self.create_subscription(String, 'contact_events', self.event_callback, 10) # subscribing to topic that outputs events
         self.create_subscription(JointState, 'joint_states', self.joint_state_callback ,10 ) 
         self.publisher = self.create_publisher(JointState, 'q_target', 10)
+        self.action_pub = self.create_publisher(String,'/eval/actual_action', 10) # for evaluation
 
         # Define joint targets 
         self.BIN_A_q = [-0.54, -0.278518, -0.150196, -1.78548, -0.000276461, 2.16789, -0.0800078]
@@ -94,9 +95,12 @@ class FSMNode(Node):
 
             if self.event == Event.LONG_TAP: # E1
                 self.state = State.STOPPED
+                self.publish_actual_action("stop")
                 self.get_logger().info("STOPPED")
             
             elif (self.event == Event.SINGLE_TAP): # E3
+                self.publish_actual_action("continue")
+
                 if (self.TARGET == True) & (self.GP_REACHED == True): # E3 T GP
                     self.state = State.AT_BIN_A
                     self.get_logger().info("Continue: STOPPED -> AT_BIN_A")
@@ -115,6 +119,7 @@ class FSMNode(Node):
                     self.get_logger().info("Continue: STOPPED -> MOVING_TO_A")
                 
             elif self.event == Event.DOUBLE_TAP: # E2
+                self.publish_actual_action("change_target")
                 if  self.TARGET == True:
                     self.state = State.MOVING_TO_B 
                     self.get_logger().info("Transition: STOPPED -> MOVING_TO_B")
@@ -129,14 +134,17 @@ class FSMNode(Node):
             self.GP_REACHED = True
 
             if self.event == Event.LONG_TAP: # E1
+                self.publish_actual_action("stop")
                 self.state = State.STOPPED
                 self.get_logger().info("Transition: AT_BIN_A -> STOPPED")
 
             elif self.event == Event.DOUBLE_TAP: # E2 
+                self.publish_actual_action("change_target")
                 self.state = State.MOVING_TO_B
                 self.get_logger().info("Transition: AT_BIN_A -> MOVING_TO_B")
 
             elif self.event == Event.SINGLE_TAP: # E3
+                self.publish_actual_action("continue")
                 self.state = State.AT_BIN_A
                 self.get_logger().info("AT_BIN_A: Continue")
 
@@ -147,14 +155,17 @@ class FSMNode(Node):
             self.GP_REACHED = True
 
             if self.event == Event.LONG_TAP: # E1
+                self.publish_actual_action("stop")
                 self.state = State.STOPPED
                 self.get_logger().info("Transition: AT_BIN_B -> STOPPED")
 
             elif self.event == Event.DOUBLE_TAP: # E2
+                self.publish_actual_action("change_target")
                 self.state = State.MOVING_TO_A
                 self.get_logger().info("Transition: AT_BIN_B -> MOVING_TO_A")
 
             elif self.event == Event.SINGLE_TAP: # E3
+                self.publish_actual_action("continue")
                 self.state = State.AT_BIN_B
                 self.get_logger().info("AT_BIN_B: Continue")
 
@@ -165,10 +176,12 @@ class FSMNode(Node):
             self.GP_REACHED = False
 
             if self.event == Event.LONG_TAP: # E1
+                self.publish_actual_action("stop")
                 self.state = State.STOPPED
                 self.get_logger().info("Transition: MOVING_TO_A -> STOPPED")
 
             elif self.event == Event.DOUBLE_TAP: # E2
+                self.publish_actual_action("change_target")
                 self.TARGET = False
                 self.state = State.MOVING_TO_B
                 self.get_logger().info("Transition: MOVING_TO_A -> MOVING_TO_B")
@@ -177,7 +190,8 @@ class FSMNode(Node):
                 self.state == State.AT_BIN_A
                 self.get_logger().info("Transition: MOVING_TO_A -> AT_BIN_A")
 
-            elif self.event == Event.SINGLE_TAP:
+            elif self.event == Event.SINGLE_TAP: # E3
+                self.publish_actual_action("continue")
                 self.state = State.MOVING_TO_A
                 self.get_logger().info("Continue MOVING_TO_A")
 
@@ -188,10 +202,12 @@ class FSMNode(Node):
             self.GP_REACHED = False
 
             if self.event == Event.LONG_TAP: # E1
+                self.publish_actual_action("stop")
                 self.state = State.STOPPED
                 self.get_logger().info("Transition: MOVING_TO_B -> STOPPED")
 
             elif self.event == Event.DOUBLE_TAP: # E2
+                self.publish_actual_action("change_target")
                 self.state = State.MOVING_TO_A 
                 self.get_logger().info("Transition: MOVING_TO_B -> MOVING_TO_A")
             
@@ -199,7 +215,8 @@ class FSMNode(Node):
                 self.state == State.AT_BIN_B
                 self.get_logger().info("Transition: MOVING_TO_B -> AT_BIN_B")
 
-            elif self.event == Event.SINGLE_TAP:
+            elif self.event == Event.SINGLE_TAP: # E3
+                self.publish_actual_action("continue")
                 self.state = State.MOVING_TO_B
                 self.get_logger().info("Continue MOVING_TO_B")
             
@@ -219,6 +236,11 @@ class FSMNode(Node):
         self.publisher.publish(msg)
         self.get_logger().info(f'Target: {self.state}')
 
+    def publish_actual_action(self, action: str):
+        msg = String()
+        msg.data = action
+        self.action_pub.publish(msg)
+        self.get_logger().info(f'Published actual action: {action}')
 
 # -------------------------
 # Main
