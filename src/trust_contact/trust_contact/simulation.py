@@ -182,8 +182,7 @@ class ApplyContactForce:
 
     def force_event_type(self):
         events = []
-        
-        num_events = np.random.choice([1, 2, 3]) # number of events in entire simulation
+        num_events = 3
         for _ in range(num_events):
             event = np.random.choice([0, 1, 2]) #0 - long tap , 1 = double tap, 2 - single tap
             events.append(event)  

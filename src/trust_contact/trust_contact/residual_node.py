@@ -35,12 +35,7 @@ class MomentumObserver(Node):
         self.create_subscription(JointState, 'joint_states', self.joint_state_callback, 10) 
         self.create_subscription(Bool, 'contact_detection', self.contact_detection_callback, 10)
         self.create_subscription(Point, 'contact_point', self.contact_point_callback, 10) 
-        self.sim_time_sub = self.create_subscription(
-            Float64,
-            '/sim_time',
-            self.sim_time_callback,
-            10
-        )
+        self.create_subscription(Float64,'/sim_time',self.sim_time_callback,10)
 
         # For Debugging - publish: p, tau, non-lin terms, r, 
         self.pub_p = self.create_publisher(Float64MultiArray, '/observer/measured_momentum', 10)
@@ -54,7 +49,7 @@ class MomentumObserver(Node):
         self.pub_q = self.create_publisher(Float64MultiArray, '/observer/q', 10)
         self.pub_mj_tau = self.create_publisher(Float64MultiArray, '/observer/mj_tau', 10)
         self.create_subscription(Float64MultiArray, '/observer/force_world', self.mujoco_force_callback, 10) 
-        self.jacobian_sub = self.create_subscription(Float64MultiArray,'/debug/contact_jacobian',self.jacobian_callback,10)
+        self.create_subscription(Float64MultiArray,'/debug/contact_jacobian',self.jacobian_callback,10)
 
         # contact detection variables
         self.force = None
