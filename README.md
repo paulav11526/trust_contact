@@ -4,7 +4,7 @@ This project was developed according to the following framework:
 
 # Evaluation Results
 A log of the evaluation results is shown here:
-[Evaluation Results](src/trust_contact/trust_contact/evaluation_results.ods)
+[Evaluation Results](src/trust_contact/trust_contact/evaluation_results.pdf)
 
 
 Videos of the respective trials from the results shown above are shown here:
