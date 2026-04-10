@@ -11,3 +11,9 @@ Videos of the respective trials from the results shown above are shown here:
 [Videos Folder](src/trust_contact/trust_contact/videos)
 
 <img width="400" height="400" alt="Screenshot from 2026-04-10 13-57-12" src="https://github.com/user-attachments/assets/4698c635-8b2a-483b-b139-02b074880df4" />
+
+# Simulation
+Run this command to launch the simulation:
+```
+ros2 launch trust_contact trust_contact_launch.py
+```
