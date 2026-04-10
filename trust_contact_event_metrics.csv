@@ -1,4 +1,0 @@
-trial_id,event_id,true_tap,predicted_tap,rf_correct,expected_action,actual_action,fsm_correct,residual_rmse,force_error_percent
-1,1,long_tap,,False,unknown,,False,0.9590985324722883,2.1039616900842377
-1,2,double_tap,Double_Tap,False,unknown,change_target,False,0.7440508415086039,35.182687536010924
-1,3,long_tap,,False,unknown,,False,0.725980428565388,43.27296810815894

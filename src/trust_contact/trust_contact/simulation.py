@@ -269,9 +269,9 @@ class ApplyContactForce:
 
     def tap_type_to_string(self, tap_type):
         mapping = {
-            0: "long_tap",
-            1: "double_tap",
-            2: "single_tap"
+            0: "Long_Tap",
+            1: "Double_Tap",
+            2: "Single_Tap"
         }
         return mapping[tap_type]
 
@@ -384,7 +384,7 @@ class MujocoSimulatorNode(Node):
         self.true_tap_pub = self.create_publisher(String, '/eval/true_tap', 10)
         self.event_active_pub = self.create_publisher(Bool, '/eval/event_active', 10)
 
-        self.trial_id = 1
+        self.trial_id = 5
         self.event_id = 0
         self.current_true_tap = ""
         self.event_active = False
