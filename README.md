@@ -14,4 +14,6 @@ Videos of the respective trials from the results shown above are shown here:
 
 # Simulation
 Run this command to launch the simulation:
+```
 ros2 launch trust_contact trust_contact_launch.py
+```
