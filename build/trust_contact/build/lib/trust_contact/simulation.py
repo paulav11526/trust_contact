@@ -8,6 +8,7 @@ import os
 from numpy import random 
 import matplotlib.pyplot as plt
 import pandas as pd
+import threading
 
 # ros dependencies
 import rclpy
@@ -15,14 +16,14 @@ from rclpy.clock import Clock
 from rclpy.node import Node
 from sensor_msgs.msg import JointState
 from geometry_msgs.msg import WrenchStamped
-from std_msgs.msg import Bool
+from std_msgs.msg import Bool, String, Int32
 from geometry_msgs.msg import Point
-from std_msgs.msg import Float64MultiArray
-from std_msgs.msg import Float64
-from std_msgs.msg import Float32MultiArray
+from std_msgs.msg import Float64MultiArray, Float64, Float32MultiArray
+
+
 
 class ApplyContactForce:
-    def __init__(self, model, data, df, random_row, contact_pub, point_pub, node):
+    def __init__(self, model, data, df, random_row, contact_pub, point_pub, param_pub ,node):
         self.m = model
         self.d = data
         self.node = node
@@ -30,9 +31,16 @@ class ApplyContactForce:
         # simulation details
         self.force_body = self.d.body("peg").id
         self.force_limit = 15  # maximum magnitude of each force component
-        self.application_time = 500 # how many timesteps force is applied for
-        self.force_starttime = 3000 # timesteps when force application begins
-        self.logging_start = self.force_starttime # timestep when sensor data logging starts
+        self.force_starttime = [500] # timesteps when force application begins
+        self.force_windows = []
+        self.prev_contact_active = False
+        self.current_force_index = None
+        self.active_force_world = None
+        self.active_force_local = None
+        self.active_force_point_local = None
+        self.active_globalpoint = None
+
+        self.logging_start = self.force_starttime[0] # timestep when sensor data logging starts
         self.logging_end = self.logging_start + 1000 # timestep when sensor data logging ends
         self.contact_detected = False
 
@@ -42,6 +50,10 @@ class ApplyContactForce:
 
         self.publisher1 = contact_pub
         self.publisher2 = point_pub
+        self.param_pub = param_pub
+
+        # trust parameter
+        self.C1 = None
 
     # setting random force vector
     def force_generation(self):
@@ -68,97 +80,269 @@ class ApplyContactForce:
         # inward pushing force
         force_local = -magnitude * normal_local
 
-        # EDIT LATER
+        # Get contact_type for tap
+        C2 = self.contact_type()
 
-        return force_local, point
+        return force_local, point, C2
 
 
-    def apply_force(self, force_point, force_local, timestep, viewer):
+    def apply_force(self, timestep, viewer, event):
         self.d.qfrc_applied[:] = 0.0
+        contact_msg = Bool()
 
-        # scaling force vector for visualization so arrow geom is not giant
-        scaled_force_vector = [force_local[0]/10, force_local[1]/10, force_local[2]/10]
-        # finding starting point for force vector's arrow 
-        local_arrow_start = [force_point[0]-scaled_force_vector[0], force_point[1]-scaled_force_vector[1], force_point[2]-scaled_force_vector[2]]
+        active_event_index = self.get_active_event_index(timestep)
+        event_active = (active_event_index is not None)
         
+        if (not self.prev_contact_active) and event_active:
+            start, end, tap_type, logical_event_id = self.event_windows[active_event_index]
+            self.node.start_contact_event(self.tap_type_to_string(tap_type), logical_event_id)
+
+        elif self.prev_contact_active and (not event_active):
+            self.node.end_contact_event()
+
+        active_index = self.get_active_force_index(timestep)
+        if active_index is None:   # if we're not in a force window
+            self.contact_detected = False
+            self.current_force_index = None
+            self.active_force_world = None
+            self.active_force_local = None
+            self.active_force_point_local = None
+            self.active_globalpoint = None
+            self.prev_contact_active = event_active
+
+            # clear custom geoms
+            viewer.user_scn.ngeom = 0
+            viewer.sync()
+
+            #publish contact detection
+            contact_msg.data = self.contact_detected
+            self.publisher1.publish(contact_msg)
+            return None, None
+        else:
+            self.contact_detected = True
+            start, end, tap_type, logical_event_id = self.force_windows[active_index]
+
+
+
+        # entering a new force window -> generate new force/point once
+        if self.current_force_index != active_index:
+            self.current_force_index = active_index
+            
+            # generate local point + local normal force 
+            force_local, force_point, C2 = self.force_generation()
+            self.active_force_point_local = np.array(force_point, dtype=float)
+            self.active_force_local = np.array(force_local, dtype=float)
+
+            c_msg = Point()
+            c_msg.x = float(self.active_force_point_local[0])
+            c_msg.y = float(self.active_force_point_local[1])
+            c_msg.z = float(self.active_force_point_local[2])
+            self.publisher2.publish(c_msg)
+            self.node.get_logger().info(f"Contact point at: {c_msg} in peg coordinates")
+
+            # publish trust parameters
+            trust_param_msg = Float32MultiArray()
+            trust_param_msg.data = np.asarray( np.array([self.C1, C2]), dtype=float).flatten().tolist()
+            self.param_pub.publish(trust_param_msg)
+
         # get global position and rotation of desired body
         xpos = self.d.xpos[self.force_body]
         xmat = self.d.xmat[self.force_body].reshape(3, 3)
 
         # convert point of force application to global coordinates
-        globalpoint = xmat @ force_point + xpos
-        arrow_start = xmat @ local_arrow_start + xpos
-        force_world = xmat @ force_local
+        self.active_globalpoint = xmat @ self.active_force_point_local + xpos
+        self.active_force_world = xmat @ self.active_force_local
 
-        c_msg = Point()
-        c_msg.x = float(force_point[0])
-        c_msg.y = float(force_point[1])
-        c_msg.z = float(force_point[2])
-        self.publisher2.publish(c_msg)
-
-
-
-
-
-
-        if self.force_starttime <timestep< (self.force_starttime + self.application_time): # apply force at specified time interval
-            mujoco.mj_applyFT(self.m, self.d, force_world, [0,0,0], globalpoint, self.force_body, self.d.qfrc_applied)
-            self.contact_detected = True
-            i = viewer.user_scn.ngeom
-            # creating arrow to visualize direction of force applied
-            mujoco.mjv_initGeom(viewer.user_scn.geoms[i], type=mujoco.mjtGeom.mjGEOM_ARROW, size=[0.01, 0.01, 0.01], pos= arrow_start, mat=np.eye(3).flatten(), rgba=[255, 0, 0, 1])
-            mujoco.mjv_connector(viewer.user_scn.geoms[i], mujoco.mjtGeom.mjGEOM_ARROW, 0.008, arrow_start, globalpoint)
-            i += 1
-                
-            # creating sphere to visualize point of force application
-            mujoco.mjv_initGeom(viewer.user_scn.geoms[i], type=2, size=[0.008, 0.008, 0.008], pos= globalpoint, mat=np.eye(3).flatten(), rgba=[0, 0, 0, 1])
-            i += 1
-            viewer.user_scn.ngeom = i
-            viewer.sync()
-
-            self.node.get_logger().info(f"Forcal local: {force_local}")
-            self.node.get_logger().info(f"Force world: {force_world}")
-            self.node.get_logger().info(f"Force world norm: {np.linalg.norm(force_world)}")
-            self.node.get_logger().info(f"qfrc_applied: {self.d.qfrc_applied}")
-            self.node.get_logger().info(f"Contact point at: {c_msg} in peg coordinates")
-        else:
-            self.contact_detected = False
+        mujoco.mj_applyFT(self.m, self.d, self.active_force_world, [0,0,0], self.active_globalpoint, self.force_body, self.d.qfrc_applied)
         
-        msg = Bool()
-        msg.data = self.contact_detected
-        self.publisher1.publish(msg)
-        #self.node.get_logger().info(f'Publishing: {self.contact_detected}')
-        #self.get_logger().info(f"q mujoco: {self.d.qpos}")
-        return globalpoint, force_world
+        # for visualization -------------------------------------------------------------------------------------------------
+        # scaling force vector for visualization so arrow geom is not giant
+        scaled_force_vector = self.active_force_world / 10.0
+        arrow_start = self.active_globalpoint - scaled_force_vector # finding starting point for force vector's arrow 
+        
+        viewer.user_scn.ngeom = 0
+        i=0
+        # creating arrow to visualize direction of force applied
+        mujoco.mjv_initGeom(viewer.user_scn.geoms[i], type=mujoco.mjtGeom.mjGEOM_ARROW, size=[0.01, 0.01, 0.01], pos= arrow_start, mat=np.eye(3).flatten(), rgba=[255, 0, 0, 1])
+        mujoco.mjv_connector(viewer.user_scn.geoms[i], mujoco.mjtGeom.mjGEOM_ARROW, 0.008, arrow_start, self.active_globalpoint)
+        i += 1
+            
+        # creating sphere to visualize point of force application
+        mujoco.mjv_initGeom(viewer.user_scn.geoms[i], type=2, size=[0.008, 0.008, 0.008], pos= self.active_globalpoint, mat=np.eye(3).flatten(), rgba=[0, 0, 0, 1])
+        i += 1
+        viewer.user_scn.ngeom = i
+        viewer.sync()
+        # -----------------------------------------------------------------------------------------------------------------
 
+        # logging
+        self.node.get_logger().info(f"Force world: {self.active_force_world} | Norm:  {np.linalg.norm(self.active_force_world)}")
+        self.node.get_logger().info(f"qfrc_applied: {self.d.qfrc_applied}")
+        self.node.get_logger().info(f"Event type: {event}")
+        self.node.get_logger().info(f"Current Event: {tap_type}")
+        
+
+        # publish bool for contact detection
+        contact_msg.data = self.contact_detected
+        self.publisher1.publish(contact_msg)
+
+        self.prev_contact_active = event_active
+        return self.active_globalpoint.copy(), self.active_force_world.copy()
+
+    # trust parameters
     def contact_parameters(self):
-        C1 = random.random() # trust parameter
+        self.C1 = random.random() # trust parameter
+
+    def contact_type(self):
         C2 = random.choice([0,1]) # palm or finger
-        X = [[C1, C2]]
-        return X
+        return C2
 
+    # defining force windows and tap types
+    
     def force_event_type(self):
-        event = np.random.choice([0,1]) #1 = double tap
-        return event
+        events = []
+        num_events = 3
+        for _ in range(num_events):
+            event = np.random.choice([0, 1, 2]) #0 - long tap , 1 = double tap, 2 - single tap
+            events.append(event)  
+        return events
 
+    def get_active_force_index(self, timestep):
+        for i, (start,end, _, id) in enumerate(self.force_windows):
+            if start <= timestep < end:
+                return i
+        return None
+
+    def get_active_event_index(self, timestep):
+        for i, (start, end, tap_type, logical_event_id) in enumerate(self.event_windows):
+            if start <= timestep <= end:
+                return i
+        return None
+
+    def force_application_time(self, events):
+        self.force_windows = []
+        self.event_windows = [] # for evaluation
+
+        current_time = np.random.randint(2000, 2500)
+        logical_event_id = 0
+
+        for event in events:
+            logical_event_id += 1
+            if event == 1: # double tap
+                tap_duration = 100
+                gap = np.random.randint(50, 100)
+
+                start1 = current_time
+                end1 = start1 + tap_duration
+
+                start2 = end1 + gap
+                end2 = start2 + tap_duration
+
+                # force windows
+                self.force_windows.append((start1, end1, 1, logical_event_id))
+                self.force_windows.append((start2, end2, 1, logical_event_id))
+
+                # event windows
+                self.event_windows.append((start1, end2, 1, logical_event_id))
+
+                current_time = end2 + np.random.randint(1000, 2000)
+            elif event == 2: # single tap
+                tap_duration = 200
+
+                start = current_time
+                end = start + tap_duration
+
+                self.force_windows.append((start, end, 2, logical_event_id))
+                self.event_windows.append((start, end, 2, logical_event_id))
+                current_time = end + np.random.randint(1000, 2000)
+            else:
+                tap_duration = 700 # long tap  
+
+                start = current_time
+                end = start + tap_duration
+
+                self.force_windows.append((start, end, 0, logical_event_id))
+                self.event_windows.append((start, end, 0, logical_event_id))
+                current_time = end + np.random.randint(1000, 2000)
+
+        self.node.get_logger().info(f'force window: {self.force_windows}')
+        self.node.get_logger().info(f'event windows: {self.event_windows}')
+
+    def tap_type_to_string(self, tap_type):
+        mapping = {
+            0: "long_tap",
+            1: "double_tap",
+            2: "single_tap"
+        }
+        return mapping[tap_type]
 
 class RobotController:
-    def __init__(self, model, data, qhome):
+    def __init__(self, model, data, qhome, node):
         self.model = model
         self.data = data
-        
-        self.q_des = qhome
+        self.node = node
+        self.n_arm_joints = 7
+
         self.q_target = qhome
+        self.speed_scale = 1.0
+        self.motion_active = False
 
-    def update(self):
-        #Initialize desired pose
-        if self.q_des is None:
-            self.q_des = self.data.qpos.copy()
+        # controller tuning
+        self.Kp = np.array([2.0, 2.0, 2.0, 2.0, 1.5, 1.5, 1.5])   # position -> velocity gain
+        self.max_joint_vel = np.array([2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0])  # rad/s
+        self.pos_tol = 0.05   # rad
 
-        self.q_des = self.q_target.copy()
-        # apply control
-        self.data.ctrl[:] = self.q_des
+        self.pending_q_target = None
+        self.pending_speed = None
+
+    def compute_velocity_command(self):
+        if self.q_target is None:
+            return np.zeros(self.n_arm_joints)
         
+        q = self.data.qpos[:self.n_arm_joints].copy()
+        q_error = self.q_target - q
+
+        # stop if close enough
+        if self.motion_active and np.linalg.norm(q_error) < self.pos_tol:
+            self.motion_active = False
+            #self.node.get_logger().info("Target reached")
+            return np.zeros(self.n_arm_joints)
+        
+        # proportional position error -> desired velocity
+        qdot_cmd = self.Kp * q_error
+        
+        # speed scaling
+        vel_limit = self.speed_scale * self.max_joint_vel
+        qdot_cmd = np.clip(qdot_cmd, -vel_limit, vel_limit)
+
+        """         # minimum command to avoid creeping forever
+        min_vel = 0.02 
+        for i in range(self.n_arm_joints):
+            if abs(q_error[i]) > self.pos_tol and abs(qdot_cmd[i]) < min_vel:
+                qdot_cmd[i] = np.sign(qdot_cmd[i]) * min_vel """
+
+        return qdot_cmd
+    
+    def apply_control(self):
+        with self.node.state_lock:
+            qdot_cmd = self.compute_velocity_command()
+
+            # arm velocity actuators
+            self.data.ctrl[:self.n_arm_joints] = qdot_cmd
+
+    def try_activate_command(self):
+        if self.pending_q_target is None or self.pending_speed is None:
+            return
+
+        self.q_target = self.pending_q_target.copy()
+        self.speed_scale = self.pending_speed
+        self.motion_active = True
+
+        self.pending_q_target = None
+        self.pending_speed_scale = None
+
+        #self.node.get_logger().info(
+        #    f"Activated new target with speed_scale={self.speed_scale:.2f}")        
+
 class MujocoSimulatorNode(Node):
     def __init__(self):
         super().__init__('mujoco_simulator_node')
@@ -172,10 +356,11 @@ class MujocoSimulatorNode(Node):
 
         # set robot to home position
         self.q_home = [8.94154e-21, -0.566287, 0.00014964, -0.850776, -9.77076e-05, 1.79119, -1.53133e-05]
+        mujoco.mj_resetDataKeyframe(self.m, self.d, 0)
         #self.d.qpos[:7] = q_home
        # self.d.qvel[:] = [1.07488e-18, -2.65678e-14 ,-5.71869e-18, 2.687e-14 ,-5.14054e-18 ,-5.34417e-14 ,-1.40062e-18]
         #self.d.ctrl[:7] = [8.94154e-21, -0.566287 ,0.00014964, -0.850776 ,-9.77076e-05 ,1.79119 ,-1.53133e-05]
-        #mujoco.mj_forward(self.m, self.d)
+        mujoco.mj_forward(self.m, self.d)
 
         # reading coordinates of body points from file and selecting random row of data
         self.df = pd.read_csv(pointcloud_path, usecols = ["X", "Y", "Z", "Nx", "Ny", "Nz"])
@@ -189,16 +374,73 @@ class MujocoSimulatorNode(Node):
         self.force_pub = self.create_publisher(Float64MultiArray, '/observer/force_world', 10)
         self.jacobian_pub = self.create_publisher(Float64MultiArray, '/debug/contact_jacobian', 10)
         self.sim_time_pub = self.create_publisher(Float64, '/sim_time', 10)
+        self.cont_param_pub = self.create_publisher(Float32MultiArray, 'contact_parameters', 10)
         self.create_subscription(JointState, 'q_target', self.target_callback, 10)
+        self.create_subscription(Float64, 'predicted_speed', self.speed_callback, 10)
+
+        # publishers for evaluation
+        self.trial_pub = self.create_publisher(Int32, '/eval/trial_id', 10)
+        self.event_pub = self.create_publisher(Int32, '/eval/event_id', 10)
+        self.true_tap_pub = self.create_publisher(String, '/eval/true_tap', 10)
+        self.event_active_pub = self.create_publisher(Bool, '/eval/event_active', 10)
+
+        self.trial_id = 1
+        self.event_id = 0
+        self.current_true_tap = ""
+        self.event_active = False
+
+        
+        # lock
+        self.state_lock = threading.Lock()
 
         #Instantiate helper classes
-        self.force_manager = ApplyContactForce(self.m, self.d, self.df, self.random_row, self.publisher1, self.publisher2, self)
-        self.controller = RobotController(self.m, self.d, self.q_home)
+        self.force_manager = ApplyContactForce(self.m, self.d, self.df, self.random_row, self.publisher1, self.publisher2, self.cont_param_pub , self)
+        self.controller = RobotController(self.m, self.d, self.q_home, self)
 
+    def publish_eval_metadata(self):
+        trial_msg = Int32()
+        trial_msg.data = self.trial_id
+        self.trial_pub.publish(trial_msg)
+
+        event_msg = Int32()
+        event_msg.data = self.event_id
+        self.event_pub.publish(event_msg)
+
+        tap_msg = String()
+        tap_msg.data = self.current_true_tap
+        self.true_tap_pub.publish(tap_msg)
+        
+        active_msg = Bool()
+        active_msg.data = self.event_active
+        self.event_active_pub.publish(active_msg)
+
+    def start_contact_event(self, tap_type: str, event_id):
+        self.event_id = event_id
+        self.current_true_tap = tap_type
+        self.event_active = True
+        self.publish_eval_metadata()
+        self.get_logger().info(
+            f"Started contact event: trial={self.trial_id}, event={self.event_id}, tap={tap_type}"
+        )
+        
+    def end_contact_event(self):
+        self.event_active = False
+        self.publish_eval_metadata()
+        self.get_logger().info(
+            f"Ended contact event: trial={self.trial_id}, event={self.event_id}"
+        )        
+
+    # subscribes to target position
     def target_callback(self, msg:JointState):
-        self.controller.q_target = np.array(msg.position)
-        self.controller.update()
-
+        with self.state_lock:
+            self.controller.pending_q_target = np.array(msg.position)
+            self.controller.try_activate_command()
+    
+    # subscribes to target speed
+    def speed_callback(self, msg:Float64 ):
+        with self.state_lock:
+            self.controller.pending_speed = msg.data
+            self.controller.try_activate_command()
 
     def publish_jacobian(self, J):
         msg = Float64MultiArray()
@@ -221,15 +463,12 @@ def main(args=None):
     node = MujocoSimulatorNode()
     msg = JointState()
 
-    # generate random force on random point
-    force_vector, force_point = node.force_manager.force_generation()
-    event = node.force_manager.force_event_type()
-    # set robot to home position
-    node.d.ctrl[:7] = node.q_home
+    # determine what type of contact event this is
+    contact_event = node.force_manager.force_event_type()
+    node.force_manager.force_application_time(contact_event)
 
-    # generate randoom trust parameter and contact type
-    X = node.force_manager.contact_parameters()
-    node.get_logger().info(f'Contact: {X}')
+    # generate randoom trust parameter for duration of simulation
+    node.force_manager.contact_parameters()
 
     # Launch the simulation
     with mujoco.viewer.launch_passive(node.m, node.d) as viewer:
@@ -252,15 +491,16 @@ def main(args=None):
             msg_t.data = float(node.d.time)
             node.sim_time_pub.publish(msg_t)
 
+            node.controller.apply_control()
+
             timestep+=1
             dt = node.m.opt.timestep
             viewer.user_scn.ngeom = 0
 
-
-
             # Apply force
-            globalpoint, force_world = node.force_manager.apply_force(force_point, force_vector, timestep, viewer)
-            node.calculate_jacobian(globalpoint)
+            globalpoint, force_world = node.force_manager.apply_force(timestep, viewer, contact_event)
+            if globalpoint is not None:
+                node.calculate_jacobian(globalpoint)
 
             if node.force_manager.logging_start < timestep <= node.force_manager.logging_end: # only recording sensor data at certain timesteps
                 sensor_readings.loc[timestep] = [node.d.sensordata[fx], node.d.sensordata[fy], node.d.sensordata[fz], node.d.sensordata[tz]] # logging sensor readings in data frame

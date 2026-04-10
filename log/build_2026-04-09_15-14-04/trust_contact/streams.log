@@ -1,0 +1,155 @@
+[0.340s] Invoking command in '/home/paulav/contact_ws/build/trust_contact': CMAKE_PREFIX_PATH=/home/paulav/contact_ws/install/messages:/usr/local PYTHONPATH=/home/paulav/contact_ws/build/trust_contact/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --uninstall --editable --build-directory /home/paulav/contact_ws/build/trust_contact/build
+[0.473s] running develop
+[0.559s] Removing /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust-contact.egg-link (link to .)
+[0.571s] Invoked command in '/home/paulav/contact_ws/build/trust_contact' returned '0': CMAKE_PREFIX_PATH=/home/paulav/contact_ws/install/messages:/usr/local PYTHONPATH=/home/paulav/contact_ws/build/trust_contact/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --uninstall --editable --build-directory /home/paulav/contact_ws/build/trust_contact/build
+[0.572s] Invoking command in '/home/paulav/contact_ws/src/trust_contact': CMAKE_PREFIX_PATH=/home/paulav/contact_ws/install/messages:/usr/local PYTHONPATH=/home/paulav/contact_ws/build/trust_contact/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/trust_contact build --build-base /home/paulav/contact_ws/build/trust_contact/build install --record /home/paulav/contact_ws/build/trust_contact/install.log --single-version-externally-managed install_data --force
+[0.695s] running egg_info
+[0.695s] writing ../../build/trust_contact/trust_contact.egg-info/PKG-INFO
+[0.695s] writing dependency_links to ../../build/trust_contact/trust_contact.egg-info/dependency_links.txt
+[0.695s] writing entry points to ../../build/trust_contact/trust_contact.egg-info/entry_points.txt
+[0.695s] writing requirements to ../../build/trust_contact/trust_contact.egg-info/requires.txt
+[0.695s] writing top-level names to ../../build/trust_contact/trust_contact.egg-info/top_level.txt
+[0.696s] reading manifest file '../../build/trust_contact/trust_contact.egg-info/SOURCES.txt'
+[0.697s] writing manifest file '../../build/trust_contact/trust_contact.egg-info/SOURCES.txt'
+[0.697s] running build
+[0.697s] running build_py
+[0.698s] copying trust_contact/evaluation_logger.py -> /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact
+[0.698s] copying trust_contact/fsm_node.py -> /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact
+[0.698s] copying trust_contact/simulation.py -> /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact
+[0.698s] copying trust_contact/sensor_logging.py -> /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact
+[0.698s] copying trust_contact/debug_jacobian.py -> /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact
+[0.698s] copying trust_contact/speed_predictor_node.py -> /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact
+[0.698s] copying trust_contact/contact_classifier_node.py -> /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact
+[0.698s] copying trust_contact/debugging.py -> /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact
+[0.698s] copying trust_contact/residual_node.py -> /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact
+[0.698s] running install
+[0.698s] running install_lib
+[0.698s] copying /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact/evaluation_logger.py -> /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact
+[0.698s] copying /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact/fsm_node.py -> /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact
+[0.698s] copying /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact/simulation.py -> /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact
+[0.698s] copying /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact/sensor_logging.py -> /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact
+[0.698s] copying /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact/debug_jacobian.py -> /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact
+[0.698s] copying /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact/speed_predictor_node.py -> /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact
+[0.698s] copying /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact/random_force.py -> /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact
+[0.699s] copying /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact/contact_classifier_node.py -> /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact
+[0.699s] copying /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact/debugging.py -> /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact
+[0.699s] copying /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact/__init__.py -> /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact
+[0.699s] copying /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact/generating_data.py -> /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact
+[0.699s] copying /home/paulav/contact_ws/build/trust_contact/build/lib/trust_contact/residual_node.py -> /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact
+[0.699s] byte-compiling /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact/evaluation_logger.py to evaluation_logger.cpython-310.pyc
+[0.700s] byte-compiling /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact/fsm_node.py to fsm_node.cpython-310.pyc
+[0.701s] byte-compiling /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact/simulation.py to simulation.cpython-310.pyc
+[0.703s] byte-compiling /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact/sensor_logging.py to sensor_logging.cpython-310.pyc
+[0.703s] byte-compiling /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact/debug_jacobian.py to debug_jacobian.cpython-310.pyc
+[0.703s] byte-compiling /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact/speed_predictor_node.py to speed_predictor_node.cpython-310.pyc
+[0.704s] byte-compiling /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact/random_force.py to random_force.cpython-310.pyc
+[0.704s] byte-compiling /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact/contact_classifier_node.py to contact_classifier_node.cpython-310.pyc
+[0.705s] byte-compiling /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact/debugging.py to debugging.cpython-310.pyc
+[0.705s] byte-compiling /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact/__init__.py to __init__.cpython-310.pyc
+[0.705s] byte-compiling /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact/generating_data.py to generating_data.cpython-310.pyc
+[0.706s]   File "/home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact/generating_data.py", line 54
+[0.706s]     model.fit(X, speed_true)import random
+[0.706s]                             ^^^^^^
+[0.706s] SyntaxError: invalid syntax
+[0.706s] 
+[0.706s] byte-compiling /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact/residual_node.py to residual_node.cpython-310.pyc
+[0.707s] running install_data
+[0.707s] copying resource/trust_contact -> /home/paulav/contact_ws/install/trust_contact/share/ament_index/resource_index/packages
+[0.707s] copying package.xml -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact
+[0.707s] copying launch/trust_contact_launch.py -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/launch
+[0.707s] copying trust_contact/models/peg.xml -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models
+[0.707s] copying trust_contact/models/panda_nohand.xml -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models
+[0.707s] copying trust_contact/models/scene.xml -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models
+[0.707s] copying trust_contact/models/panda_withpeg.xml -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models
+[0.707s] copying trust_contact/models/panda.urdf -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models
+[0.707s] copying trust_contact/pointcloud/link2_points.asc -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/pointcloud
+[0.713s] copying trust_contact/pointcloud/link5_points.asc -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/pointcloud
+[0.717s] copying trust_contact/pointcloud/peg_points.asc -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/pointcloud
+[0.731s] copying trust_contact/pointcloud/link7_points.asc -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/pointcloud
+[0.734s] copying trust_contact/pointcloud/link4_points.asc -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/pointcloud
+[0.738s] copying trust_contact/pointcloud/link1_points.asc -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/pointcloud
+[0.744s] copying trust_contact/pointcloud/link6_points.asc -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/pointcloud
+[0.747s] copying trust_contact/pointcloud/link3_points.asc -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/pointcloud
+[0.752s] copying trust_contact/pointcloud/RF_OG.py -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/pointcloud
+[0.752s] copying trust_contact/models/assets/oldpeg.stl -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.752s] copying trust_contact/models/assets/link5_0.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.752s] copying trust_contact/models/assets/link0_10.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.752s] copying trust_contact/models/assets/link7_3.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.753s] copying trust_contact/models/assets/finger_0.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.753s] copying trust_contact/models/assets/link4_2.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.753s] copying trust_contact/models/assets/link5_2.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.755s] copying trust_contact/models/assets/link5_1.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.756s] copying trust_contact/models/assets/finger_1.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.756s] copying trust_contact/models/assets/link4_0.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.756s] copying trust_contact/models/assets/link6_9.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.756s] copying trust_contact/models/assets/link0_1.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.756s] copying trust_contact/models/assets/link6.stl -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.756s] copying trust_contact/models/assets/link3_3.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.756s] copying trust_contact/models/assets/hand_3.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.757s] copying trust_contact/models/assets/hand_4.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.758s] copying trust_contact/models/assets/link2.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.759s] copying trust_contact/models/assets/link4_1.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.761s] copying trust_contact/models/assets/link7.stl -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.761s] copying trust_contact/models/assets/link0_11.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.761s] copying trust_contact/models/assets/link7_6.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.761s] copying trust_contact/models/assets/link6_13.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.761s] copying trust_contact/models/assets/link0_9.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.761s] copying trust_contact/models/assets/hand_2.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.762s] copying trust_contact/models/assets/link2.stl -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.762s] copying trust_contact/models/assets/link3_0.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.763s] copying trust_contact/models/assets/oldpeg.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.764s] copying trust_contact/models/assets/link0_8.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.765s] copying trust_contact/models/assets/link0_7.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.765s] copying trust_contact/models/assets/link4_3.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.765s] copying trust_contact/models/assets/link6_4.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.765s] copying trust_contact/models/assets/link6_3.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.765s] copying trust_contact/models/assets/peg.stl -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.765s] copying trust_contact/models/assets/hand.stl -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.765s] copying trust_contact/models/assets/link7_5.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.765s] copying trust_contact/models/assets/link6_1.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.765s] copying trust_contact/models/assets/link6_15.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.766s] copying trust_contact/models/assets/link0_3.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.766s] copying trust_contact/models/assets/link3.stl -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.766s] copying trust_contact/models/assets/link0_4.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.766s] copying trust_contact/models/assets/link4.stl -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.766s] copying trust_contact/models/assets/link1.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.767s] copying trust_contact/models/assets/link6_12.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.767s] copying trust_contact/models/assets/link3_1.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.767s] copying trust_contact/models/assets/link0.stl -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.767s] copying trust_contact/models/assets/link7_2.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.767s] copying trust_contact/models/assets/link6_10.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.767s] copying trust_contact/models/assets/link0_0.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.768s] copying trust_contact/models/assets/link6_16.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.769s] copying trust_contact/models/assets/link5_collision_2.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.769s] copying trust_contact/models/assets/link6_5.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.769s] copying trust_contact/models/assets/link5_collision_0.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.769s] copying trust_contact/models/assets/link6_7.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.769s] copying trust_contact/models/assets/link3_2.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.769s] copying trust_contact/models/assets/link0_2.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.769s] copying trust_contact/models/assets/link6_6.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.769s] copying trust_contact/models/assets/link6_11.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.769s] copying trust_contact/models/assets/link7_0.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.770s] copying trust_contact/models/assets/link6_14.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.770s] copying trust_contact/models/assets/link5_collision_1.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.770s] copying trust_contact/models/assets/link7_1.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.770s] copying trust_contact/models/assets/hand_0.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.770s] copying trust_contact/models/assets/link7_4.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.770s] copying trust_contact/models/assets/link6_0.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.771s] copying trust_contact/models/assets/link0_5.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.771s] copying trust_contact/models/assets/link1.stl -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.771s] copying trust_contact/models/assets/link7_7.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.771s] copying trust_contact/models/assets/peg.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.771s] copying trust_contact/models/assets/hand_1.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.772s] copying trust_contact/models/assets/link6_8.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.772s] copying trust_contact/models/assets/link6_2.obj -> /home/paulav/contact_ws/install/trust_contact/share/trust_contact/models/assets
+[0.772s] running install_egg_info
+[0.773s] Copying ../../build/trust_contact/trust_contact.egg-info to /home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages/trust_contact-0.0.0-py3.10.egg-info
+[0.773s] running install_scripts
+[0.784s] Installing contact_classifier_node script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+[0.784s] Installing evaluation_logger script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+[0.784s] Installing fsm_node script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+[0.784s] Installing residual_node script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+[0.784s] Installing simulation script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+[0.784s] Installing speed_predictor_node script to /home/paulav/contact_ws/install/trust_contact/lib/trust_contact
+[0.785s] writing list of installed files to '/home/paulav/contact_ws/build/trust_contact/install.log'
+[0.796s] Invoked command in '/home/paulav/contact_ws/src/trust_contact' returned '0': CMAKE_PREFIX_PATH=/home/paulav/contact_ws/install/messages:/usr/local PYTHONPATH=/home/paulav/contact_ws/build/trust_contact/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/paulav/contact_ws/install/trust_contact/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/trust_contact build --build-base /home/paulav/contact_ws/build/trust_contact/build install --record /home/paulav/contact_ws/build/trust_contact/install.log --single-version-externally-managed install_data --force

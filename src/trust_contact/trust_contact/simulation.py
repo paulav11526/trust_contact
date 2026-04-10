@@ -304,7 +304,7 @@ class RobotController:
         # stop if close enough
         if self.motion_active and np.linalg.norm(q_error) < self.pos_tol:
             self.motion_active = False
-            self.node.get_logger().info("Target reached")
+            #self.node.get_logger().info("Target reached")
             return np.zeros(self.n_arm_joints)
         
         # proportional position error -> desired velocity
@@ -314,11 +314,11 @@ class RobotController:
         vel_limit = self.speed_scale * self.max_joint_vel
         qdot_cmd = np.clip(qdot_cmd, -vel_limit, vel_limit)
 
-        # minimum command to avoid creeping forever
-        min_vel = 0.05 
+        """         # minimum command to avoid creeping forever
+        min_vel = 0.02 
         for i in range(self.n_arm_joints):
             if abs(q_error[i]) > self.pos_tol and abs(qdot_cmd[i]) < min_vel:
-                qdot_cmd[i] = np.sign(qdot_cmd[i]) * min_vel
+                qdot_cmd[i] = np.sign(qdot_cmd[i]) * min_vel """
 
         return qdot_cmd
     
@@ -328,9 +328,6 @@ class RobotController:
 
             # arm velocity actuators
             self.data.ctrl[:self.n_arm_joints] = qdot_cmd
-
-            # gravity/bias compensation
-            self.data.qfrc_applied[:] = self.data.qfrc_bias
 
     def try_activate_command(self):
         if self.pending_q_target is None or self.pending_speed is None:
@@ -343,8 +340,8 @@ class RobotController:
         self.pending_q_target = None
         self.pending_speed_scale = None
 
-        self.node.get_logger().info(
-            f"Activated new target with speed_scale={self.speed_scale:.2f}")        
+        #self.node.get_logger().info(
+        #    f"Activated new target with speed_scale={self.speed_scale:.2f}")        
 
 class MujocoSimulatorNode(Node):
     def __init__(self):

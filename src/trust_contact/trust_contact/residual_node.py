@@ -289,7 +289,7 @@ class MomentumObserver(Node):
 
         # get force error
         F_norm = np.linalg.norm(F_ext)
-        error = np.abs(self.mujoco_force - F_norm) / (np.abs(self.mujoco_force) + 1e-6) * 100
+        error = np.float64(np.abs(np.linalg.norm(self.mujoco_force) - F_norm) / (np.abs(np.linalg.norm(self.mujoco_force)) + 1e-6) * 100)
         
         return F_norm, error
 
@@ -309,7 +309,7 @@ class MomentumObserver(Node):
     # publishes error
     def publish_force_error(self, error):
         msg = Float64()
-        msg.data = error
+        msg.data = np.float64(error)
         self.force_err_pub.publish(msg)
         
 

@@ -1,0 +1,4 @@
+RF accuracy: 0.00%
+FSM success rate: 0.00%
+Residual RMSE: 0.8097 ± 0.1297
+Force error (%): 26.85 ± 21.81

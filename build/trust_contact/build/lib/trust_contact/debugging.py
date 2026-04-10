@@ -182,11 +182,3 @@ m_pin.frames[frame_id].placement = pin.SE3(np.eye(3), point_peg)
 pin.forwardKinematics(m_pin, d_pin.data, q)
 pin.updateFramePlacements(m_pin, d_pin)
 
-# Jacobian at peg
-Jc = pin.computeFrameJacobian(m_pin, d_pin, q, frame_id, pin.ReferenceFrame.LOCAL_WORLD_ALIGNED)
-Jc_v=Jc[:3, :]
-
-F_ext = pinv(Jc_v.T) @ d_mj.qfrc_applied
-
-print(f'Jc: {Jc}')
-print(f'Fext = {F_ext}')

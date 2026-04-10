@@ -1,5 +1,3 @@
-#TODO: find out why the force calculation is so off and why the evaluation logger is like delayed (first RF classification is none so then the rest are shifted down one)
-
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Int32, Bool, String, Float64
@@ -23,16 +21,6 @@ class EvaluationLogger(Node):
 
         self.current_event = None
         self.rows = []
-
-        self.waiting_for_outputs = False
-        self.event_end_time = None
-
-        self.latest_predicted_tap = None
-        self.latest_actual_action = None
-        self.pending_finalize_deadline = None
-
-        self.create_timer(0.05, self.pending_finalize_check)
-
         # from simulation node
         self.create_subscription(Int32, '/eval/trial_id', self.trial_cb, 10)
         self.create_subscription(Int32, '/eval/event_id', self.event_cb, 10)
@@ -62,27 +50,19 @@ class EvaluationLogger(Node):
         self.true_tap = msg.data
 
     def pred_tap_cb(self, msg):
-        self.latest_predicted_tap = msg.data
-        self.get_logger().info(f"RF callback received predicted_tap={msg.data}")
-
+        self.predicted_tap = msg.data
         if self.current_event is not None:
             self.current_event["predicted_tap"] = msg.data
-            self.try_finalize_event()
 
     def action_cb(self, msg):
-        self.latest_actual_action = msg.data
-        self.get_logger().info(f"FSM callback received actual_action={msg.data}")
-
+        self.actual_action = msg.data
         if self.current_event is not None:
             self.current_event["actual_action"] = msg.data
-            self.try_finalize_event()
 
     def force_error_cb(self, msg):
         self.force_error = msg.data
         if self.current_event is not None:
             self.current_event["force_error"] = msg.data
-
-        self.try_finalize_event()
 
     def residual_cb(self, msg):
         self.latest_residual = np.array(msg.data)
@@ -101,40 +81,26 @@ class EvaluationLogger(Node):
             self.start_event()
 
         elif self.prev_event_active and (not self.event_active):
-            self.close_event_window()
+            self.end_event()
 
     def start_event(self):
-        if self.current_event is not None:
-            self.get_logger().warn(
-                f"Tried to start new event while previous event is still open: "
-                f"trial={self.current_event['trial_id']}, event={self.current_event['event_id']}"
-            )
-            return
-        
-        self.latest_predicted_tap = None
-        self.latest_actual_action = None
-        self.pending_finalize_deadline = None        
-        
-
         self.current_event = {
             "trial_id": self.trial_id,
             "event_id": self.event_id,
             "true_tap": self.true_tap,
-            "predicted_tap": None,
-            "actual_action": None,
+            "predicted_tap": self.predicted_tap,
+            "actual_action": self.actual_action,
             "force_error": self.force_error,
             "residual_samples": [],
             "tau_ref_samples": []
         }
-        self.event_active = True
-        self.waiting_for_outputs = False
-        self.get_logger().info(f"Started event trial={self.current_event['trial_id']}, event={self.current_event['event_id']}")
+        self.get_logger().info(f"Started event trial={self.trial_id}, event={self.event_id}")
 
     def expected_action_from_tap(self, tap):
         mapping = {
-            "single_Tap": "continue",
-            "double_Tap": "change_target",
-            "long_Tap": "stop"
+            "Single_Tap": "continue",
+            "Double_Tap": "change_target",
+            "Long_Tap": "stop"
         }
         return mapping.get(tap, "unknown")
 
@@ -158,16 +124,16 @@ class EvaluationLogger(Node):
         pred_tap = self.current_event["predicted_tap"]
         actual_action = self.current_event["actual_action"]
         expected_action = self.expected_action_from_tap(true_tap)
-        
+
         row = {
             "trial_id": self.current_event["trial_id"],
             "event_id": self.current_event["event_id"],
             "true_tap": true_tap,
             "predicted_tap": pred_tap,
-            "rf_correct": pred_tap == true_tap if pred_tap is not None else False,
+            "rf_correct": pred_tap == true_tap,
             "expected_action": expected_action,
             "actual_action": actual_action,
-            "fsm_correct": actual_action == expected_action if actual_action is not None else False,
+            "fsm_correct": actual_action == expected_action,
             "residual_rmse": rmse,
             "force_error_percent": self.current_event["force_error"]
         }
@@ -175,73 +141,9 @@ class EvaluationLogger(Node):
         self.rows.append(row)
         self.get_logger().info(f"Finished event: {row}")
         self.current_event = None
-        self.waiting_for_outputs = False
-        self.event_active = False
-        self.pending_finalize_deadline = None
 
-        if len(self.rows) == 3:
+        if len(self.rows) == 15:
             self.save_results()
-
-    def close_event_window(self):
-        self.event_active = False
-        self.waiting_for_outputs = True
-
-        if self.current_event is None:
-            self.get_logger().warn("Tried to close event window but no current_event exists")
-            return
-
-        # give RF/FSM a short amount of time to publish after contact ends
-        self.pending_finalize_deadline = self.get_clock().now().nanoseconds + int(2.5 * 1e9) # 2 second buffer
-
-        self.get_logger().info(
-            f"Closed event window for trial={self.current_event['trial_id']}, "
-            f"event={self.current_event['event_id']}"
-        )
-
-    def try_finalize_event(self, force_timeout=False):
-        if self.current_event is None:
-            return
-
-        if not self.waiting_for_outputs:
-            return
-
-        if self.current_event["predicted_tap"] is None and not force_timeout:
-            return
-
-        if self.current_event["actual_action"] is None and not force_timeout:
-            return
-
-        self.end_event()
-
-    def pending_finalize_check(self):
-        if self.current_event is None:
-            return
-
-        if not self.waiting_for_outputs:
-            return
-
-        if self.pending_finalize_deadline is None:
-            return
-
-        now_ns = self.get_clock().now().nanoseconds
-        if now_ns < self.pending_finalize_deadline:
-            return
-
-        # copy in whatever the latest outputs are
-        if self.current_event["predicted_tap"] is None:
-            self.current_event["predicted_tap"] = self.latest_predicted_tap
-
-        if self.current_event["actual_action"] is None:
-            self.current_event["actual_action"] = self.latest_actual_action
-
-        self.get_logger().info(
-            f"Finalize check for trial={self.current_event['trial_id']}, "
-            f"event={self.current_event['event_id']} | "
-            f"predicted={self.current_event['predicted_tap']}, "
-            f"action={self.current_event['actual_action']}"
-        )
-
-        self.try_finalize_event(force_timeout=True)
 
     def save_results(self):
         df = pd.DataFrame(self.rows)

@@ -32,15 +32,11 @@ class MomentumObserver(Node):
     def __init__(self):
         super().__init__('residual_node')
         self.publisher1 = self.create_publisher(ForceEvent, 'force_data', 10)
+        self.force_err_pub = self.create_publisher(Float64, '/eval/force_error', 10 )
         self.create_subscription(JointState, 'joint_states', self.joint_state_callback, 10) 
         self.create_subscription(Bool, 'contact_detection', self.contact_detection_callback, 10)
         self.create_subscription(Point, 'contact_point', self.contact_point_callback, 10) 
-        self.sim_time_sub = self.create_subscription(
-            Float64,
-            '/sim_time',
-            self.sim_time_callback,
-            10
-        )
+        self.create_subscription(Float64,'/sim_time',self.sim_time_callback,10)
 
         # For Debugging - publish: p, tau, non-lin terms, r, 
         self.pub_p = self.create_publisher(Float64MultiArray, '/observer/measured_momentum', 10)
@@ -48,13 +44,13 @@ class MomentumObserver(Node):
         self.pub_nle = self.create_publisher(Float64MultiArray, '/observer/nonlinear_terms', 10)
         self.pub_integrand = self.create_publisher(Float64MultiArray, '/observer/integrand', 10)
         self.pub_integral = self.create_publisher(Float64MultiArray, '/observer/integral_state', 10)
-        self.pub_residual = self.create_publisher(Float64MultiArray, '/observer/residual', 10)
+        self.pub_residual = self.create_publisher(Float64MultiArray, '/observer/residual', 10)  # for evaluation
         self.pub_tau_minus_nle = self.create_publisher(Float64MultiArray, '/observer/tau_minus_nle', 10)
         self.pub_qdot = self.create_publisher(Float64MultiArray, '/observer/qdot', 10)
         self.pub_q = self.create_publisher(Float64MultiArray, '/observer/q', 10)
         self.pub_mj_tau = self.create_publisher(Float64MultiArray, '/observer/mj_tau', 10)
         self.create_subscription(Float64MultiArray, '/observer/force_world', self.mujoco_force_callback, 10) 
-        self.jacobian_sub = self.create_subscription(Float64MultiArray,'/debug/contact_jacobian',self.jacobian_callback,10)
+        self.create_subscription(Float64MultiArray,'/debug/contact_jacobian',self.jacobian_callback,10)
 
         # contact detection variables
         self.force = None
@@ -146,7 +142,8 @@ class MomentumObserver(Node):
             if (sim_time - self.contact_pending_time) > self.force_estimation_delay:
                 snapshot = self.get_force_snapshot()
                 if snapshot is not None:
-                    self.force = self.compute_force(snapshot)
+                    self.force, error = self.compute_force(snapshot)
+                    self.publish_force_error(error)
                     self.get_logger().info(f'External Force of: {self.force}')
                 self.contact_pending = False        
 
@@ -286,14 +283,15 @@ class MomentumObserver(Node):
         #publish
         tau_check = self.Jc_v.T @ F_ext
         self.get_logger().info(f'Publishing: External Force = {F_ext}')
-        self.get_logger().info(f'tau_check = {tau_check}')
-        self.get_logger().info(f'tau_check_mjforce = {mj_tau}')
-        self.get_logger().info(f'r_used = {r}')
+        #self.get_logger().info(f'tau_check = {tau_check}')
+        #self.get_logger().info(f'tau_check_mjforce = {mj_tau}')
+        #self.get_logger().info(f'r_used = {r}')
 
-
-        self.get_logger().info(f'External Force = {F_ext}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+        # get force error
+        F_norm = np.linalg.norm(F_ext)
+        error = np.abs(self.mujoco_force - F_norm) / (np.abs(self.mujoco_force) + 1e-6) * 100
         
-        return np.linalg.norm(F_ext)
+        return F_norm, error
 
     # publishes force for RF
     def publish_force(self):
@@ -306,8 +304,15 @@ class MomentumObserver(Node):
         msg.timestamp_2_end = Time(seconds=self.results[5]).to_msg()
 
         self.publisher1.publish(msg)
-        self.get_logger().info('Published force data')
+        self.get_logger().info(f'Published force data: {msg}')
    
+    # publishes error
+    def publish_force_error(self, error):
+        msg = Float64()
+        msg.data = error
+        self.force_err_pub.publish(msg)
+        
+
     # helper function to get snapshot of states 
     def get_force_snapshot(self):
         with self.state_lock:

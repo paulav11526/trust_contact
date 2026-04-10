@@ -30,6 +30,7 @@ class FSMNode(Node):
 
     def __init__(self):
         super().__init__('fsm_node')
+        self.get_logger().info("Initializing FSM Node...")
         self.create_subscription(String, 'contact_events', self.event_callback, 10) # subscribing to topic that outputs events
         self.create_subscription(JointState, 'joint_states', self.joint_state_callback ,10 ) 
         self.publisher = self.create_publisher(JointState, 'q_target', 10)
@@ -38,9 +39,10 @@ class FSMNode(Node):
         # Define joint targets 
         self.BIN_A_q = [-0.54, -0.278518, -0.150196, -1.78548, -0.000276461, 2.16789, -0.0800078]
         self.BIN_B_q = [0.579967, -0.278543, -0.150242, -1.78547, -0.000275622, 2.1679, -0.0800071]
-        self.STOP_q = None
 
         self.current_q =np.array( [8.94154e-21, -0.566287, 0.00014964, -0.850776, -9.77076e-05, 1.79119, -1.53133e-05])
+        self.q_hold = None
+        self.prev_state = None
         # Initial state
         self.state = State.STOPPED
 
@@ -65,6 +67,9 @@ class FSMNode(Node):
     def event_callback(self, msg: String):
         if msg.data == 'Long_Tap':
             self.event = Event.LONG_TAP
+            if self.current_q is not None:
+                self.q_hold = self.current_q.copy()
+
         elif msg.data == "Double_Tap":
             self.event = Event.DOUBLE_TAP
         else:
@@ -89,10 +94,10 @@ class FSMNode(Node):
                     self.state = State.AT_BIN_B
                     self.get_logger().info('Arrived at B')
             return
+        
 
         # Handle transitions
         if self.state == State.STOPPED:    # ------------------------------------------ STOPPED
-
             if self.event == Event.LONG_TAP: # E1
                 self.state = State.STOPPED
                 self.publish_actual_action("stop")
@@ -227,7 +232,11 @@ class FSMNode(Node):
     def publish_target(self):
         msg = JointState()
         if self.state == State.STOPPED:
-            msg.position = self.current_q.tolist() # send exact position as goal position
+            if self.q_hold is not None:
+                msg.position = self.q_hold.tolist() # send exact position as goal position
+            else: 
+                msg.position = self.current_q.tolist() 
+
         elif self.state == State.MOVING_TO_A or self.state == State.AT_BIN_A:
             msg.position = self.BIN_A_q
         elif self.state == State.MOVING_TO_B or self.state == State.AT_BIN_B:
