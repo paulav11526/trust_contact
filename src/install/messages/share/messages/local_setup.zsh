@@ -1,1 +1,0 @@
-/home/paulav/contact_ws/src/build/messages/ament_cmake_environment_hooks/local_setup.zsh

@@ -1,1 +1,0 @@
-/home/paulav/contact_ws/build/messages/rosidl_typesupport_fastrtps_c/messages/msg/detail/force_event__rosidl_typesupport_fastrtps_c.h

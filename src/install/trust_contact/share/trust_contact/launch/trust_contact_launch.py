@@ -1,1 +1,0 @@
-/home/paulav/contact_ws/src/build/trust_contact/launch/trust_contact_launch.py

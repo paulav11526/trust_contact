@@ -1,0 +1,30 @@
+Trial 1: 
+RF accuracy: 100.00%
+FSM success rate: 100.00%
+Residual RMSE: 0.6859 ± 0.6509
+Force error (%): 6.67 ± 6.17
+
+
+Trial 2:
+RF accuracy: 100.00%
+FSM success rate: 100.00%
+Residual RMSE: 0.6859 ± 0.6509
+Force error (%): 6.67 ± 6.17
+
+Trial 3:
+RF accuracy: 100.00%
+FSM success rate: 100.00%
+Residual RMSE: 0.5788 ± 0.6063
+Force error (%): 12.65 ± 5.17
+
+Trial 4:
+RF accuracy: 100.00%
+FSM success rate: 100.00%
+Residual RMSE: 0.5332 ± 0.3480
+Force error (%): 34.73 ± 44.52
+
+Trial 5:
+RF accuracy: 100.00%
+FSM success rate: 100.00%
+Residual RMSE: 0.7444 ± 0.4866
+Force error (%): 4.77 ± 4.12

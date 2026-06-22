@@ -1,1 +1,0 @@
-/home/paulav/contact_ws/src/build/messages/rosidl_generator_py/messages/msg/_force_event_s.c
